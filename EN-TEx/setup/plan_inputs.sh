@@ -29,7 +29,7 @@ echo "=== plan_inputs (input-planning pass) ==="
 echo "  tsv=$TSV  min_total_reads=$MIN_READS  suggest_test_frac=$TEST_FRAC"
 echo "  log -> $LOG"
 
-python -m entexbert2.scripts.plan_inputs \
+python "$REPO_ROOT/plan_inputs.py" \
     --tsv "$TSV" \
     --min_total_reads "$MIN_READS" \
     --suggest_test_frac "$TEST_FRAC" \

@@ -11,16 +11,16 @@
 #SBATCH --array=0-0                       # <-- set to 0-(N-1); N printed by make_hp_task_manifest.py
 #
 # run_hp_search.sbatch — SLURM array for the ref_single BASELINE hyperparameter search.
-# One array task = one (config x cell x seed) baseline fine-tune. Selection is on the DEV split;
+# One array task = one (config x dataset x seed) baseline fine-tune. Selection is on the DEV split;
 # --eval_and_save_results False means TEST is never evaluated during tuning (held-out chroms stay
 # untouched). No final model is dumped (save_model False) — only the Trainer's own checkpoint
 # (with trainer_state.json -> best dev auprc) is kept, so disk stays small.
 set -euo pipefail
 
-REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"   # repo root (sbatch lives in hp/)
-MANIFEST="${MANIFEST:-$REPO_ROOT/hp/tasks_hp.tsv}"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"   # repo root (sbatch lives in hp_tune/)
+MANIFEST="${MANIFEST:-$REPO_ROOT/hp_tune/tasks_hp.tsv}"
 MODEL="${MODEL:-$HOME/entexBERT-2/DNABERT-2-117M-attention}"
-OUT_BASE="${OUT_BASE:-$REPO_ROOT/hp/runs}"
+OUT_BASE="${OUT_BASE:-$REPO_ROOT/hp_tune/runs}"
 CONDA_ENV="${CONDA_ENV:-eb2}"
 
 mkdir -p logs "$OUT_BASE"

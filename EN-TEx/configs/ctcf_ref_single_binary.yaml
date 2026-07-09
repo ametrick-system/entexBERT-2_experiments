@@ -1,0 +1,75 @@
+# ctcf_ref_single_binary.yaml — base config for the EN-TEx ref_single binary-AS experiments.
+# Lives in entexBERT-2_experiments/EN-TEx/configs/. Consumed by generate_all_inputs (via build_inputs.sh)
+# to build per-dataset train/dev/test inputs. This describes DATA GENERATION; training hyperparameters
+# (lr, batch, epochs, class weighting, pooling) live in the SLURM scripts, not here.
+#
+# NOTE: fold_assignment below is a PLACEHOLDER. Fill it in AFTER running plan_inputs:
+#   the --suggest_test_frac output prints a ready-to-paste fold_assignment dict targeting ~10% of
+#   positives. The SAME dict must be used for every dataset (build_inputs.sh loops all datasets over this
+#   one config), or cross-individual leakage returns.
+
+experiment: ctcf_ref_single_binary
+
+ref_fasta: /home/asm242/reference_genome/hg38.fa      # <-- confirm path on McCleary
+output_dir: inputs/ctcf_ref_single                    # overridden per-run by build_inputs.sh --output_dir
+
+# ---- data source (donor/assay/tissue are filled per-dataset by generate_all_inputs; leave the shared bits here) ----
+row_source:
+  type: snv_tsv
+  path: /home/asm242/entex_data/hetSNVs_default_AS.tsv  # <-- confirm path; must match build_inputs.sh TSV
+  tissue: null                                          # pool tissues within a (donor, assay) dataset
+  min_total_reads: 10                                   # <-- must match build_inputs.sh MIN_READS
+
+# ---- label: binary allele-specific-binding call ----
+primary_label:
+  type: as_class          # imbalance_significance == 1 -> positive
+  name: imbalance_significance
+
+# ---- baseline arm carries NO aux labels; the lupi arm adds them via SLURM CLI flags, not here ----
+aux_labels: []
+
+# ---- single reference window around the SNV (no ref/alt twin) ----
+sequence:
+  input_mode: ref_single
+
+window:
+  left_bp: 512
+  right_bp: 511            # 512 + 511 + 1(SNV) = 1024 tokens of context
+  snv_offset_mode: fixed   # set to 'uniform' + jitter_max_bp>0 for jitter experiments
+  jitter_max_bp: 0
+
+# ---- NO downsampling: keep every training row. Class imbalance is handled at TRAINING time by
+#      --class_weights balanced (inverse-frequency BCE reweighting), NOT by balancing the data here. ----
+balance:
+  strategy: none
+  label_col: imbalance_significance
+
+# ---- hybrid cross-individual partition: held-out chromosome(s) -> TEST, rest hashed into train/dev ----
+partition:
+  enabled: true
+  bin_size: 100000
+  salt: entexbert2_v1
+  fold_id: 0
+  # PLACEHOLDER — replace with plan_inputs --suggest_test_frac output (same dict for ALL datasets):
+  fold_assignment: {chr7: 0, chr14: 0}
+
+# ---- split bookkeeping (the partition block above OVERRIDES the group-shuffle split when enabled) ----
+split:
+  mode: train_dev_test
+  ratio: [0.8, 0.1, 0.1]
+  seed: 42
+  group: locus
+  skip_ambiguous: true
+
+# ---- head is derived from the label task_type; num_labels=2 = binary softmax (matches sbatch --main_num_labels 2) ----
+head:
+  task: classification
+  num_labels: 2
+  head_num_layers: 1
+  head_hidden_size: -1
+
+# ---- datasets: OPTIONAL. build_inputs.sh passes --datasets_csv (from plan_inputs) which takes precedence.
+#      Uncomment to hardcode a dataset list instead:
+# datasets:
+#   - {donor: ENC-002, assay: TF-ChIP-seq_CTCF}
+#   - {donor: ENC-003, assay: TF-ChIP-seq_CTCF}
