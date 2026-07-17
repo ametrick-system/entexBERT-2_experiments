@@ -50,6 +50,11 @@ EN-TEx/experiments/refalt_ENC-002_CTCF_reg_100/runs/ref_alt_reg/checkpoint-200/p
 EN-TEx/experiments/refalt_ENC-002_CTCF_reg_100/runs/ref_alt_reg/checkpoint-400/optimizer.pt
 EN-TEx/experiments/refalt_ENC-002_CTCF_reg_100/runs/ref_alt_reg/checkpoint-400/pytorch_model.bin
 EN-TEx/experiments/refalt_ENC-002_CTCF_reg_100/runs/ref_alt_reg/pytorch_model.bin
+EN-TEx/experiments/refsingle_ENC-002_CTCF_ctcf_ref_single_classification_binsplit2/runs/clf/checkpoint-300/optimizer.pt
+EN-TEx/experiments/refsingle_ENC-002_CTCF_ctcf_ref_single_classification_binsplit2/runs/clf/checkpoint-300/pytorch_model.bin
+EN-TEx/experiments/refsingle_ENC-002_CTCF_ctcf_ref_single_classification_binsplit2/runs/clf/checkpoint-400/optimizer.pt
+EN-TEx/experiments/refsingle_ENC-002_CTCF_ctcf_ref_single_classification_binsplit2/runs/clf/checkpoint-400/pytorch_model.bin
+EN-TEx/experiments/refsingle_ENC-002_CTCF_ctcf_ref_single_classification_binsplit2/runs/clf/pytorch_model.bin
 EN-TEx/hp_tune/runs/cfg000__ENC-001__TF-ChIP-seq_CTCF__seed1/checkpoint-43600/optimizer.pt
 EN-TEx/hp_tune/runs/cfg000__ENC-001__TF-ChIP-seq_CTCF__seed1/checkpoint-43600/pytorch_model.bin
 EN-TEx/hp_tune/runs/cfg000__ENC-001__TF-ChIP-seq_CTCF__seed1/checkpoint-7400/optimizer.pt
