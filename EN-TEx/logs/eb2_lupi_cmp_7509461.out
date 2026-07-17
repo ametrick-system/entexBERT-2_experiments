@@ -1,0 +1,3 @@
+mkdir: cannot create directory ‘experiments’: Permission denied
+mkdir: cannot create directory ‘logs’: Permission denied
+mkdir: cannot create directory ‘experiments’: Permission denied

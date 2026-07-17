@@ -1,0 +1,54 @@
+# ctcf_ref_alt_pair_classification_binsplit.yaml
+# Pure genomic-bin split (SCHEME #1, plain). All chromosomes contribute to training;
+# 100kb bins hashed 3-way into train/dev/test so co-located loci stay in one split.
+experiment: ctcf_ref_alt_pair_classification_binsplit_strict
+
+ref_fasta: /home/asm242/reference_genome/hg38.fa
+row_source:
+  type: snv_tsv
+  path: /home/asm242/entex_data/hetSNVs.tsv
+  min_total_reads: 20
+
+primary_label:
+  type: as_class
+  name: imbalance_significance
+
+sequence:
+  input_mode: ref_alt_pair
+
+window:
+  left_bp: 256
+  right_bp: 256
+  snv_offset_mode: fixed
+  jitter_max_bp: 0
+
+head:
+  task: classification
+  num_labels: 2
+  head_num_layers: 2
+  head_hidden_size: -1
+
+split:
+  group: locus
+  mode: train_dev_test
+  ratio: [0.8, 0.1, 0.1]
+
+partition:
+  enabled: true
+  bin_size: 100000
+  salt: entexbert2_v1
+  fold_assignment: {}       # EMPTY -> pure-bin path (all chromosomes train)
+  bin_test_frac: 0.10
+  bin_dev_frac: 0.10
+  exclude_boundary: true    # drop loci whose 256bp window straddles a 100kb bin edge (~0.5%)
+
+# --- balance the TRAIN split only. KEY IS 'apply_to' (run_experiment.py reads bcfg['apply_to']).
+#     NOTE: 'balance_split' is the INTERNAL variable name and is NOT a config key -> silently
+#     ignored, falling back to the default 'all' (balances pre-split, contaminating dev/test). ---
+balance:
+  strategy: global_binary
+  apply_to: train
+  label_col: imbalance_significance
+
+datasets:
+  - {donor: ENC-002, assay: TF-ChIP-seq_CTCF}

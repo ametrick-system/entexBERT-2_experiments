@@ -1,0 +1,68 @@
+# ctcf_ref_single_lupi.yaml — data-generation config for the ENC-002 CTCF LUPI comparison.
+# IDENTICAL to the baseline ref_single config EXCEPT aux_labels is populated: the three privileged
+# per-locus regression targets are computed and written into train/dev/test.csv. Both arms of the
+# comparison (baseline num_aux_tasks=0, lupi num_aux_tasks=3) read this SAME build — the baseline
+# finetune simply ignores the extra aux columns (aux_task_names empty -> unread), so the two arms
+# are trained on byte-identical rows. Training HPs live in the run script, not here.
+
+experiment: ctcf_ref_single_lupi
+
+ref_fasta: /home/asm242/reference_genome/hg38.fa
+output_dir: inputs/ctcf_ref_single_lupi                # overridden per-run by build_inputs.sh --output_dir
+
+row_source:
+  type: snv_tsv
+  path: /home/asm242/entex_data/hetSNVs.tsv            # correct EN-TEx TSV
+  tissue: null                                         # pool tissues within (donor, assay)
+  min_total_reads: 10
+
+primary_label:
+  type: as_class
+  name: imbalance_significance
+
+# ---- PRIVILEGED aux targets (LUPI). All regression; names default to the target name, so the
+#      written columns are log_total_count / neg_log10_p_betabinom / abs_log_count_ratio.
+#      EN-TEx has zero NaN-p, so drop_aux_nan (default) removes no rows. ----
+aux_labels:
+  - {type: as_regression, target: log_total_count}
+  - {type: as_regression, target: neg_log10_p_betabinom}
+  - {type: as_regression, target: abs_log_count_ratio}
+
+sequence:
+  input_mode: ref_single
+
+window:
+  left_bp: 512
+  right_bp: 511
+  snv_offset_mode: fixed
+  jitter_max_bp: 0
+
+balance:
+  strategy: none
+  label_col: imbalance_significance
+
+partition:
+  enabled: true
+  bin_size: 100000
+  salt: entexbert2_v1
+  fold_id: 0
+  fold_assignment: {chr5: 0, chr12: 0, chr21: 0}       # CTCF-specific ~10% held-out (from plan_inputs --tf CTCF)
+
+split:
+  mode: train_dev_test
+  ratio: [0.8, 0.1, 0.1]
+  seed: 42
+  group: locus
+  skip_ambiguous: true
+
+head:
+  task: classification
+  num_labels: 2
+  head_num_layers: 1
+  head_hidden_size: -1
+
+# ---- dataset list: the ONE dataset this comparison trains on. generate_all_inputs reads this
+#      (no --datasets_csv needed). To compare a different donor, change donor here (or override the
+#      whole thing with --datasets_csv). assay stays CTCF; tissues are pooled (no tissue key). ----
+datasets:
+  - {donor: ENC-002, assay: TF-ChIP-seq_CTCF}

@@ -1,0 +1,11 @@
+config_id	learning_rate	batch_size	epochs	weight_decay	warmup_steps	head_num_layers
+cfg000	2.720e-04	16	2	0.01	100	2
+cfg001	4.875e-05	16	3	0.01	100	1
+cfg002	7.202e-05	16	2	0.0	100	2
+cfg003	4.757e-04	32	4	0.1	0	2
+cfg004	1.472e-05	8	4	0.01	50	1
+cfg005	3.991e-05	16	4	0.1	0	2
+cfg006	5.651e-05	32	3	0.0	100	1
+cfg007	1.440e-05	16	4	0.1	100	1
+cfg008	1.095e-04	16	2	0.1	50	1
+cfg009	2.112e-05	32	2	0.0	0	2

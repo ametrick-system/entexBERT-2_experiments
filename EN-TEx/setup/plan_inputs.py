@@ -31,6 +31,7 @@ Reads the (large) TSV in chunks; no genome file or model needed.
 """
 
 import argparse
+import os
 import itertools
 from collections import defaultdict
 
@@ -275,6 +276,9 @@ def main():
                   "leakage returns.")
 
     if args.out_prefix:
+        _parent = os.path.dirname(args.out_prefix)
+        if _parent:
+            os.makedirs(_parent, exist_ok=True)
         datasets.to_csv(f"{args.out_prefix}_datasets.csv", index=False)
         per_chrom.to_csv(f"{args.out_prefix}_per_chrom.csv", index=False)
         print(f"\nWrote {args.out_prefix}_datasets.csv and {args.out_prefix}_per_chrom.csv")

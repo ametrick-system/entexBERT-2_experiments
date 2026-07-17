@@ -1,0 +1,94 @@
+{
+  "best_metric": 0.030951889324798677,
+  "best_model_checkpoint": "/home/asm242/entexBERT-2_experiments/EN-TEx/hp_tune/runs/cfg000__ENC-004__TF-ChIP-seq_CTCF__seed13/checkpoint-200",
+  "epoch": 0.01604556941714469,
+  "global_step": 400,
+  "is_hyper_param_search": false,
+  "is_local_process_zero": true,
+  "is_world_process_zero": true,
+  "log_history": [
+    {
+      "epoch": 0.0,
+      "learning_rate": 0.000136,
+      "loss": 0.6398,
+      "step": 50
+    },
+    {
+      "epoch": 0.0,
+      "learning_rate": 0.00026928,
+      "loss": 0.7939,
+      "step": 100
+    },
+    {
+      "epoch": 0.01,
+      "learning_rate": 0.0002717321435749025,
+      "loss": 0.7334,
+      "step": 150
+    },
+    {
+      "epoch": 0.01,
+      "learning_rate": 0.00027145882069215,
+      "loss": 0.6389,
+      "step": 200
+    },
+    {
+      "epoch": 0.01,
+      "eval_accuracy": 0.9690481106752014,
+      "eval_auprc": 0.030951889324798677,
+      "eval_auroc": 0.5,
+      "eval_f1": 0.4921403928230618,
+      "eval_loss": 0.675035297870636,
+      "eval_matthews_correlation": 0.0,
+      "eval_precision": 0.4845240553376007,
+      "eval_recall": 0.5,
+      "eval_runtime": 82.0673,
+      "eval_samples_per_second": 590.126,
+      "eval_steps_per_second": 18.448,
+      "step": 200
+    },
+    {
+      "epoch": 0.01,
+      "learning_rate": 0.0002711854978093975,
+      "loss": 0.7335,
+      "step": 250
+    },
+    {
+      "epoch": 0.01,
+      "learning_rate": 0.00027091217492664494,
+      "loss": 0.6412,
+      "step": 300
+    },
+    {
+      "epoch": 0.01,
+      "learning_rate": 0.00027063885204389244,
+      "loss": 0.6446,
+      "step": 350
+    },
+    {
+      "epoch": 0.02,
+      "learning_rate": 0.00027036552916113993,
+      "loss": 0.7184,
+      "step": 400
+    },
+    {
+      "epoch": 0.02,
+      "eval_accuracy": 0.9690481106752014,
+      "eval_auprc": 0.030951889324798677,
+      "eval_auroc": 0.5,
+      "eval_f1": 0.4921403928230618,
+      "eval_loss": 0.6316165924072266,
+      "eval_matthews_correlation": 0.0,
+      "eval_precision": 0.4845240553376007,
+      "eval_recall": 0.5,
+      "eval_runtime": 80.039,
+      "eval_samples_per_second": 605.08,
+      "eval_steps_per_second": 18.916,
+      "step": 400
+    }
+  ],
+  "max_steps": 49858,
+  "num_train_epochs": 2,
+  "total_flos": 0.0,
+  "trial_name": null,
+  "trial_params": null
+}

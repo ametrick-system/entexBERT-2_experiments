@@ -1,0 +1,13 @@
+[build] generating TRAIN-BALANCED ref_alt_pair classification inputs for ENC-002__TF-ChIP-seq_CTCF
+Traceback (most recent call last):
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/scripts/generate_all_inputs.py", line 213, in <module>
+    main()
+  File "/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/scripts/generate_all_inputs.py", line 133, in main
+    base_cfg = load_config(args.config)
+  File "/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/run_experiment.py", line 197, in load_config
+    with open(path) as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'configs/ctcf_ref_alt_pair_classification_trainbal.yaml'

@@ -1,0 +1,29 @@
+[build] generating ref_alt_pair inputs for ENC-002__TF-ChIP-seq_CTCF into experiments/refalt_ENC-002_CTCF_hetero/inputs
+Traceback (most recent call last):
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/scripts/generate_all_inputs.py", line 213, in <module>
+    main()
+  File "/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/scripts/generate_all_inputs.py", line 176, in main
+    df = run_from_config(dataset_cfg, ref_fasta=args.ref_fasta)
+  File "/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/run_experiment.py", line 403, in run_from_config
+    df = build_dataset(
+TypeError: build_dataset() got an unexpected keyword argument 'depth_col'
+generate_all_inputs: 1 dataset(s) from config `datasets:` block
+  base output_dir: experiments/refalt_ENC-002_CTCF_hetero/inputs
+  SHARED partition: bin_size=100000 fold_id=0 test_chroms=['chr12', 'chr21', 'chr5'] (identical across all datasets)
+    - ENC-002__TF-ChIP-seq_CTCF  ->  experiments/refalt_ENC-002_CTCF_hetero/inputs/ENC-002__TF-ChIP-seq_CTCF/fold0
+
+[1/1] BUILD ENC-002__TF-ChIP-seq_CTCF
+Experiment: ENC-002__TF-ChIP-seq_CTCF
+  source:     snv_tsv (has_variants=True)
+  primary:    signed_log_alt_ref [regression]
+  aux:        none
+  input_mode: ref_alt_pair
+  window:     L256/R256 offset=fixed jitter=0
+  split:      train_dev_test group=locus exclude=0 loci
+  partition:  hybrid bin_size=100000 fold_id=0 test_chroms=['chr12', 'chr21', 'chr5'] (overrides group-shuffle)
+  output_dir: experiments/refalt_ENC-002_CTCF_hetero/inputs/ENC-002__TF-ChIP-seq_CTCF/fold0
+Loading reference FASTA...

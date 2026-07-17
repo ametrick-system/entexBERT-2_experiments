@@ -1,0 +1,29 @@
+{
+  "base_config": "configs/ctcf_ref_single_lupi.yaml",
+  "datasets_source": "config `datasets:` block",
+  "fold_id": 0,
+  "shared_partition_resolved": {
+    "enabled": true,
+    "bin_size": 100000,
+    "salt": "entexbert2_v1",
+    "fold_assignment": {
+      "chr5": 0,
+      "chr12": 0,
+      "chr21": 0
+    },
+    "fold_id": 0,
+    "train_frac_within_nontest": 0.8888888888888888
+  },
+  "datasets": [
+    {
+      "dataset": {
+        "donor": "ENC-002",
+        "assay": "TF-ChIP-seq_CTCF"
+      },
+      "dataset_id": "ENC-002__TF-ChIP-seq_CTCF",
+      "output_dir": "experiments/lupi_ENC-002_CTCF/inputs/ENC-002__TF-ChIP-seq_CTCF/fold0",
+      "status": "ok",
+      "n_rows": 621216
+    }
+  ]
+}

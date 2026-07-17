@@ -1,0 +1,55 @@
+{
+  "best_metric": 0.03107267902299485,
+  "best_model_checkpoint": "/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/hp_tune/runs/cfg001__ENC-002__TF-ChIP-seq_CTCF__seed13/checkpoint-200",
+  "epoch": 0.0065400085020110525,
+  "global_step": 200,
+  "is_hyper_param_search": false,
+  "is_local_process_zero": true,
+  "is_world_process_zero": true,
+  "log_history": [
+    {
+      "epoch": 0.0,
+      "learning_rate": 2.4375e-05,
+      "loss": 0.6809,
+      "step": 50
+    },
+    {
+      "epoch": 0.0,
+      "learning_rate": 4.82625e-05,
+      "loss": 0.6719,
+      "step": 100
+    },
+    {
+      "epoch": 0.0,
+      "learning_rate": 4.872446613489301e-05,
+      "loss": 0.855,
+      "step": 150
+    },
+    {
+      "epoch": 0.01,
+      "learning_rate": 4.869786835873989e-05,
+      "loss": 0.6571,
+      "step": 200
+    },
+    {
+      "epoch": 0.01,
+      "eval_accuracy": 0.9746337977849232,
+      "eval_auprc": 0.03107267902299485,
+      "eval_auroc": 0.5218956526479082,
+      "eval_f1": 0.4935769857065315,
+      "eval_loss": 1.1404167413711548,
+      "eval_matthews_correlation": 0.0,
+      "eval_precision": 0.4873168988924616,
+      "eval_recall": 0.5,
+      "eval_runtime": 94.6175,
+      "eval_samples_per_second": 621.228,
+      "eval_steps_per_second": 19.415,
+      "step": 200
+    }
+  ],
+  "max_steps": 91743,
+  "num_train_epochs": 3,
+  "total_flos": 0.0,
+  "trial_name": null,
+  "trial_params": null
+}

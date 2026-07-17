@@ -1,0 +1,20 @@
+{
+  "model_name_or_path": "/home/asm242/entexBERT-2/DNABERT-2-117M-attention",
+  "use_lora": false,
+  "cache_dir": null,
+  "model_max_length": 512,
+  "task": "classification",
+  "main_num_labels": 2,
+  "pooling_mode": "center_mean",
+  "center_pool_width": 5,
+  "head_num_layers": 2,
+  "head_hidden_size": -1,
+  "head_activation": "gelu",
+  "head_dropout": 0.1,
+  "num_aux_tasks": 0,
+  "aux_task_names": [],
+  "aux_task_types": [],
+  "aux_num_labels": [],
+  "run_name": "ENC-002__TF-ChIP-seq_CTCF__clf_binsplit",
+  "contrast_mode": "symmetric_abs"
+}

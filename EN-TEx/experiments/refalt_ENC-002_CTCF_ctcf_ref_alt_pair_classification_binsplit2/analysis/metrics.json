@@ -1,0 +1,21 @@
+{
+  "task": "classification",
+  "flavor": "binary",
+  "n_examples": 19932,
+  "accuracy": 0.5368753762793498,
+  "f1": 0.13543130092722674,
+  "precision": 0.07459760627321502,
+  "recall": 0.7340101522842639,
+  "n_pos": 985,
+  "n_neg": 18947,
+  "auroc": 0.6559157135895239,
+  "auprc": 0.09961283935348939,
+  "confusion": {
+    "tn": 9978,
+    "fp": 8969,
+    "fn": 262,
+    "tp": 723
+  },
+  "decision_threshold": 0.5124024152755737,
+  "threshold_source": "dev_youden"
+}

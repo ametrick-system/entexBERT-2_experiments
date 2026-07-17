@@ -1,0 +1,64 @@
+# ctcf_ref_alt_pair_classification.yaml
+# STAGE 1 of the hurdle model: binary ASB-SIGNIFICANCE classification on PAIRED ref/alt windows.
+# Target: imbalance_significance (1 = allele-specific binding call, 0 = not) -- the ADASTRA/ASB
+# literature benchmark framing. Motivated by the stratified-eval finding: continuous signed-effect
+# regression over ALL loci hit a rank-order ceiling (Spearman ~0.05 across all depths), because
+# most loci are near-zero count noise. Classification asks the tractable question the model already
+# shows signal on (Pearson rose with depth on strong-effect loci = it separates ASB from non-ASB).
+#
+# CONTRAST: symmetric_abs -- significance is DIRECTION-AGNOSTIC (a locus is ASB whether ALT or REF
+# binds more), so the forward uses head(|pool(alt) - pool(ref)|), not the signed difference.
+
+experiment: ctcf_ref_alt_pair_classification
+
+# --- data source (same EN-TEx hetSNV table) ---
+ref_fasta: /home/asm242/reference_genome/hg38.fa
+row_source:
+  type: snv_tsv
+  path: /home/asm242/entex_data/hetSNVs.tsv
+  min_total_reads: 20          # a significance call still needs reliable counts
+
+# --- primary label: the binary ASB significance call (NOT the continuous effect) ---
+primary_label:
+  type: as_class
+  name: imbalance_significance
+
+# --- paired input: same twin framing as the regression run ---
+sequence:
+  input_mode: ref_alt_pair
+
+# --- window (per allele) ---
+window:
+  left_bp: 256
+  right_bp: 256
+  snv_offset_mode: fixed
+  jitter_max_bp: 0
+
+# --- classification head: num_labels MUST be 2 (binary via 2-way softmax) ---
+head:
+  task: classification
+  num_labels: 2
+  head_num_layers: 2
+  head_hidden_size: -1
+
+# --- split: leave-chromosome-out, identical fold across donors (no leakage) ---
+split:
+  group: locus
+  mode: train_dev_test
+  ratio: [0.8, 0.1, 0.1]
+
+partition:
+  enabled: true
+  bin_size: 100000
+  salt: entexbert2_v1
+  fold_id: 0
+  fold_assignment: {chr5: 0, chr12: 0, chr21: 0}
+
+# --- imbalance handled at TRAIN time by class_weights (NOT downsampling); ~3-4% positives ---
+balance:
+  strategy: none
+  label_col: imbalance_significance
+
+# --- which datasets to build (start with the strongest single one) ---
+datasets:
+  - {donor: ENC-002, assay: TF-ChIP-seq_CTCF}

@@ -1,0 +1,82 @@
+{
+  "experiment": "ENC-002__TF-ChIP-seq_CTCF",
+  "resolved": {
+    "experiment": "ENC-002__TF-ChIP-seq_CTCF",
+    "ref_fasta": "/home/asm242/reference_genome/hg38.fa",
+    "output_dir": "/home/asm242/entexBERT-2_experiments/EN-TEx/setup/inputs/ctcf_ref_single/ENC-002__TF-ChIP-seq_CTCF/fold0",
+    "row_source": {
+      "type": "snv_tsv",
+      "path": "/home/asm242/entex_data/hetSNVs.tsv",
+      "tissue": null,
+      "min_total_reads": 10,
+      "donor": "ENC-002",
+      "assay": "TF-ChIP-seq_CTCF"
+    },
+    "primary_label": {
+      "type": "as_class",
+      "name": "imbalance_significance"
+    },
+    "aux_labels": [],
+    "sequence": {
+      "input_mode": "ref_single"
+    },
+    "window": {
+      "left_bp": 512,
+      "right_bp": 512,
+      "snv_offset_mode": "uniform",
+      "jitter_max_bp": 50
+    },
+    "balance": {
+      "strategy": "none",
+      "label_col": "imbalance_significance"
+    },
+    "partition": {
+      "enabled": true,
+      "bin_size": 100000,
+      "salt": "entexbert2_v1",
+      "fold_id": 0,
+      "fold_assignment": {
+        "chr5": 0,
+        "chr12": 0,
+        "chr21": 0
+      }
+    },
+    "split": {
+      "mode": "train_dev_test",
+      "ratio": [
+        0.8,
+        0.1,
+        0.1
+      ],
+      "seed": 42,
+      "group": "locus",
+      "skip_ambiguous": true
+    },
+    "head": {
+      "task": "classification",
+      "num_labels": 2,
+      "head_num_layers": 1,
+      "head_hidden_size": -1
+    }
+  },
+  "head_resolved": {
+    "task": "classification",
+    "num_labels": 2,
+    "head_num_layers": 1,
+    "head_hidden_size": -1
+  },
+  "partition_resolved": {
+    "enabled": true,
+    "bin_size": 100000,
+    "salt": "entexbert2_v1",
+    "fold_assignment": {
+      "chr5": 0,
+      "chr12": 0,
+      "chr21": 0
+    },
+    "fold_id": 0,
+    "train_frac_within_nontest": 0.8888888888888888
+  },
+  "ref_fasta": "/home/asm242/reference_genome/hg38.fa",
+  "output_dir": "/home/asm242/entexBERT-2_experiments/EN-TEx/setup/inputs/ctcf_ref_single/ENC-002__TF-ChIP-seq_CTCF/fold0"
+}

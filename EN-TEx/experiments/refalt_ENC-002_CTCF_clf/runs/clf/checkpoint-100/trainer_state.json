@@ -1,0 +1,43 @@
+{
+  "best_metric": 0.05923378852507473,
+  "best_model_checkpoint": "experiments/refalt_ENC-002_CTCF_clf/runs/clf/checkpoint-100",
+  "epoch": 0.08005603922745923,
+  "global_step": 100,
+  "is_hyper_param_search": false,
+  "is_local_process_zero": true,
+  "is_world_process_zero": true,
+  "log_history": [
+    {
+      "epoch": 0.04,
+      "learning_rate": 3e-05,
+      "loss": 0.6839,
+      "step": 50
+    },
+    {
+      "epoch": 0.08,
+      "learning_rate": 2.95942656207736e-05,
+      "loss": 0.6405,
+      "step": 100
+    },
+    {
+      "epoch": 0.08,
+      "eval_accuracy": 0.9542371112502609,
+      "eval_auprc": 0.05923378852507473,
+      "eval_auroc": 0.5066931047901572,
+      "eval_f1": 0.48829136738671863,
+      "eval_loss": 0.6637487411499023,
+      "eval_matthews_correlation": 0.0,
+      "eval_precision": 0.47711855562513045,
+      "eval_recall": 0.5,
+      "eval_runtime": 32.013,
+      "eval_samples_per_second": 598.631,
+      "eval_steps_per_second": 18.711,
+      "step": 100
+    }
+  ],
+  "max_steps": 3747,
+  "num_train_epochs": 3,
+  "total_flos": 0.0,
+  "trial_name": null,
+  "trial_params": null
+}
