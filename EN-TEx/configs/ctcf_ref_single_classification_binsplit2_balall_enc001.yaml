@@ -1,0 +1,53 @@
+# ctcf_ref_single_classification_binsplit2_balall_enc001.yaml
+# entexBERT-2 on INDIVIDUAL 1 (ENC-001) CTCF, TIGHTEST match to the DNABERT-1 leak-free retrain.
+# balance.apply_to = ALL -> downsample negatives to positives on the FULL dataset BEFORE the split,
+# so train/dev/test are ALL ~50/50 -- exactly DNABERT-1's snv_seq.py order (downsample, then split).
+# Only difference from DNABERT-1: bin-grouped split (leak-free) vs their random split.
+# IDENTICAL to ctcf_ref_single_classification_binsplit2_enc001.yaml EXCEPT balance.apply_to train->all.
+experiment: ctcf_ref_single_classification_binsplit2_balall_enc001
+
+ref_fasta: /home/asm242/reference_genome/hg38.fa
+row_source:
+  type: snv_tsv
+  path: /home/asm242/entex_data/hetSNVs.tsv
+  min_total_reads: 20
+
+primary_label:
+  type: as_class
+  name: imbalance_significance
+
+sequence:
+  input_mode: ref_single
+
+window:
+  left_bp: 128
+  right_bp: 128
+  snv_offset_mode: fixed
+  jitter_max_bp: 0
+
+head:
+  task: classification
+  num_labels: 2
+  head_num_layers: 1
+
+split:
+  group: locus
+  mode: train_dev_test
+  ratio: [0.8, 0.1, 0.1]
+
+partition:
+  enabled: true
+  bin_size: 100000
+  salt: entexbert2_v1
+  fold_assignment: {}
+  bin_test_frac: 0.10
+  bin_dev_frac: 0.10
+  exclude_boundary: true
+
+balance:
+  strategy: global_binary
+  apply_to: all              # <-- balance BEFORE split -> train/dev/test all ~50/50 (DNABERT-1 recipe)
+  label_col: imbalance_significance
+
+datasets:
+  - {donor: ENC-001, assay: TF-ChIP-seq_CTCF}

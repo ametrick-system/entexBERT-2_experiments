@@ -1,0 +1,53 @@
+# ctcf_ref_alt_pair_classification_binsplit2_cw.yaml
+# CLASS-WEIGHTED variant of the ref_alt_pair binsplit2 run: keep ALL negatives (no downsampling),
+# handle imbalance at TRAINING time via --class_weights balanced (set in the sbatch, NOT here).
+# IDENTICAL to ctcf_ref_alt_pair_classification_binsplit2.yaml except balance.strategy = none.
+experiment: ctcf_ref_alt_pair_classification_binsplit2_cw
+
+ref_fasta: /home/asm242/reference_genome/hg38.fa
+row_source:
+  type: snv_tsv
+  path: /home/asm242/entex_data/hetSNVs.tsv
+  min_total_reads: 20
+
+primary_label:
+  type: as_class
+  name: imbalance_significance
+
+sequence:
+  input_mode: ref_alt_pair
+
+window:
+  left_bp: 256
+  right_bp: 256
+  snv_offset_mode: fixed
+  jitter_max_bp: 0
+
+head:
+  task: classification
+  num_labels: 2
+  head_num_layers: 2
+  head_hidden_size: -1
+
+split:
+  group: locus
+  mode: train_dev_test
+  ratio: [0.8, 0.1, 0.1]
+
+partition:
+  enabled: true
+  bin_size: 100000
+  salt: entexbert2_v1        # SAME salt -> SAME bin->split map as the downsample run
+  fold_assignment: {}
+  bin_test_frac: 0.10
+  bin_dev_frac: 0.10
+  exclude_boundary: true
+
+# --- NO downsampling: keep every training row. Imbalance handled at TRAIN time by
+#     --class_weights balanced (inverse-frequency weighted CE), set in the sbatch. ---
+balance:
+  strategy: none
+  label_col: imbalance_significance
+
+datasets:
+  - {donor: ENC-002, assay: TF-ChIP-seq_CTCF}

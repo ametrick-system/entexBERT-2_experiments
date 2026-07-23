@@ -1,0 +1,21 @@
+{
+  "task": "classification",
+  "flavor": "binary",
+  "n_examples": 19932,
+  "accuracy": 0.9326209110977323,
+  "f1": 0.2104644326866549,
+  "precision": 0.25,
+  "recall": 0.1817258883248731,
+  "n_pos": 985,
+  "n_neg": 18947,
+  "auroc": 0.7489387843567911,
+  "auprc": 0.18008218127889916,
+  "confusion": {
+    "tn": 18410,
+    "fp": 537,
+    "fn": 806,
+    "tp": 179
+  },
+  "decision_threshold": 0.5,
+  "threshold_source": "fixed_0.5"
+}
