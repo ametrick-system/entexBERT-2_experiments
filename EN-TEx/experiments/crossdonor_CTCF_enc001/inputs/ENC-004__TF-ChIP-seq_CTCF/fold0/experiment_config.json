@@ -1,0 +1,76 @@
+{
+  "experiment": "ENC-004__TF-ChIP-seq_CTCF",
+  "resolved": {
+    "experiment": "ENC-004__TF-ChIP-seq_CTCF",
+    "ref_fasta": "/home/asm242/reference_genome/hg38.fa",
+    "row_source": {
+      "type": "snv_tsv",
+      "path": "/home/asm242/entex_data/hetSNVs.tsv",
+      "min_total_reads": 20,
+      "donor": "ENC-004",
+      "assay": "TF-ChIP-seq_CTCF"
+    },
+    "primary_label": {
+      "type": "as_class",
+      "name": "imbalance_significance"
+    },
+    "sequence": {
+      "input_mode": "ref_single"
+    },
+    "window": {
+      "left_bp": 128,
+      "right_bp": 128,
+      "snv_offset_mode": "fixed",
+      "jitter_max_bp": 0
+    },
+    "head": {
+      "task": "classification",
+      "num_labels": 2,
+      "head_num_layers": 1
+    },
+    "split": {
+      "group": "locus",
+      "mode": "train_dev_test",
+      "ratio": [
+        0.8,
+        0.1,
+        0.1
+      ]
+    },
+    "partition": {
+      "enabled": true,
+      "bin_size": 100000,
+      "salt": "entexbert2_v1",
+      "fold_assignment": {},
+      "bin_test_frac": 0.1,
+      "bin_dev_frac": 0.1,
+      "exclude_boundary": true
+    },
+    "balance": {
+      "strategy": "global_binary",
+      "apply_to": "all",
+      "label_col": "imbalance_significance"
+    },
+    "output_dir": "experiments/crossdonor_CTCF_enc001/inputs/ENC-004__TF-ChIP-seq_CTCF/fold0"
+  },
+  "head_resolved": {
+    "task": "classification",
+    "num_labels": 2,
+    "head_num_layers": 1,
+    "head_hidden_size": -1
+  },
+  "partition_resolved": {
+    "enabled": true,
+    "bin_size": 100000,
+    "salt": "entexbert2_v1",
+    "fold_assignment": {},
+    "fold_id": 0,
+    "train_frac_within_nontest": 0.8888888888888888,
+    "bin_test_frac": 0.1,
+    "bin_dev_frac": 0.1,
+    "exclude_boundary": true,
+    "boundary_bp": 128
+  },
+  "ref_fasta": "/home/asm242/reference_genome/hg38.fa",
+  "output_dir": "experiments/crossdonor_CTCF_enc001/inputs/ENC-004__TF-ChIP-seq_CTCF/fold0"
+}

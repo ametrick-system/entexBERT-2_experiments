@@ -1,0 +1,288 @@
+=== preflight ===
+  checkpoint: experiments/refsingle_ENC-001_CTCF_ctcf_ref_single_classification_binsplit2_enc001/runs/clf
+  base config (same salt as ENC-001!): configs/ctcf_ref_single_classification_binsplit2_enc001.yaml
+=== STEP 1: build cross-donor inputs (same salt as ENC-001) ===
+generate_all_inputs: 3 dataset(s) from datasets_csv=crossdonor_datasets_ctcf.csv
+  base output_dir: experiments/crossdonor_CTCF_enc001/inputs
+  SHARED partition: bin_size=100000 fold_id=0 test_chroms=[] (identical across all datasets)
+    - ENC-002__TF-ChIP-seq_CTCF  ->  experiments/crossdonor_CTCF_enc001/inputs/ENC-002__TF-ChIP-seq_CTCF/fold0
+    - ENC-003__TF-ChIP-seq_CTCF  ->  experiments/crossdonor_CTCF_enc001/inputs/ENC-003__TF-ChIP-seq_CTCF/fold0
+    - ENC-004__TF-ChIP-seq_CTCF  ->  experiments/crossdonor_CTCF_enc001/inputs/ENC-004__TF-ChIP-seq_CTCF/fold0
+
+[1/3] BUILD ENC-002__TF-ChIP-seq_CTCF
+Experiment: ENC-002__TF-ChIP-seq_CTCF
+  source:     snv_tsv (has_variants=True)
+  primary:    imbalance_significance [classification]
+  aux:        none
+  input_mode: ref_single
+  window:     L128/R128 offset=fixed jitter=0
+  split:      train_dev_test group=locus exclude=0 loci
+  partition:  hybrid bin_size=100000 fold_id=0 test_chroms=[] (overrides group-shuffle)
+  output_dir: experiments/crossdonor_CTCF_enc001/inputs/ENC-002__TF-ChIP-seq_CTCF/fold0
+Loading reference FASTA...
+partition_spec enabled (bin_size=100000, fold_id=0): row-level split counts {'train': 161432, 'test': 20683, 'dev': 19953, '__exclude__': 438}
+  boundary exclusion: dropped 438 loci whose window straddled a 100000bp bin edge (boundary_bp=128)
+
+Duplicate AS/window summary
+Rows: 202068
+Unique groups: 31511
+Duplicate groups: 19923
+Rows in duplicate groups: 190480
+Conflicting-label groups: 2527
+Rows in conflicting-label groups: 32578
+
+Example conflicting groups:
+                  n_rows  n_unique_labels  mean_label  min_label  max_label
+_group_key                                                                 
+001382c1a7aba51a      23                2    0.043478          0          1
+002acf6388b1c3d6      16                2    0.062500          0          1
+0032464c24b955af      12                2    0.083333          0          1
+00353f0a0aafac34       4                2    0.500000          0          1
+003e38ba55fc20cd      18                2    0.055556          0          1
+0064d993322784f0      22                2    0.045455          0          1
+006be0827f51e3e1      18                2    0.055556          0          1
+0087fe68d9aa1969      21                2    0.809524          0          1
+009ec1df9f00be87      20                2    0.050000          0          1
+00a5d00d252c78bf      20                2    0.250000          0          1
+Precomputed split via column '_assigned_split': {'train.csv': 161432, 'dev.csv': 19953, 'test.csv': 20683}
+train-only balance (global_binary): train 161432 -> 17820 rows (pos 8910 -> 8910); dev/test left at natural prevalence.
+Saved 58456 total examples to experiments/crossdonor_CTCF_enc001/inputs/ENC-002__TF-ChIP-seq_CTCF/fold0
+{'train.csv': 17820, 'dev.csv': 19953, 'test.csv': 20683}
+
+Main label summary:
+count    58456.000000
+mean         0.185986
+std          0.389099
+min          0.000000
+25%          0.000000
+50%          0.000000
+75%          0.000000
+max          1.000000
+Name: label, dtype: float64
+
+Main label counts:
+label
+0    47584
+1    10872
+Name: count, dtype: int64
+
+Done. Final rows: 202068
+
+Finetune settings (map to finetune_entexbert2.py):
+  --task classification
+  --main_num_labels 2
+  --head_num_layers 1  (1 = linear, >1 = MLP)
+  trainer data path: experiments/crossdonor_CTCF_enc001/inputs/ENC-002__TF-ChIP-seq_CTCF/fold0
+  primary label column: imbalance_significance
+
+[2/3] BUILD ENC-003__TF-ChIP-seq_CTCF
+Experiment: ENC-003__TF-ChIP-seq_CTCF
+  source:     snv_tsv (has_variants=True)
+  primary:    imbalance_significance [classification]
+  aux:        none
+  input_mode: ref_single
+  window:     L128/R128 offset=fixed jitter=0
+  split:      train_dev_test group=locus exclude=0 loci
+  partition:  hybrid bin_size=100000 fold_id=0 test_chroms=[] (overrides group-shuffle)
+  output_dir: experiments/crossdonor_CTCF_enc001/inputs/ENC-003__TF-ChIP-seq_CTCF/fold0
+Loading reference FASTA...
+partition_spec enabled (bin_size=100000, fold_id=0): row-level split counts {'train': 156771, 'test': 19538, 'dev': 19515, '__exclude__': 526}
+  boundary exclusion: dropped 526 loci whose window straddled a 100000bp bin edge (boundary_bp=128)
+
+Duplicate AS/window summary
+Rows: 195824
+Unique groups: 27720
+Duplicate groups: 17838
+Rows in duplicate groups: 185942
+Conflicting-label groups: 2094
+Rows in conflicting-label groups: 30971
+
+Example conflicting groups:
+                  n_rows  n_unique_labels  mean_label  min_label  max_label
+_group_key                                                                 
+0010b98998252812       8                2    0.125000          0          1
+0033b9b5a1383c67      26                2    0.576923          0          1
+004eeacd79644841      25                2    0.160000          0          1
+005717e0596c616c      27                2    0.037037          0          1
+0063391e89518bdf       3                2    0.333333          0          1
+0090bf9432f7de50      17                2    0.117647          0          1
+00d1ba67e117f287       3                2    0.333333          0          1
+01143f1b17c5bcf4      17                2    0.058824          0          1
+0130c287fb01c104       2                2    0.500000          0          1
+01527a0f94feb462      27                2    0.148148          0          1
+Precomputed split via column '_assigned_split': {'train.csv': 156762, 'dev.csv': 19515, 'test.csv': 19538}
+train-only balance (global_binary): train 156762 -> 17090 rows (pos 8545 -> 8545); dev/test left at natural prevalence.
+Saved 56143 total examples to experiments/crossdonor_CTCF_enc001/inputs/ENC-003__TF-ChIP-seq_CTCF/fold0
+{'train.csv': 17090, 'dev.csv': 19515, 'test.csv': 19538}
+
+Main label summary:
+count    56143.00000
+mean         0.18590
+std          0.38903
+min          0.00000
+25%          0.00000
+50%          0.00000
+75%          0.00000
+max          1.00000
+Name: label, dtype: float64
+
+Main label counts:
+label
+0    45706
+1    10437
+Name: count, dtype: int64
+
+Done. Final rows: 195824
+
+Finetune settings (map to finetune_entexbert2.py):
+  --task classification
+  --main_num_labels 2
+  --head_num_layers 1  (1 = linear, >1 = MLP)
+  trainer data path: experiments/crossdonor_CTCF_enc001/inputs/ENC-003__TF-ChIP-seq_CTCF/fold0
+  primary label column: imbalance_significance
+
+[3/3] BUILD ENC-004__TF-ChIP-seq_CTCF
+Experiment: ENC-004__TF-ChIP-seq_CTCF
+  source:     snv_tsv (has_variants=True)
+  primary:    imbalance_significance [classification]
+  aux:        none
+  input_mode: ref_single
+  window:     L128/R128 offset=fixed jitter=0
+  split:      train_dev_test group=locus exclude=0 loci
+  partition:  hybrid bin_size=100000 fold_id=0 test_chroms=[] (overrides group-shuffle)
+  output_dir: experiments/crossdonor_CTCF_enc001/inputs/ENC-004__TF-ChIP-seq_CTCF/fold0
+Loading reference FASTA...
+partition_spec enabled (bin_size=100000, fold_id=0): row-level split counts {'train': 170216, 'dev': 22523, 'test': 21556, '__exclude__': 544}
+  boundary exclusion: dropped 544 loci whose window straddled a 100000bp bin edge (boundary_bp=128)
+
+Duplicate AS/window summary
+Rows: 214295
+Unique groups: 25698
+Duplicate groups: 17334
+Rows in duplicate groups: 205931
+Conflicting-label groups: 2191
+Rows in conflicting-label groups: 37407
+
+Example conflicting groups:
+                  n_rows  n_unique_labels  mean_label  min_label  max_label
+_group_key                                                                 
+000052492fbcbabb      23                2    0.043478          0          1
+00089ce421eceb58       4                2    0.250000          0          1
+005ce4269dda50dd      27                2    0.037037          0          1
+006f17328266552c      23                2    0.043478          0          1
+007cbf686668f95b      33                2    0.030303          0          1
+0092b74e95321a5f      19                2    0.105263          0          1
+009ec1df9f00be87      27                2    0.222222          0          1
+00a4a62bb0aad446       5                2    0.200000          0          1
+00d7e65e68a10c3c      19                2    0.105263          0          1
+0101401c4ff777db       7                2    0.142857          0          1
+Precomputed split via column '_assigned_split': {'train.csv': 170212, 'dev.csv': 22523, 'test.csv': 21556}
+cross-split dedup: dropped 1 rows from dev (sequence already present in an earlier split).
+cross-split dedup: removed 1 cross-split duplicate-sequence rows total.
+train-only balance (global_binary): train 170212 -> 17134 rows (pos 8567 -> 8567); dev/test left at natural prevalence.
+Saved 61212 total examples to experiments/crossdonor_CTCF_enc001/inputs/ENC-004__TF-ChIP-seq_CTCF/fold0
+{'train.csv': 17134, 'dev.csv': 22522, 'test.csv': 21556}
+
+Main label summary:
+count    61212.000000
+mean         0.173430
+std          0.378622
+min          0.000000
+25%          0.000000
+50%          0.000000
+75%          0.000000
+max          1.000000
+Name: label, dtype: float64
+
+Main label counts:
+label
+0    50596
+1    10616
+Name: count, dtype: int64
+
+Done. Final rows: 214295
+
+Finetune settings (map to finetune_entexbert2.py):
+  --task classification
+  --main_num_labels 2
+  --head_num_layers 1  (1 = linear, >1 = MLP)
+  trainer data path: experiments/crossdonor_CTCF_enc001/inputs/ENC-004__TF-ChIP-seq_CTCF/fold0
+  primary label column: imbalance_significance
+
+Done. ok=3 skipped=0 error=0. Manifest: experiments/crossdonor_CTCF_enc001/inputs/generate_all_inputs_manifest.json
+=== STEP 2: pool + leak-check ===
+[exclude] 8707 ENC-001 train loci
+[load] ENC-002: 20683 test rows  pos=977
+[load] ENC-003: 19538 test rows  pos=935
+[load] ENC-004: 21556 test rows  pos=610
+[leak-check] dropped 0/61777 rows whose locus is in ENC-001 train (expect ~0: same-salt bins are disjoint by construction)
+[balance] pooled cross-donor test n=5044 pos_frac=0.5000
+[done] wrote test.csv (n=5044) + test.meta.csv to experiments/crossdonor_CTCF_enc001/pool
+       eval: python -m entexbert2.analyze --checkpoint_dir <ENC-001 runs/clf> --data_csv experiments/crossdonor_CTCF_enc001/pool/test.csv --output_dir experiments/crossdonor_CTCF_enc001/pool/eval
+=== STEP 3: analyze ENC-001 checkpoint on cross-donor pool ===
+/home/asm242/.cache/huggingface/modules/transformers_modules/DNABERT-2-117M-attention/bert_layers.py:127: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+Some weights of the model checkpoint at /home/asm242/entexBERT-2/DNABERT-2-117M-attention were not used when initializing BertModel: ['cls.predictions.transform.dense.weight', 'cls.predictions.decoder.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.bias', 'cls.predictions.transform.LayerNorm.weight']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BertModel were not initialized from the model checkpoint at /home/asm242/entexBERT-2/DNABERT-2-117M-attention and are newly initialized: ['bert.pooler.dense.weight', 'bert.pooler.dense.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Merged 17 metadata columns from experiments/crossdonor_CTCF_enc001/pool/test.meta.csv
+Loaded weights from experiments/refsingle_ENC-001_CTCF_ctcf_ref_single_classification_binsplit2_enc001/runs/clf/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+task=classification num_labels=2 flavor=binary input_mode=single
+Using fixed decision threshold: 0.5000
+Metrics: {
+  "task": "classification",
+  "flavor": "binary",
+  "n_examples": 5044,
+  "accuracy": 0.6352101506740682,
+  "f1": 0.5593869731800766,
+  "precision": 0.7061668681983071,
+  "recall": 0.4631245043616178,
+  "n_pos": 2522,
+  "n_neg": 2522,
+  "auroc": 0.6626032704429412,
+  "auprc": 0.683548249591403,
+  "confusion": {
+    "tn": 2036,
+    "fp": 486,
+    "fn": 1354,
+    "tp": 1168
+  },
+  "decision_threshold": 0.5,
+  "threshold_source": "fixed_0.5"
+}
+PCA explained variance ratio: [0.4090999960899353, 0.03290000185370445, 0.024399999529123306, 0.01759999990463257, 0.01590000092983246, 0.013199999928474426, 0.011300000362098217, 0.01080000028014183, 0.009600000455975533, 0.008999999612569809]
+TP: deduplicated 1168 -> 261
+TP: using 100 examples
+FP: deduplicated 486 -> 319
+FP: using 100 examples
+TN: deduplicated 2036 -> 1277
+TN: using 100 examples
+FN: deduplicated 1354 -> 485
+FN: using 100 examples
+
+Wrote predictions.csv, metrics.json, pca.csv, representative_examples_all.csv (400 examples across 4 categories) to experiments/crossdonor_CTCF_enc001/pool/eval
+=== done: metrics -> experiments/crossdonor_CTCF_enc001/pool/eval ===
+{
+  "task": "classification",
+  "flavor": "binary",
+  "n_examples": 5044,
+  "accuracy": 0.6352101506740682,
+  "f1": 0.5593869731800766,
+  "precision": 0.7061668681983071,
+  "recall": 0.4631245043616178,
+  "n_pos": 2522,
+  "n_neg": 2522,
+  "auroc": 0.6626032704429412,
+  "auprc": 0.683548249591403,
+  "confusion": {
+    "tn": 2036,
+    "fp": 486,
+    "fn": 1354,
+    "tp": 1168
+  },
+  "decision_threshold": 0.5,
+  "threshold_source": "fixed_0.5"
+}
