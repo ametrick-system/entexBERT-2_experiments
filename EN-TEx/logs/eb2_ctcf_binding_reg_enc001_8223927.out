@@ -1,0 +1,30 @@
+[build] generating CTCF binding-regression inputs (ctcf_binding_regression_enc001) for ENC-001__TF-ChIP-seq_CTCF
+[urlOpen] Couldn't open home/asm242/entex_data/ENC-001/ctcf_sigmoid_colon_fold_change_over_control.bigWig for reading
+[urlOpen] Couldn't open home/asm242/entex_data/ENC-001/ctcf_sigmoid_colon_fold_change_over_control.bigWig for reading
+[pyBwOpen] bw is NULL!
+Traceback (most recent call last):
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/scripts/generate_all_inputs.py", line 213, in <module>
+    main()
+  File "/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/scripts/generate_all_inputs.py", line 176, in main
+    df = run_from_config(dataset_cfg, ref_fasta=args.ref_fasta)
+  File "/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/run_experiment.py", line 356, in run_from_config
+    primary_label = build_label(cfg["primary_label"])
+  File "/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/run_experiment.py", line 198, in build_label
+    return LABEL_BUILDERS[ltype](cfg, tf)
+  File "/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/run_experiment.py", line 157, in _build_bigwig
+    return make_bigwig_label_spec(
+  File "/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/utils.py", line 1897, in make_bigwig_label_spec
+    annotator = BigWigSignalAnnotator(
+  File "/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/utils.py", line 1730, in __init__
+    self.bw = pyBigWig.open(bigwig_path)
+RuntimeError: Received an error during file opening!
+generate_all_inputs: 1 dataset(s) from config `datasets:` block
+  base output_dir: experiments/binding_reg_ENC-001_CTCF_ctcf_binding_regression_enc001/inputs
+  SHARED partition: bin_size=100000 fold_id=0 test_chroms=[] (identical across all datasets)
+    - ENC-001__TF-ChIP-seq_CTCF  ->  experiments/binding_reg_ENC-001_CTCF_ctcf_binding_regression_enc001/inputs/ENC-001__TF-ChIP-seq_CTCF/fold0
+
+[1/1] BUILD ENC-001__TF-ChIP-seq_CTCF

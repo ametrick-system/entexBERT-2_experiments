@@ -1,0 +1,73 @@
+# ctcf_binding_regression_enc001.yaml
+# entexBERT-2 CTCF BINDING-SIGNAL regression on INDIVIDUAL 1 (ENC-001). sigmoid colon
+#
+# Trains a binding regressor (target = BigWig fold-change-over-control) so the
+# model can be scored ref-vs-alt Delta on the ADASTRA ASB benchmark exactly like
+# the 14 zero-shot models in Han et al. 2024 Fig 3A. The model NEVER sees ASB
+# labels -> no ASB-label leakage, genuine zero-shot variant-effect prediction.
+#
+# 257 bp window (128/128) to match the DNABERT-1 / entexBERT-2 CTCF runs.
+experiment: ctcf_binding_regression_enc001
+
+ref_fasta: /home/asm242/reference_genome/hg38.fa
+
+# NEW peak_bed row source: peak summits (positives) + matched non-peak
+# background windows. FILL IN the two McCleary paths below.
+row_source:
+  type: peak_bed
+  path: /home/asm242/entex_data/ENC-001/ctcf_sigmoid_colon_chip.bed
+  format: narrowpeak
+  genome_sizes: /home/asm242/reference_genome/hg38.chrom.sizes  # <-- 2-col chrom.sizes
+  summit_mode: summit           # anchor on narrowPeak summit (col 10)
+  background_ratio: 1.0         # equal-N background windows
+  background_gap_bp: 1000       # background >= 1kb from any peak
+  # donor/assay are injected by generate_all_inputs from the datasets: block
+
+# BigWig fold-change regression target (already-wired label type "bigwig").
+# region=window -> mean fold-change over the full 257 bp model window.
+primary_label:
+  type: bigwig
+  name: ctcf_foldchange
+  path: /home/asm242/entex_data/ENC-001/ENCFF099EJD.bigWig
+  signal_mode: mean
+  region: window
+  transform: log1p            # log1p(fold-change); the label registry default for bigwig
+
+sequence:
+  input_mode: ref_single
+
+window:
+  left_bp: 128
+  right_bp: 128
+  snv_offset_mode: fixed
+  jitter_max_bp: 0
+
+# Regression head (single linear layer, matching the DNABERT-1 head depth).
+head:
+  task: regression
+  num_labels: 1
+  head_num_layers: 1
+  head_hidden_size: -1
+
+split:
+  group: locus
+  mode: train_dev_test
+  ratio: [0.8, 0.1, 0.1]
+
+# Same leak-free 100kb bin-split discipline as the ASB runs. Hold out test
+# chromosomes so the genomic regions scored on the ADASTRA benchmark are unseen.
+partition:
+  enabled: true
+  bin_size: 100000
+  salt: entexbert2_binding_v1
+  fold_assignment: {}          # {} => bin-hash test/dev; set chroms for holdout
+  bin_test_frac: 0.10
+  bin_dev_frac: 0.10
+  exclude_boundary: true
+
+# No class balancing for regression (continuous target).
+balance:
+  strategy: none
+
+datasets:
+  - {donor: ENC-001, assay: TF-ChIP-seq_CTCF}
