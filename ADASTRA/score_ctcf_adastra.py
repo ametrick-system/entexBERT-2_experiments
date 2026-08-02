@@ -21,8 +21,9 @@ WHAT YOU NEED ON THE CLUSTER (all small — no 246 MB ADASTRA download):
   --eval_csv         ctcf_adastra_evalset.csv.gz   (shipped: 9071 pos + 242720 neg)
   --ref_fasta        /home/asm242/reference_genome/hg38.fa
   --reference_csv    ctcf_benchmark_reference_auroc.csv   (shipped: 14-model table)
-  [--train_coords]   OPTIONAL split_coords.csv from the build, to flag/drop eval
-                     variants whose 100kb bin overlaps a training bin (leakage).
+  [--train_coords]   OPTIONAL the build's meta sidecars — fold0/train.meta.csv AND
+                     fold0/dev.meta.csv — to drop eval variants whose 100kb bin was
+                     seen in training/validation (leak-free number). NOT test.meta.csv.
 
 Run (on a GPU node, in the eb2 env, from the repo root so `entexbert2` imports):
   python score_ctcf_adastra.py \
@@ -122,9 +123,13 @@ def main():
     ap.add_argument("--ref_fasta", required=True, help="hg38.fa")
     ap.add_argument("--reference_csv", default=None,
                     help="ctcf_benchmark_reference_auroc.csv (14-model table)")
-    ap.add_argument("--train_coords", default=None,
-                    help="OPTIONAL split_coords.csv from the build; used to flag/drop "
-                         "eval variants in training bins (leakage audit).")
+    ap.add_argument("--train_coords", default=None, nargs="+",
+                    help="OPTIONAL one or more meta files from the build "
+                         "(fold0/train.meta.csv fold0/dev.meta.csv). Their (chr, bin) "
+                         "pairs form the SEEN set; ADASTRA variants in any seen bin are "
+                         "flagged as leaky. Pass BOTH train and dev for a truly leak-free "
+                         "number (the model selected its checkpoint on dev). Do NOT pass "
+                         "test.meta.csv — those bins are held out and fine to score.")
     ap.add_argument("--bin_size", type=int, default=100000,
                     help="must match the training config partition bin_size")
     ap.add_argument("--drop_leaky", action="store_true",
@@ -158,28 +163,42 @@ def main():
     ev["delta"] = delta
     ev["abs_delta"] = np.abs(delta)
 
-    # 3) optional leakage audit against training bins
+    # 3) optional leakage audit: collect the SEEN (chr, bin) set from every meta
+    #    file passed (train + dev), then flag ADASTRA variants in any seen bin.
     leaky_mask = np.zeros(len(ev), dtype=bool)
-    if args.train_coords and os.path.exists(args.train_coords):
-        tc = pd.read_csv(args.train_coords)
-        # training bins = (chr, pos//bin_size) present in ANY split of the build
+    coord_files = args.train_coords or []
+    seen_bins = set()
+    for path in coord_files:
+        if not os.path.exists(path):
+            print(f"[leakage] WARNING: {path} not found; skipping.")
+            continue
+        tc = pd.read_csv(path)
         chrom_col = "chr" if "chr" in tc.columns else tc.columns[0]
         pos_col = ("SNV" if "SNV" in tc.columns
                    else "pos" if "pos" in tc.columns
                    else "anchor" if "anchor" in tc.columns else None)
-        if pos_col:
-            train_bins = set(zip(tc[chrom_col].astype(str),
-                                 (tc[pos_col].astype(int) // args.bin_size)))
-            ev_bins = list(zip(ev["chr"].astype(str),
-                               ((ev["pos"].astype(int) - 1) // args.bin_size)))
-            leaky_mask = np.array([b in train_bins for b in ev_bins])
-            print(f"[leakage] {leaky_mask.sum()}/{len(ev)} eval variants fall in a "
-                  f"training bin ({100*leaky_mask.mean():.2f}%)")
-        else:
-            print("[leakage] train_coords present but no pos/SNV/anchor column; skipping.")
+        if pos_col is None:
+            print(f"[leakage] {path}: no SNV/pos/anchor column ({list(tc.columns)[:6]}...); "
+                  f"skipping this file.")
+            continue
+        before = len(seen_bins)
+        seen_bins |= set(zip(tc[chrom_col].astype(str),
+                             (tc[pos_col].astype(int) // args.bin_size)))
+        print(f"[leakage] {os.path.basename(path)}: +{len(seen_bins)-before} bins "
+              f"(via '{pos_col}'), {len(seen_bins)} seen total")
+    if seen_bins:
+        # ev['pos'] is 1-based -> match the build's SNV (0-based anchor) binning
+        ev_bins = list(zip(ev["chr"].astype(str),
+                           ((ev["pos"].astype(int) - 1) // args.bin_size)))
+        leaky_mask = np.array([b in seen_bins for b in ev_bins])
+        n_pos_leak = int(leaky_mask[ev["label"].to_numpy() == 1].sum())
+        print(f"[leakage] {leaky_mask.sum()}/{len(ev)} eval variants "
+              f"({100*leaky_mask.mean():.2f}%) fall in a seen (train/dev) bin; "
+              f"{n_pos_leak} of them are ASB-positive. These are DROPPED for leak_free.")
     else:
-        print("[leakage] no --train_coords given; reporting the full-set number only. "
-              "(For a publishable number, pass split_coords.csv to exclude training bins.)")
+        print("[leakage] no usable --train_coords given; reporting the full-set number only. "
+              "For a leak-free number, pass fold0/train.meta.csv fold0/dev.meta.csv "
+              "(NOT test.meta.csv).")
 
     # 4) AUROC — full set, and leak-free subset if we have the audit
     def report(tag, sub):
