@@ -1,0 +1,81 @@
+# entexBERT-2 CTCF binding regression, INDIVIDUAL 2 (donor ENCDO451RUA / ENC-002),
+# MULTI-TISSUE consensus-merge pool over 18 EN-TEx CTCF tissues (omental_fat_pad dropped: bottlenecked).
+# Row source: multi_tissue_peak (consensus merge). Label: precomputed column (mean fold-change) + log1p.
+# LABEL bigWig = fold-change-over-control (.fc.bigWig). The .pval.bigWig files are NOT used here;
+# they are for the later heteroscedastic-head run (per-locus confidence -> sigma).
+experiment: ctcf_binding_regression_multitissue_enc002
+ref_fasta: /home/asm242/reference_genome/hg38.fa
+
+row_source:
+  type: multi_tissue_peak
+  donor: ENC-002                # individual 2 (ENCDO451RUA); read here in run_from_config path
+  assay: TF-ChIP-seq_CTCF
+  genome_sizes: /home/asm242/reference_genome/hg38.chrom.sizes
+  # ONE entry per tissue; peak (windows) + fold-change bigWig (label) from the SAME experiment, hg38.
+  tissue_tracks:
+    - {tissue: transverse_colon, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_transverse_colon.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_transverse_colon.fc.bigWig}
+    - {tissue: sigmoid_colon, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_sigmoid_colon.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_sigmoid_colon.fc.bigWig}
+    - {tissue: upper_lobe_of_left_lung, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_upper_lobe_of_left_lung.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_upper_lobe_of_left_lung.fc.bigWig}
+    - {tissue: stomach, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_stomach.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_stomach.fc.bigWig}
+    - {tissue: gastrocnemius_medialis, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_gastrocnemius_medialis.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_gastrocnemius_medialis.fc.bigWig}
+    - {tissue: spleen, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_spleen.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_spleen.fc.bigWig}
+    - {tissue: esophagus_muscularis_mucosa, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_esophagus_muscularis_mucosa.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_esophagus_muscularis_mucosa.fc.bigWig}
+    - {tissue: adrenal_gland, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_adrenal_gland.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_adrenal_gland.fc.bigWig}
+    - {tissue: thyroid_gland, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_thyroid_gland.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_thyroid_gland.fc.bigWig}
+    - {tissue: body_of_pancreas, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_body_of_pancreas.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_body_of_pancreas.fc.bigWig}
+    - {tissue: esophagus_squamous_epithelium, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_esophagus_squamous_epithelium.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_esophagus_squamous_epithelium.fc.bigWig}
+    - {tissue: tibial_nerve, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_tibial_nerve.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_tibial_nerve.fc.bigWig}
+    - {tissue: gastroesophageal_sphincter, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_gastroesophageal_sphincter.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_gastroesophageal_sphincter.fc.bigWig}
+    - {tissue: peyers_patch, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_peyers_patch.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_peyers_patch.fc.bigWig}
+    - {tissue: suprapubic_skin, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_suprapubic_skin.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_suprapubic_skin.fc.bigWig}
+    - {tissue: prostate_gland, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_prostate_gland.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_prostate_gland.fc.bigWig}
+    - {tissue: lower_leg_skin, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_lower_leg_skin.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_lower_leg_skin.fc.bigWig}
+    - {tissue: testis, peak_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_testis.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_testis.fc.bigWig}
+  merge_window_bp: 100          # fuse summits within 100bp into one consensus locus
+  label_radius_bp: 32           # label/reliability footprint (matches the radius-32 single-tissue run)
+  summit_mode: summit
+  background_ratio: 1.0
+  background_gap_bp: 1000
+  exclude_chroms: [chrY, chrM]
+
+primary_label:
+  type: column                  # read the precomputed target column
+  name: ctcf_binding
+  column: binding_label_raw     # emitted by the row source (mean FC across tissues)
+  transform: log1p              # log1p(mean fold-change)
+
+sequence:
+  input_mode: ref_single
+
+window:
+  left_bp: 128
+  right_bp: 128                 # 257bp input context
+  snv_offset_mode: fixed
+  jitter_max_bp: 0
+
+head:
+  task: regression
+  num_labels: 1
+  head_num_layers: 1
+  head_hidden_size: -1
+
+split:
+  group: locus
+  mode: train_dev_test
+  ratio: [0.8, 0.1, 0.1]
+
+partition:
+  enabled: true
+  bin_size: 100000
+  salt: entexbert2_binding_multitissue_enc002_v1
+  fold_assignment: {}           # {} => bin-hash; set chroms for whole-chr holdout
+  bin_test_frac: 0.10
+  bin_dev_frac: 0.10
+  exclude_boundary: true
+
+balance:
+  strategy: none                # continuous target
+
+# Top-level datasets: ONE entry (donor+assay); the tissue fan-out lives in row_source.
+datasets:
+  - {donor: ENC-002, assay: TF-ChIP-seq_CTCF}

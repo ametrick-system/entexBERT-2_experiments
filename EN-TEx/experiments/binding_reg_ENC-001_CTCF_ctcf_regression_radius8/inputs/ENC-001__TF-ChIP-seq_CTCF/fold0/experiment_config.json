@@ -1,0 +1,84 @@
+{
+  "experiment": "ENC-001__TF-ChIP-seq_CTCF",
+  "resolved": {
+    "experiment": "ENC-001__TF-ChIP-seq_CTCF",
+    "ref_fasta": "/home/asm242/reference_genome/hg38.fa",
+    "row_source": {
+      "type": "peak_bed",
+      "path": "/home/asm242/entex_data/ENC-001/ctcf_sigmoid_colon_chip.bed",
+      "format": "narrowpeak",
+      "genome_sizes": "/home/asm242/reference_genome/hg38.chrom.sizes",
+      "summit_mode": "summit",
+      "background_ratio": 1.0,
+      "background_gap_bp": 1000,
+      "donor": "ENC-001",
+      "assay": "TF-ChIP-seq_CTCF"
+    },
+    "primary_label": {
+      "type": "bigwig",
+      "name": "ctcf_foldchange",
+      "path": "/home/asm242/entex_data/ENC-001/ENCFF099EJD.bigWig",
+      "signal_mode": "mean",
+      "region": "snv_radius",
+      "radius_bp": 8,
+      "transform": "log1p"
+    },
+    "sequence": {
+      "input_mode": "ref_single"
+    },
+    "window": {
+      "left_bp": 128,
+      "right_bp": 128,
+      "snv_offset_mode": "fixed",
+      "jitter_max_bp": 0
+    },
+    "head": {
+      "task": "regression",
+      "num_labels": 1,
+      "head_num_layers": 1,
+      "head_hidden_size": -1
+    },
+    "split": {
+      "group": "locus",
+      "mode": "train_dev_test",
+      "ratio": [
+        0.8,
+        0.1,
+        0.1
+      ]
+    },
+    "partition": {
+      "enabled": true,
+      "bin_size": 100000,
+      "salt": "entexbert2_binding_v1",
+      "fold_assignment": {},
+      "bin_test_frac": 0.1,
+      "bin_dev_frac": 0.1,
+      "exclude_boundary": true
+    },
+    "balance": {
+      "strategy": "none"
+    },
+    "output_dir": "experiments/binding_reg_ENC-001_CTCF_ctcf_regression_radius8/inputs/ENC-001__TF-ChIP-seq_CTCF/fold0"
+  },
+  "head_resolved": {
+    "task": "regression",
+    "num_labels": 1,
+    "head_num_layers": 1,
+    "head_hidden_size": -1
+  },
+  "partition_resolved": {
+    "enabled": true,
+    "bin_size": 100000,
+    "salt": "entexbert2_binding_v1",
+    "fold_assignment": {},
+    "fold_id": 0,
+    "train_frac_within_nontest": 0.8888888888888888,
+    "bin_test_frac": 0.1,
+    "bin_dev_frac": 0.1,
+    "exclude_boundary": true,
+    "boundary_bp": 128
+  },
+  "ref_fasta": "/home/asm242/reference_genome/hg38.fa",
+  "output_dir": "experiments/binding_reg_ENC-001_CTCF_ctcf_regression_radius8/inputs/ENC-001__TF-ChIP-seq_CTCF/fold0"
+}

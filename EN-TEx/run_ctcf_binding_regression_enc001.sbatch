@@ -21,7 +21,7 @@ set -euo pipefail
 REPO_ROOT="${SLURM_SUBMIT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)}"
 cd "$REPO_ROOT"
 
-CONFIG="${CONFIG:-configs/ctcf_binding_regression_enc001.yaml}"
+CONFIG="${CONFIG:-configs/ctcf_regression_radius8.yaml}"
 TAG="$(basename "$CONFIG" .yaml)"
 DONOR="${DONOR:-ENC-001}"
 DATASET="${DATASET:-${DONOR}__TF-ChIP-seq_CTCF}"
