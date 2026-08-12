@@ -1,0 +1,86 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) StdEnv
+/apps/custom/lmod/8.7.48/init/bash: line 250: conda: command not found
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+WARNING:root:Perform single-sequence regression...
+WARNING:root:Perform single-sequence regression...
+WARNING:root:Perform single-sequence regression...
+/home/asm242/.cache/huggingface/modules/transformers_modules/DNABERT-2-117M-attention/bert_layers.py:127: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+Some weights of the model checkpoint at /home/asm242/entexBERT-2/DNABERT-2-117M-attention were not used when initializing BertModel: ['cls.predictions.transform.dense.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.predictions.decoder.bias', 'cls.predictions.transform.LayerNorm.weight']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BertModel were not initialized from the model checkpoint at /home/asm242/entexBERT-2/DNABERT-2-117M-attention and are newly initialized: ['bert.pooler.dense.bias', 'bert.pooler.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+  0%|          | 0/3228 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/asm242/entexBERT-2/src/entexbert2/finetune_entexbert2.py", line 454, in <module>
+    train()
+  File "/home/asm242/entexBERT-2/src/entexbert2/finetune_entexbert2.py", line 436, in train
+    trainer.train()
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/transformers/trainer.py", line 1664, in train
+    return inner_training_loop(
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/transformers/trainer.py", line 1940, in _inner_training_loop
+    tr_loss_step = self.training_step(model, inputs)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/transformers/trainer.py", line 2735, in training_step
+    loss = self.compute_loss(model, inputs)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/transformers/trainer.py", line 2767, in compute_loss
+    outputs = model(**inputs)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1194, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/asm242/entexBERT-2/src/entexbert2/model.py", line 219, in forward
+    raise RuntimeError(
+RuntimeError: entexBERT2 ASB model requires a paired (hap1, hap2) batch, but input_ids_alt did not reach forward. Set remove_unused_columns=False and use the twin collator.
+  0%|          | 0/3228 [00:00<?, ?it/s]

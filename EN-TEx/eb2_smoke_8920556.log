@@ -1,0 +1,31 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) StdEnv
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+torch 1.13.1+cu117 | cuda True | transformers 4.29.2
+  found: /home/asm242/entexBERT-2/DNABERT-2-117M-attention
+  found: /home/asm242/reference_genome/hg38.fa
+  found: /home/asm242/palmer_scratch/entex_data/hetSNVs.tsv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_adastra_evalset.csv
+
+=== STEP 1: build tiny Stage-2 dataset ===
+[in]  22310439 rows (assay=CTCF)
+[agg] 712805 donor-loci -> 233906 kept (n>=20; dropped 478899)
+[pos] imbalance_significant loci: 23346 (10.0%)
+[k/n] median n=55, median k/n=0.500
+[wrote] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/smoke/smoke_counts_full.csv
+[1b] wrote 2000 loci -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/smoke/smoke_counts.csv | chroms: ['chr1', 'chr12', 'chr2', 'chr5']
+Traceback (most recent call last):
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/asm242/entexBERT-2/src/entexbert2/run_experiment.py", line 431, in <module>
+    main()
+  File "/home/asm242/entexBERT-2/src/entexbert2/run_experiment.py", line 427, in main
+    run_from_config(cfg, ref_fasta=args.ref_fasta, output_dir=args.output_dir)
+  File "/home/asm242/entexBERT-2/src/entexbert2/run_experiment.py", line 327, in run_from_config
+    left_bp=wcfg["left_bp"],
+KeyError: 'left_bp'

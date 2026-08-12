@@ -1,0 +1,66 @@
+# ep300_binding_regression_multitissue_enc001.yaml
+# entexBERT-2 EP300 binding regression, INDIVIDUAL 1 (donor ENCDO845WKR / ENC-001),
+# MULTI-TISSUE consensus-merge over 5 EN-TEx EP300 tissues.
+# Mirrors ctcf_binding_regression_multitissue_enc002 (the trunk that gave |Delta|~0.68):
+# row source multi_tissue_peak (consensus merge), label = column binding_label_raw (mean FC) + log1p.
+# LABEL bigWig = fold-change-over-control (.fc.bigWig). The .pval.bigWig files are NOT used here.
+experiment: ep300_binding_regression_multitissue_enc001
+ref_fasta: /home/asm242/reference_genome/hg38.fa
+
+row_source:
+  type: multi_tissue_peak
+  donor: ENC-001                # individual 1 (ENCDO845WKR)
+  assay: TF-ChIP-seq_EP300
+  genome_sizes: /home/asm242/reference_genome/hg38.chrom.sizes
+  # ONE entry per tissue; peak (windows) + fold-change bigWig (label), SAME experiment, hg38.
+  tissue_tracks:
+    - {tissue: transverse_colon, peak_path: /home/asm242/palmer_scratch/entex_data/EP300/ENC-001/ep300_1_transverse_colon.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/EP300/ENC-001/ep300_1_transverse_colon.fc.bigWig}
+    - {tissue: upper_lobe_of_left_lung, peak_path: /home/asm242/palmer_scratch/entex_data/EP300/ENC-001/ep300_1_upper_lobe_of_left_lung.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/EP300/ENC-001/ep300_1_upper_lobe_of_left_lung.fc.bigWig}
+    - {tissue: esophagus_muscularis_mucosa, peak_path: /home/asm242/palmer_scratch/entex_data/EP300/ENC-001/ep300_1_esophagus_muscularis_mucosa.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/EP300/ENC-001/ep300_1_esophagus_muscularis_mucosa.fc.bigWig}
+    - {tissue: tibial_nerve, peak_path: /home/asm242/palmer_scratch/entex_data/EP300/ENC-001/ep300_1_tibial_nerve.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/EP300/ENC-001/ep300_1_tibial_nerve.fc.bigWig}
+    - {tissue: gastroesophageal_sphincter, peak_path: /home/asm242/palmer_scratch/entex_data/EP300/ENC-001/ep300_1_gastroesophageal_sphincter.narrowPeak, bigwig_path: /home/asm242/palmer_scratch/entex_data/EP300/ENC-001/ep300_1_gastroesophageal_sphincter.fc.bigWig}
+  merge_window_bp: 100          # fuse summits within 100bp into one consensus locus
+  label_radius_bp: 32           # label/reliability footprint (matches the CTCF radius-32 run)
+  summit_mode: summit
+  background_ratio: 1.0
+  background_gap_bp: 1000
+  exclude_chroms: [chrY, chrM]
+
+primary_label:
+  type: column                  # read the precomputed target column
+  name: ep300_binding
+  column: binding_label_raw     # emitted by the row source (mean FC across tissues)
+  transform: log1p              # log1p(mean fold-change)
+
+sequence:
+  input_mode: ref_single
+
+window:
+  left_bp: 128
+  right_bp: 128                 # 257bp input context
+  snv_offset_mode: fixed
+  jitter_max_bp: 0
+
+head:
+  task: regression
+  num_labels: 1
+  head_num_layers: 1
+  head_hidden_size: -1
+
+split:
+  group: locus
+  mode: train_dev_test
+  ratio: [0.8, 0.1, 0.1]
+
+partition:
+  enabled: true
+  bin_size: 100000
+  salt: entexbert2_binding_multitissue_ep300_enc001_v1
+  fold_assignment: {}           # {} => bin-hash; whole-chr holdout not needed for the zero-shot trunk
+  bin_test_frac: 0.10
+  bin_dev_frac: 0.10
+  exclude_boundary: true
+
+balance:
+  strategy: none                # continuous target
+# NOTE: no `datasets:` block -- run_from_config reads row_source directly (donor/assay live there).

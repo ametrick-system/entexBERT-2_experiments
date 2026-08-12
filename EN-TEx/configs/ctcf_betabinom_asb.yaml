@@ -1,0 +1,65 @@
+# ctcf_betabinom_asb.yaml
+# Supervised beta-binomial ASB task (Track 2). entexBERT-2 predicts logit p = P(read from
+# hap1) via the hap1-vs-hap2 twin; the loss is the beta-binomial NLL over (k=hap1 reads,
+# n=total reads). Trains DIRECTLY on allelic counts, so leakage is central: held-out
+# chromosomes (chr5+chr12, from select_heldout_chroms.py) sit UNDER the 100kb bin-split.
+#
+# STEP-0 prep (run once, before build):
+#   python build_betabinom_counts.py --hetsnv_tsv $HOME/entex_data/hetSNVs.tsv \
+#       --assay CTCF --out ctcf_betabinom_counts.csv
+#   python select_heldout_chroms.py --eval_csv ctcf_betabinom_counts.csv \
+#       --label_col imbalance_significance --out_prefix ctcf_bb    # -> chr5, chr12
+
+experiment: ctcf_betabinom_asb
+
+ref_fasta: /home/asm242/reference_genome/hg38.fa
+
+row_source:
+  type: betabinom_counts               # NEW source (diff PART 1)
+  path: ctcf_betabinom_counts.csv      # output of build_betabinom_counts.py
+  assay: CTCF
+  # donor: omitted -> keep all donors (each donor-locus is its own row; distinct genotypes)
+
+# primary_label makes 'label' a meaningful reference/analysis column; the betabinomial task
+# IGNORES it (reads k,n instead). imbalance_significance = the ADASTRA-style AS call.
+primary_label:
+  type: as_class
+  name: imbalance_significance
+
+# the two loss constants carried into train.csv (diff PART 2). NOT a label spec.
+count_cols: [k, n]
+
+sequence:
+  input_mode: hap_pair                 # REQUIRED by the betabinomial sign guard (H4c)
+  window:
+    left_bp: 128
+    right_bp: 128
+  snv_offset_mode: fixed
+
+head:
+  task: betabinomial
+  num_labels: 1
+  head_num_layers: 1
+
+# leak-free split: whole-chromosome holdout (chr5+chr12 -> TEST) with the remaining
+# chromosomes hashed into train/dev by 100kb bin. NOTE the schema: fold_assignment maps
+# {chromosome -> fold index} and fold_id picks which fold is TEST (NOT {'test': [...]}), and
+# the block does nothing unless enabled: true. boundary_bp is set explicitly (=window
+# half-width) because build_partition_spec only auto-derives it from a TOP-LEVEL `window`
+# block, which this config nests under `sequence`.
+partition:
+  enabled: true
+  bin_size: 100000
+  salt: entexbert2_betabinom_v1
+  fold_id: 0
+  # held-out TEST chromosomes from select_heldout_chroms.py (~10% of positives, chr1/chr7 spared)
+  fold_assignment: {chr5: 0, chr12: 0}
+  exclude_boundary: true
+  boundary_bp: 128
+
+balance:
+  strategy: none                       # count likelihood is depth-weighted; do NOT subsample
+
+datasets:
+  - donor: ALLDONOR
+    assay: TF-ChIP-seq_CTCF

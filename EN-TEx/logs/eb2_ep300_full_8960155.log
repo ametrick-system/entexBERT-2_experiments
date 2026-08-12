@@ -1,0 +1,74 @@
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+torch 1.13.1+cu117 | cuda True
+  found: /home/asm242/entexBERT-2/DNABERT-2-117M-attention
+  found: /home/asm242/reference_genome/hg38.fa
+  found: /home/asm242/reference_genome/hg38.chrom.sizes
+  found: /home/asm242/palmer_scratch/entex_data/hetSNVs.tsv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ep300_adastra_evalset.csv.gz
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ep300_benchmark_reference_auroc.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/configs/ep300_binding_regression_multitissue_enc001.yaml
+--- (A) EP300 tissue files under /home/asm242/palmer_scratch/entex_data/EP300/ENC-001 ---
+  found: ep300_1_transverse_colon.narrowPeak
+  found: ep300_1_transverse_colon.fc.bigWig
+  found: ep300_1_upper_lobe_of_left_lung.narrowPeak
+  found: ep300_1_upper_lobe_of_left_lung.fc.bigWig
+  found: ep300_1_esophagus_muscularis_mucosa.narrowPeak
+  found: ep300_1_esophagus_muscularis_mucosa.fc.bigWig
+  found: ep300_1_tibial_nerve.narrowPeak
+  found: ep300_1_tibial_nerve.fc.bigWig
+  found: ep300_1_gastroesophageal_sphincter.narrowPeak
+  found: ep300_1_gastroesophageal_sphincter.fc.bigWig
+[preflight] OK
+
+=== STEP 1: build Stage-1 (multi-tissue) inputs ===
+Experiment: ep300_binding_regression_multitissue_enc001
+  source:     multi_tissue_peak (has_variants=False)
+  primary:    ep300_binding [regression]
+  aux:        none
+  input_mode: ref_single
+  window:     L128/R128 offset=fixed jitter=0
+  split:      train_dev_test group=locus exclude=0 loci
+  partition:  hybrid bin_size=100000 fold_id=0 test_chroms=[] (overrides group-shuffle)
+  output_dir: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/stage1/inputs
+Loading reference FASTA...
+partition_spec enabled (bin_size=100000, fold_id=0): row-level split counts {'train': 140957, 'test': 17733, 'dev': 17715, '__exclude__': 445}
+  boundary exclusion: dropped 445 loci whose window straddled a 100000bp bin edge (boundary_bp=128)
+
+Duplicate AS/window summary
+Rows: 176405
+Unique groups: 176405
+Duplicate groups: 0
+Rows in duplicate groups: 0
+Conflicting-label groups: 0
+Rows in conflicting-label groups: 0
+Precomputed split via column '_assigned_split': {'train.csv': 137794, 'dev.csv': 17454, 'test.csv': 17375}
+cross-split dedup: dropped 1 rows from dev (sequence already present in an earlier split).
+cross-split dedup: removed 1 cross-split duplicate-sequence rows total.
+Saved 172622 total examples to /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/stage1/inputs
+{'train.csv': 137794, 'dev.csv': 17453, 'test.csv': 17375}
+
+Main label summary:
+count    172622.000000
+mean          0.979871
+std           0.667562
+min           0.000000
+25%           0.417451
+50%           0.879946
+75%           1.469637
+max           5.612205
+Name: label, dtype: float64
+
+Done. Final rows: 176405
+
+Finetune settings (map to finetune_entexbert2.py):
+  --task regression
+  --main_num_labels 1
+  --head_num_layers 1  (1 = linear, >1 = MLP)
+  trainer data path: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/stage1/inputs
+  primary label column: ep300_binding
+[STEP 1] train n=137794 label[mean=0.984 sd=0.669]
+[STEP 1] peak_mean=1.523 bg_mean=0.412 sep=OK
+[STEP 1] OK
+
+=== STEP 2: Stage-1 binding-trunk training ===

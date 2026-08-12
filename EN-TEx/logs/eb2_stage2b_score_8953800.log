@@ -1,0 +1,14 @@
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+torch 1.13.1+cu117 | cuda True
+  found: /home/asm242/entexBERT-2/DNABERT-2-117M-attention
+  found: /home/asm242/reference_genome/hg38.fa
+  found: /home/asm242/palmer_scratch/entex_data/hetSNVs.tsv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_adastra_evalset.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_asb/inputs/train.meta.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_asb/inputs/dev.meta.csv
+
+=== STEP A: select best 2a checkpoint ===
+[STEP A] BEST 2a: s=s=100  dev_spearman=dev_spearman=0.06072  /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_asb/runs/asb_2a_s100
+[STEP A] ckpt = [cand]
+best 2a ckpt missing pytorch_model.bin

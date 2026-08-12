@@ -1,0 +1,190 @@
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+  reference OK (EP300_AUROC resolvable)
+  found: /home/asm242/reference_genome/hg38.fa
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ep300_adastra_evalset.csv.gz
+  found: /home/asm242/palmer_scratch/entex_data/hetSNVs.tsv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/inputs/train.meta.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/inputs/dev.meta.csv
+
+=== locating checkpoints under /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs ===
+  best 2a: s=20 dev_spearman=0.08547 -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2a_s20
+  2b run: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2b_s20
+
+=== scoring (leak-free) ===
+--- scoring 2a (/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2a_s20) ---
+[load] ADASTRA eval: 32619 rows (pos=1416, neg=31203)
+[windows] built 32619/32619  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 32619 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2a_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] train.meta.csv: +8745 bins, 8745 seen total
+[leakage] dev.meta.csv: +1097 bins, 9842 seen total
+[leakage] 22617/32619 eval variants (69.34%) in a seen bin; 784 ASB-positive. Dropped for leak_free.
+[AUROC:full] balanced 1416 pos + 1416 neg  AUROC=0.5465 95%CI[0.5237,0.5674]  AUPRC=0.5477
+[AUROC:leak_free] balanced 632 pos + 632 neg  AUROC=0.5297 95%CI[0.4976,0.5592]  AUPRC=0.5413
+
+=== entexBERT-2 vs benchmark models (EP300_AUROC, 7 models) ===
+      Enformer             DNN       0.5961
+      DeepFun              DNN       0.5891
+      DeepSEA              DNN       0.5601
+      deltaSVM_ChIP-seq    kmer/gkm  0.5334
+  >>> entexBERT-2 (this run)   0.5297  <<<
+      DeepBind_ChIP-seq    DNN       0.5174
+      Beluga               DNN       0.5087
+      Sei                  DNN       0.4970
+
+[done] wrote /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score_2a_adastra_metrics.json + /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score_2a_adastra_perVariant.csv.gz
+[filter] total_reads>=20: 40808/220043 rows kept
+[load] 40808 hetSNV rows over donors=['ENC-001', 'ENC-002', 'ENC-003', 'ENC-004']
+[leakage] train.meta.csv: +8745 bins, 8745 seen total
+[leakage] dev.meta.csv: +1097 bins, 9842 seen total
+
+===== donor ENC-001: 24345 rows (pos=1120, neg=23225) =====
+[windows] built 24345/24345  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 24345 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2a_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 22036/24345 ENC-001 (cross-donor) variants in a seen bin (979 positive).
+  [ENC-001:full] AUROC=0.5024 CI[0.4777,0.5264] AUPRC=0.4920 n_pos=1120 | mag_Spearman=0.0349 signed_Spearman=0.1078
+  [ENC-001:leak_free] AUROC=0.5547 CI[0.4889,0.6232] AUPRC=0.5193 n_pos=141 | mag_Spearman=0.0537 signed_Spearman=0.1329
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+    sigmoid_colon                    AUROC=0.4175 n_pos=20 mag_Sp=0.0681
+    tibial_nerve                     AUROC=0.6010 n_pos=87 mag_Sp=0.0552
+
+===== donor ENC-002: 3910 rows (pos=225, neg=3685) =====
+[windows] built 3910/3910  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 3910 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2a_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 3610/3910 ENC-002 (matched) variants in a seen bin (212 positive).
+  [ENC-002:full] AUROC=0.4986 CI[0.4478,0.5529] AUPRC=0.5134 n_pos=225 | mag_Spearman=0.0286 signed_Spearman=0.1220
+  [ENC-002:leak_free] AUROC=0.5207 CI[0.2810,0.7778] AUPRC=0.5051 n_pos=13 | mag_Spearman=0.0247 signed_Spearman=0.0678
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+
+===== donor ENC-003: 2973 rows (pos=190, neg=2783) =====
+[windows] built 2973/2973  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 2973 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2a_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 2725/2973 ENC-003 (cross-donor) variants in a seen bin (177 positive).
+  [ENC-003:full] AUROC=0.5604 CI[0.5060,0.6200] AUPRC=0.5616 n_pos=190 | mag_Spearman=0.0157 signed_Spearman=0.0761
+  [ENC-003:leak_free] AUROC=0.6154 CI[0.3728,0.8284] AUPRC=0.6469 n_pos=13 | mag_Spearman=-0.0014 signed_Spearman=-0.0039
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+
+===== donor ENC-004: 9580 rows (pos=535, neg=9045) =====
+[windows] built 9580/9580  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 9580 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2a_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 8692/9580 ENC-004 (cross-donor) variants in a seen bin (489 positive).
+  [ENC-004:full] AUROC=0.4840 CI[0.4486,0.5172] AUPRC=0.4928 n_pos=535 | mag_Spearman=0.0348 signed_Spearman=0.1079
+  [ENC-004:leak_free] AUROC=0.4898 CI[0.3709,0.6142] AUPRC=0.5752 n_pos=46 | mag_Spearman=0.0065 signed_Spearman=0.1427
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+    upper_lobe_of_left_lung          AUROC=0.3788 n_pos=35 mag_Sp=-0.0672
+
+[write] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score_2a_hetsnv_perVariant.csv.gz  (40808 scored variants)
+[write] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score_2a_hetsnv_summary.csv
+
+=== donor-level (ALL-tissue) summary ===
+  donor  donor_kind    regime    auroc  n_pos  mag_spearman  signed_spearman
+ENC-001 cross-donor      full 0.502367   1120      0.034895         0.107759
+ENC-001 cross-donor leak_free 0.554650    141      0.053660         0.132920
+ENC-002     matched      full 0.498568    225      0.028601         0.122001
+ENC-002     matched leak_free 0.520710     13      0.024672         0.067825
+ENC-003 cross-donor      full 0.560443    190      0.015654         0.076064
+ENC-003 cross-donor leak_free 0.615385     13     -0.001408        -0.003925
+ENC-004 cross-donor      full 0.484011    535      0.034848         0.107899
+ENC-004 cross-donor leak_free 0.489839     46      0.006451         0.142705
+--- scoring 2b (/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2b_s20) ---
+[load] ADASTRA eval: 32619 rows (pos=1416, neg=31203)
+[windows] built 32619/32619  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 32619 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2b_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] train.meta.csv: +8745 bins, 8745 seen total
+[leakage] dev.meta.csv: +1097 bins, 9842 seen total
+[leakage] 22617/32619 eval variants (69.34%) in a seen bin; 784 ASB-positive. Dropped for leak_free.
+[AUROC:full] balanced 1416 pos + 1416 neg  AUROC=0.5039 95%CI[0.4837,0.5234]  AUPRC=0.5073
+[AUROC:leak_free] balanced 632 pos + 632 neg  AUROC=0.5014 95%CI[0.4709,0.5343]  AUPRC=0.4979
+
+=== entexBERT-2 vs benchmark models (EP300_AUROC, 7 models) ===
+      Enformer             DNN       0.5961
+      DeepFun              DNN       0.5891
+      DeepSEA              DNN       0.5601
+      deltaSVM_ChIP-seq    kmer/gkm  0.5334
+      DeepBind_ChIP-seq    DNN       0.5174
+      Beluga               DNN       0.5087
+  >>> entexBERT-2 (this run)   0.5014  <<<
+      Sei                  DNN       0.4970
+
+[done] wrote /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score_2b_adastra_metrics.json + /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score_2b_adastra_perVariant.csv.gz
+[filter] total_reads>=20: 40808/220043 rows kept
+[load] 40808 hetSNV rows over donors=['ENC-001', 'ENC-002', 'ENC-003', 'ENC-004']
+[leakage] train.meta.csv: +8745 bins, 8745 seen total
+[leakage] dev.meta.csv: +1097 bins, 9842 seen total
+
+===== donor ENC-001: 24345 rows (pos=1120, neg=23225) =====
+[windows] built 24345/24345  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 24345 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2b_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 22036/24345 ENC-001 (cross-donor) variants in a seen bin (979 positive).
+  [ENC-001:full] AUROC=0.4981 CI[0.4722,0.5219] AUPRC=0.5074 n_pos=1120 | mag_Spearman=0.0118 signed_Spearman=0.0401
+  [ENC-001:leak_free] AUROC=0.4589 CI[0.3931,0.5245] AUPRC=0.4645 n_pos=141 | mag_Spearman=0.0040 signed_Spearman=0.0608
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+    sigmoid_colon                    AUROC=0.4150 n_pos=20 mag_Sp=0.0508
+    tibial_nerve                     AUROC=0.4853 n_pos=87 mag_Sp=-0.0219
+
+===== donor ENC-002: 3910 rows (pos=225, neg=3685) =====
+[windows] built 3910/3910  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 3910 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2b_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 3610/3910 ENC-002 (matched) variants in a seen bin (212 positive).
+  [ENC-002:full] AUROC=0.5797 CI[0.5262,0.6321] AUPRC=0.5722 n_pos=225 | mag_Spearman=0.0058 signed_Spearman=0.0793
+  [ENC-002:leak_free] AUROC=0.5325 CI[0.2810,0.7708] AUPRC=0.5628 n_pos=13 | mag_Spearman=-0.0591 signed_Spearman=0.0314
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+
+===== donor ENC-003: 2973 rows (pos=190, neg=2783) =====
+[windows] built 2973/2973  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 2973 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2b_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 2725/2973 ENC-003 (cross-donor) variants in a seen bin (177 positive).
+  [ENC-003:full] AUROC=0.5602 CI[0.5064,0.6187] AUPRC=0.5583 n_pos=190 | mag_Spearman=0.0023 signed_Spearman=0.0169
+  [ENC-003:leak_free] AUROC=0.6095 CI[0.3690,0.8251] AUPRC=0.6339 n_pos=13 | mag_Spearman=0.0082 signed_Spearman=0.0350
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+
+===== donor ENC-004: 9580 rows (pos=535, neg=9045) =====
+[windows] built 9580/9580  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 9580 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2b_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 8692/9580 ENC-004 (cross-donor) variants in a seen bin (489 positive).
+  [ENC-004:full] AUROC=0.5304 CI[0.4942,0.5664] AUPRC=0.5264 n_pos=535 | mag_Spearman=0.0193 signed_Spearman=0.0289
+  [ENC-004:leak_free] AUROC=0.5577 CI[0.4402,0.6752] AUPRC=0.5432 n_pos=46 | mag_Spearman=0.0100 signed_Spearman=0.0046
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+    upper_lobe_of_left_lung          AUROC=0.5355 n_pos=35 mag_Sp=-0.0481
+
+[write] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score_2b_hetsnv_perVariant.csv.gz  (40808 scored variants)
+[write] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score_2b_hetsnv_summary.csv
+
+=== donor-level (ALL-tissue) summary ===
+  donor  donor_kind    regime    auroc  n_pos  mag_spearman  signed_spearman
+ENC-001 cross-donor      full 0.498132   1120      0.011808         0.040137
+ENC-001 cross-donor leak_free 0.458931    141      0.003956         0.060846
+ENC-002     matched      full 0.579694    225      0.005819         0.079277
+ENC-002     matched leak_free 0.532544     13     -0.059090         0.031374
+ENC-003 cross-donor      full 0.560222    190      0.002267         0.016913
+ENC-003 cross-donor leak_free 0.609467     13      0.008162         0.034976
+ENC-004 cross-donor      full 0.530401    535      0.019318         0.028913
+ENC-004 cross-donor leak_free 0.557656     46      0.010020         0.004606
+
+============================================================
+ EP300 SCORING COMPLETE.
+   best 2a: s=20 (dev spearman 0.08547) -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2a_s20
+   2b:      /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/asb_2b_s20
+   outputs: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score_2a_*  and  /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score_2b_*
+ WIN CONDITION: leak-free |Delta| AUROC > ~0.596 (Enformer, best DNN on EP300).
+============================================================

@@ -1,0 +1,35 @@
+experiment: smoke_stage2_ctcf_asb
+ref_fasta: /home/asm242/reference_genome/hg38.fa                       # $REF
+output_dir: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/smoke/inputs   # $BUILD
+
+row_source:
+  type: betabinom_counts
+  path: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/smoke/smoke_counts.csv  # $WORK/smoke_counts.csv
+  assay: CTCF
+  min_total_reads: 20
+
+primary_label:
+  type: logit_ratio          # y = logit((k+0.5)/(n+1)); reads k,n from the betabinom source at build
+  name: logit_ratio
+
+sequence: {input_mode: hap_pair}
+
+# NOTE schema: `window` is TOP-LEVEL (not under `sequence`); `input_mode` is under `sequence`.
+window: {left_bp: 128, right_bp: 128, snv_offset_mode: fixed, jitter_max_bp: 0}
+
+head: {task: regression, num_labels: 1, head_num_layers: 1, head_hidden_size: -1}
+
+depth_col: n                 # n -> the `depth` weight column so the finetune loss forms w = n_eff(n)
+
+split: {mode: train_dev_test, ratio: [0.8, 0.1, 0.1], seed: 42, group: locus}
+
+# Leak-free split: hold out chr5+chr12 to TEST, hash the rest into train/dev by 100kb bin.
+partition:
+  enabled: true
+  bin_size: 100000
+  fold_id: 0
+  fold_assignment: {chr5: 0, chr12: 0}
+  exclude_boundary: true
+  boundary_bp: 128
+
+balance: {strategy: none}

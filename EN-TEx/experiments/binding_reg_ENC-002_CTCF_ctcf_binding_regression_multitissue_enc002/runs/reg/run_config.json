@@ -11,6 +11,8 @@
   "head_hidden_size": -1,
   "head_activation": "gelu",
   "head_dropout": 0.1,
+  "predict_sigma": true,
+  "sigma_logvar_clamp": 10.0,
   "num_aux_tasks": 0,
   "aux_task_names": [],
   "aux_task_types": [],

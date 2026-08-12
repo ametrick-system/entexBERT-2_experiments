@@ -1,0 +1,7 @@
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+torch 1.13.1+cu117 | cuda True
+  found: /home/asm242/entexBERT-2/DNABERT-2-117M-attention
+  found: /home/asm242/reference_genome/hg38.fa
+  found: /home/asm242/palmer_scratch/entex_data/hetSNVs.tsv
+  MISSING: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_adastra_evalset.csv.gz

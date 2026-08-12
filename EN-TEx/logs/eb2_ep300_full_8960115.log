@@ -1,0 +1,23 @@
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+torch 1.13.1+cu117 | cuda True
+  found: /home/asm242/entexBERT-2/DNABERT-2-117M-attention
+  found: /home/asm242/reference_genome/hg38.fa
+  found: /home/asm242/reference_genome/hg38.chrom.sizes
+  found: /home/asm242/palmer_scratch/entex_data/hetSNVs.tsv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ep300_adastra_evalset.csv.gz
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ep300_benchmark_reference_auroc.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/configs/ep300_binding_regression_multitissue_enc001.yaml
+--- (A) EP300 tissue files under /home/asm242/palmer_scratch/entex_data/EP300/ENC-001 ---
+  found: ep300_1_transverse_colon.narrowPeak
+  found: ep300_1_transverse_colon.fc.bigWig
+  found: ep300_1_upper_lobe_of_left_lung.narrowPeak
+  found: ep300_1_upper_lobe_of_left_lung.fc.bigWig
+  found: ep300_1_esophagus_muscularis_mucosa.narrowPeak
+  found: ep300_1_esophagus_muscularis_mucosa.fc.bigWig
+  found: ep300_1_tibial_nerve.narrowPeak
+  found: ep300_1_tibial_nerve.fc.bigWig
+  found: ep300_1_gastroesophageal_sphincter.narrowPeak
+  found: ep300_1_gastroesophageal_sphincter.fc.bigWig
+--- (B) EP300 presence in hetSNVs.tsv ---
+  hetSNVs EP300 rows (col 'assay'): 0

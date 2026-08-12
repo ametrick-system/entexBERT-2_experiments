@@ -1,0 +1,81 @@
+{
+  "experiment": "smoke_stage2_ctcf_asb",
+  "resolved": {
+    "experiment": "smoke_stage2_ctcf_asb",
+    "ref_fasta": "/home/asm242/reference_genome/hg38.fa",
+    "output_dir": "/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/smoke/inputs",
+    "row_source": {
+      "type": "betabinom_counts",
+      "path": "/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/smoke/smoke_counts.csv",
+      "assay": "CTCF",
+      "min_total_reads": 20
+    },
+    "primary_label": {
+      "type": "logit_ratio",
+      "name": "logit_ratio"
+    },
+    "sequence": {
+      "input_mode": "hap_pair"
+    },
+    "window": {
+      "left_bp": 128,
+      "right_bp": 128,
+      "snv_offset_mode": "fixed",
+      "jitter_max_bp": 0
+    },
+    "head": {
+      "task": "regression",
+      "num_labels": 1,
+      "head_num_layers": 1,
+      "head_hidden_size": -1
+    },
+    "depth_col": "n",
+    "split": {
+      "mode": "train_dev_test",
+      "ratio": [
+        0.8,
+        0.1,
+        0.1
+      ],
+      "seed": 42,
+      "group": "locus"
+    },
+    "partition": {
+      "enabled": true,
+      "bin_size": 100000,
+      "fold_id": 0,
+      "fold_assignment": {
+        "chr5": 0,
+        "chr12": 0
+      },
+      "exclude_boundary": true,
+      "boundary_bp": 128
+    },
+    "balance": {
+      "strategy": "none"
+    }
+  },
+  "head_resolved": {
+    "task": "regression",
+    "num_labels": 1,
+    "head_num_layers": 1,
+    "head_hidden_size": -1
+  },
+  "partition_resolved": {
+    "enabled": true,
+    "bin_size": 100000,
+    "salt": "entexbert2_v1",
+    "fold_assignment": {
+      "chr5": 0,
+      "chr12": 0
+    },
+    "fold_id": 0,
+    "train_frac_within_nontest": 0.8888888888888888,
+    "bin_test_frac": 0.0,
+    "bin_dev_frac": 0.0,
+    "exclude_boundary": true,
+    "boundary_bp": 128
+  },
+  "ref_fasta": "/home/asm242/reference_genome/hg38.fa",
+  "output_dir": "/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/smoke/inputs"
+}

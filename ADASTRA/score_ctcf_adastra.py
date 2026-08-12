@@ -2,7 +2,8 @@
 """
 score_ctcf_adastra.py — score a trained entexBERT-2 CTCF binding regressor on the
 ADASTRA ASB benchmark (Han et al. 2024, Fig 3A) by ref-vs-alt Delta, and report
-AUROC alongside the 14 published models.
+AUROC alongside the published models (11 have a valid CTCF AUROC; the benchmark
+scores 14 models overall, but 3 are undefined for CTCF).
 
 The model was trained to predict CTCF BINDING signal (BigWig fold-change), never
 ASB labels. Here we score each ASB variant by the SIGNED contrast
@@ -20,7 +21,8 @@ WHAT YOU NEED ON THE CLUSTER (all small — no 246 MB ADASTRA download):
   --checkpoint_dir   the trained regressor: .../runs/reg  (has run_config.json)
   --eval_csv         ctcf_adastra_evalset.csv.gz   (shipped: 9071 pos + 242720 neg)
   --ref_fasta        /home/asm242/reference_genome/hg38.fa
-  --reference_csv    ctcf_benchmark_reference_auroc.csv   (shipped: 14-model table)
+  --reference_csv    ctcf_benchmark_reference_auroc.csv   (shipped: 11 models with a
+                     valid CTCF AUROC, of the benchmark's 14)
   [--train_coords]   OPTIONAL the build's meta sidecars — fold0/train.meta.csv AND
                      fold0/dev.meta.csv — to drop eval variants whose 100kb bin was
                      seen in training/validation (leak-free number). NOT test.meta.csv.
@@ -122,7 +124,7 @@ def main():
     ap.add_argument("--eval_csv", required=True, help="ctcf_adastra_evalset.csv.gz")
     ap.add_argument("--ref_fasta", required=True, help="hg38.fa")
     ap.add_argument("--reference_csv", default=None,
-                    help="ctcf_benchmark_reference_auroc.csv (14-model table)")
+                    help="ctcf_benchmark_reference_auroc.csv (11 models w/ valid CTCF AUROC)")
     ap.add_argument("--train_coords", default=None, nargs="+",
                     help="OPTIONAL one or more meta files from the build "
                          "(fold0/train.meta.csv fold0/dev.meta.csv). Their (chr, bin) "
@@ -159,9 +161,13 @@ def main():
     print(f"[score] running inference on {len(pairs)} variants (pair mode, twin Delta)...")
     logits, _emb, run_config = run_inference(
         args.checkpoint_dir, pairs, args.batch_size, args.device, overrides)
-    delta = np.asarray(logits, dtype=float).reshape(len(pairs), -1)[:, 0]
+    arr = np.asarray(logits, dtype=float).reshape(len(pairs), -1)
+    delta = arr[:, 0]
     ev["delta"] = delta
     ev["abs_delta"] = np.abs(delta)
+    if arr.shape[1] >= 2:                        # test-time sigma head present
+        ev["sigma"] = np.exp(0.5 * arr[:, 1])
+        ev["zscore"] = np.abs(delta) / (ev["sigma"].to_numpy() + 1e-6)
 
     # 3) optional leakage audit: collect the SEEN (chr, bin) set from every meta
     #    file passed (train + dev), then flag ADASTRA variants in any seen bin.
@@ -206,8 +212,15 @@ def main():
                                                sub["label"].to_numpy())
         print(f"[AUROC:{tag}] balanced on {m} pos + {m} neg  "
               f"AUROC={pt:.4f}  95%CI[{lo:.4f},{hi:.4f}]  AUPRC={aupr:.4f}")
-        return {"regime": tag, "auroc": pt, "auroc_lo": lo, "auroc_hi": hi,
-                "auprc": aupr, "n_pos": int(m)}
+        out = {"regime": tag, "auroc": pt, "auroc_lo": lo, "auroc_hi": hi,
+               "auprc": aupr, "n_pos": int(m)}
+        if "zscore" in sub.columns:              # test-time sigma head present
+            zpt, zaupr, (zlo, zhi), _ = balanced_auroc(sub["zscore"].to_numpy(),
+                                                       sub["label"].to_numpy())
+            print(f"[AUROC:{tag}] SIGMA  |Delta|/sigma  AUROC={zpt:.4f}  "
+                  f"95%CI[{zlo:.4f},{zhi:.4f}]  (vs |Delta| above)")
+            out["auroc_z"] = zpt; out["auroc_z_lo"] = zlo; out["auroc_z_hi"] = zhi
+        return out
 
     results = [report("full", ev)]
     if leaky_mask.any():
@@ -219,7 +232,7 @@ def main():
     if args.reference_csv and os.path.exists(args.reference_csv):
         ref = pd.read_csv(args.reference_csv).sort_values("CTCF_AUROC", ascending=False)
         eb2 = results[-1]["auroc"]  # leak_free if present else full
-        print("\n=== entexBERT-2 vs the 14 models (CTCF AUROC) ===")
+        print(f"\n=== entexBERT-2 vs the benchmark models (CTCF AUROC, {len(ref)} with valid CTCF) ===")
         placed = False
         for _, r in ref.iterrows():
             if not placed and eb2 >= r["CTCF_AUROC"]:
@@ -229,8 +242,13 @@ def main():
         if not placed:
             print(f"  >>> entexBERT-2 (this run)   {eb2:.4f}  (below all listed) <<<")
 
-    # 6) save
-    ev[["chr", "pos", "ref", "alt", "snp", "label", "delta", "abs_delta"]].to_csv(
+    # 6) save (include leaky flag + sigma/zscore when the sigma head is present, so
+    #    downstream figures can filter to leak-free and plot |Delta| vs sigma)
+    ev["leaky"] = leaky_mask
+    pv_cols = ["chr", "pos", "ref", "alt", "snp", "label", "delta", "abs_delta", "leaky"]
+    if "sigma" in ev.columns:
+        pv_cols += ["sigma", "zscore"]
+    ev[pv_cols].to_csv(
         f"{args.out}_perVariant.csv.gz", index=False, compression="gzip")
     with open(f"{args.out}_metrics.json", "w") as f:
         json.dump({"results": results,
