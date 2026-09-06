@@ -1,0 +1,15 @@
+*** DIAGNOSTIC MODE: capped steps + 2-value s-sweep. NOT a final result. ***
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+torch 1.13.1+cu117 | cuda True
+  repo OK: as_class label present
+  repo OK: CNN stem present in model.py
+  found: /home/asm242/entexBERT-2/DNABERT-2-117M-attention
+  found: /home/asm242/reference_genome/hg38.fa
+  found: /home/asm242/palmer_scratch/entex_data/hetSNVs.tsv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_adastra_evalset.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_benchmark_reference_auroc.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/binding_reg_ENC-002_CTCF_ctcf_binding_regression_multitissue_enc002/runs/reg/pytorch_model.bin
+
+=== STEP 3c: counts + held-out chroms + s_hat ===
+[STEP 3c] counts absent -> building from hetSNVs

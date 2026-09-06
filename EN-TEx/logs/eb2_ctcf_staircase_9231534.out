@@ -1,0 +1,27 @@
+[build] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/binding_windows already populated — skipping (delete to force rebuild)
+[build] OK: single-window binding build with feature_type
+[build] /home/asm242/entexBERT-2/build_adastra_pairs.py exists — skipping (delete to force rebuild)
+=== [staircase] 3 trunk states x {binding, asb} ===
+[binding:train] 155142 rows, peaks=79191, bg=75951
+[binding:test] 20188 rows, peaks=10200, bg=9988
+[asb:train] 208691 pairs, pos=20972
+Traceback (most recent call last):
+  File "staircase_probe.py", line 438, in <module>
+    main()
+  File "staircase_probe.py", line 355, in main
+    pairs = pd.read_csv(args.adastra_pairs)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 912, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 583, in _read
+    return parser.read(nrows)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1704, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/pandas/io/parsers/c_parser_wrapper.py", line 234, in read
+    chunks = self._reader.read_low_memory(nrows)
+  File "pandas/_libs/parsers.pyx", line 814, in pandas._libs.parsers.TextReader.read_low_memory
+  File "pandas/_libs/parsers.pyx", line 875, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 850, in pandas._libs.parsers.TextReader._tokenize_rows
+  File "pandas/_libs/parsers.pyx", line 861, in pandas._libs.parsers.TextReader._check_tokenize_status
+  File "pandas/_libs/parsers.pyx", line 2029, in pandas._libs.parsers.raise_parser_error
+pandas.errors.ParserError: Error tokenizing data. C error: Expected 1 fields in line 11, saw 4
+

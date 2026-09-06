@@ -1,0 +1,254 @@
+*** DIAGNOSTIC MODE: capped steps + 2-value s-sweep. NOT a final result. ***
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+torch 1.13.1+cu117 | cuda True
+  repo OK: as_class label present
+  repo OK: CNN stem present in model.py
+  found: /home/asm242/entexBERT-2/DNABERT-2-117M-attention
+  found: /home/asm242/reference_genome/hg38.fa
+  found: /home/asm242/palmer_scratch/entex_data/hetSNVs.tsv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_adastra_evalset.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_benchmark_reference_auroc.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/binding_reg_ENC-002_CTCF_ctcf_binding_regression_multitissue_enc002/runs/reg/pytorch_model.bin
+
+=== STEP 3c: counts + held-out chroms + s_hat ===
+[STEP 3c] reusing existing counts: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/ctcf_betabinom_counts.csv
+total positives = 23346  over 22 chromosomes
+largest-2 by variant count (spared from holdout): ['chr1', 'chr2']
+special-regime excluded: ['chr1', 'chrM', 'chrX', 'chrY']
+
+HELD-OUT SET: chr3+chr10  pos=2335  frac=0.1000 (target 10%, dev 0.0000)
+CI-viability OK (2335 >= 100 positives).
+
+wrote /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/ctcf_heldout_clf_per_chrom_counts.csv
+[STEP 3c] held-out chroms = chr3,chr10
+[STEP 3c] s_hat=31.6 | s-sweep = 31.6 20
+
+=== STEP 4c: build Stage-2 classification dataset ===
+[STEP 4c] reusing existing baseline split at /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/inputs_clf (clean ablation -> identical data)
+[STEP 4c] train.csv cols: ['sequence1', 'sequence2', 'label', 'depth'] | rows: 186500
+[STEP 4c] label counts: {0.0: 167552, 1.0: 18948} | positive fraction: 0.1016
+[STEP 4c] OK
+
+=== STEP 5c: Stage-2a frozen contrast head (s sweep) ===
+--- Stage-2a s=31.6 -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/runs/clf_2a_s31.6 ---
+{'loss': 0.6825, 'learning_rate': 0.0004, 'epoch': 0.0}
+{'loss': 0.6707, 'learning_rate': 0.0008, 'epoch': 0.01}
+{'loss': 0.6575, 'learning_rate': 0.0009714285714285714, 'epoch': 0.01}
+{'loss': 0.6789, 'learning_rate': 0.0009142857142857143, 'epoch': 0.01}
+{'loss': 0.6796, 'learning_rate': 0.0008571428571428571, 'epoch': 0.02}
+{'eval_loss': 0.7094476819038391, 'eval_bce': 0.7099312668418399, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.5895851409505334, 'eval_auprc': 0.1659925478524283, 'eval_mcc': 0.05348851129845976, 'eval_precision': 0.10365899098293464, 'eval_recall': 0.6872529644268774, 'eval_f1': 0.1801463446221589, 'eval_runtime': 156.0979, 'eval_samples_per_second': 142.161, 'eval_steps_per_second': 2.223, 'epoch': 0.02}
+{'loss': 0.6556, 'learning_rate': 0.0008, 'epoch': 0.02}
+{'loss': 0.6601, 'learning_rate': 0.0007428571428571429, 'epoch': 0.02}
+{'loss': 0.667, 'learning_rate': 0.0006857142857142857, 'epoch': 0.03}
+{'loss': 0.6708, 'learning_rate': 0.0006285714285714285, 'epoch': 0.03}
+{'loss': 0.6765, 'learning_rate': 0.0005714285714285714, 'epoch': 0.03}
+{'eval_loss': 0.6941567659378052, 'eval_bce': 0.6941941922407733, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.5895160537966477, 'eval_auprc': 0.16094041733156442, 'eval_mcc': 0.09674738098272777, 'eval_precision': 0.13927227101631118, 'eval_recall': 0.38389328063241107, 'eval_f1': 0.20439300276206762, 'eval_runtime': 156.1643, 'eval_samples_per_second': 142.1, 'eval_steps_per_second': 2.222, 'epoch': 0.03}
+{'loss': 0.6538, 'learning_rate': 0.0005142857142857142, 'epoch': 0.04}
+{'loss': 0.6693, 'learning_rate': 0.00045714285714285713, 'epoch': 0.04}
+{'loss': 0.6561, 'learning_rate': 0.0004, 'epoch': 0.04}
+{'loss': 0.6409, 'learning_rate': 0.00034285714285714285, 'epoch': 0.05}
+{'loss': 0.6731, 'learning_rate': 0.0002857142857142857, 'epoch': 0.05}
+{'eval_loss': 0.6888827681541443, 'eval_bce': 0.6884809089451608, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.5990689207567406, 'eval_auprc': 0.17089785497909823, 'eval_mcc': 0.11261716531305825, 'eval_precision': 0.15873015873015872, 'eval_recall': 0.32608695652173914, 'eval_f1': 0.21352313167259784, 'eval_runtime': 156.3417, 'eval_samples_per_second': 141.939, 'eval_steps_per_second': 2.219, 'epoch': 0.05}
+{'loss': 0.645, 'learning_rate': 0.00022857142857142857, 'epoch': 0.05}
+{'loss': 0.6614, 'learning_rate': 0.00017142857142857143, 'epoch': 0.06}
+{'loss': 0.6438, 'learning_rate': 0.00011428571428571428, 'epoch': 0.06}
+{'loss': 0.6565, 'learning_rate': 5.714285714285714e-05, 'epoch': 0.07}
+{'loss': 0.6636, 'learning_rate': 0.0, 'epoch': 0.07}
+{'eval_loss': 0.6852430701255798, 'eval_bce': 0.6846725757471036, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.6023148410378086, 'eval_auprc': 0.17149862494850232, 'eval_mcc': 0.11904231276698196, 'eval_precision': 0.16751677852348992, 'eval_recall': 0.308300395256917, 'eval_f1': 0.21708123151852496, 'eval_runtime': 156.3079, 'eval_samples_per_second': 141.97, 'eval_steps_per_second': 2.22, 'epoch': 0.07}
+{'train_runtime': 729.092, 'train_samples_per_second': 17.556, 'train_steps_per_second': 0.549, 'train_loss': 0.663132951259613, 'epoch': 0.07}
+    dev AUROC = 0.6023148410378086
+--- Stage-2a s=20 -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/runs/clf_2a_s20 ---
+{'loss': 0.6865, 'learning_rate': 0.0004, 'epoch': 0.0}
+{'loss': 0.6752, 'learning_rate': 0.0008, 'epoch': 0.01}
+{'loss': 0.6643, 'learning_rate': 0.0009714285714285714, 'epoch': 0.01}
+{'loss': 0.6808, 'learning_rate': 0.0009142857142857143, 'epoch': 0.01}
+{'loss': 0.6823, 'learning_rate': 0.0008571428571428571, 'epoch': 0.02}
+{'eval_loss': 0.7036942839622498, 'eval_bce': 0.7038396683379113, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.595586303476642, 'eval_auprc': 0.17323063351143536, 'eval_mcc': 0.0697647907161703, 'eval_precision': 0.11127115592365862, 'eval_recall': 0.6106719367588933, 'eval_f1': 0.18824246116356988, 'eval_runtime': 220.0255, 'eval_samples_per_second': 100.856, 'eval_steps_per_second': 1.577, 'epoch': 0.02}
+{'loss': 0.6611, 'learning_rate': 0.0008, 'epoch': 0.02}
+{'loss': 0.6664, 'learning_rate': 0.0007428571428571429, 'epoch': 0.02}
+{'loss': 0.6754, 'learning_rate': 0.0006857142857142857, 'epoch': 0.03}
+{'loss': 0.671, 'learning_rate': 0.0006285714285714285, 'epoch': 0.03}
+{'loss': 0.6802, 'learning_rate': 0.0005714285714285714, 'epoch': 0.03}
+{'eval_loss': 0.6912477612495422, 'eval_bce': 0.6911113407999423, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.5973894904425517, 'eval_auprc': 0.16994887441237963, 'eval_mcc': 0.1111221420056637, 'eval_precision': 0.15247108307045215, 'eval_recall': 0.35820158102766797, 'eval_f1': 0.2138958548458475, 'eval_runtime': 219.8313, 'eval_samples_per_second': 100.946, 'eval_steps_per_second': 1.578, 'epoch': 0.03}
+{'loss': 0.653, 'learning_rate': 0.0005142857142857142, 'epoch': 0.04}
+{'loss': 0.672, 'learning_rate': 0.00045714285714285713, 'epoch': 0.04}
+{'loss': 0.6589, 'learning_rate': 0.0004, 'epoch': 0.04}
+{'loss': 0.6449, 'learning_rate': 0.00034285714285714285, 'epoch': 0.05}
+{'loss': 0.6784, 'learning_rate': 0.0002857142857142857, 'epoch': 0.05}
+{'eval_loss': 0.6828870177268982, 'eval_bce': 0.6824365949054246, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.603224917296307, 'eval_auprc': 0.17461675497777038, 'eval_mcc': 0.12477476725819876, 'eval_precision': 0.17557251908396945, 'eval_recall': 0.29545454545454547, 'eval_f1': 0.22025782688766113, 'eval_runtime': 155.0756, 'eval_samples_per_second': 143.098, 'eval_steps_per_second': 2.238, 'epoch': 0.05}
+{'loss': 0.6519, 'learning_rate': 0.00022857142857142857, 'epoch': 0.05}
+{'loss': 0.6617, 'learning_rate': 0.00017142857142857143, 'epoch': 0.06}
+{'loss': 0.6463, 'learning_rate': 0.00011428571428571428, 'epoch': 0.06}
+{'loss': 0.6563, 'learning_rate': 5.714285714285714e-05, 'epoch': 0.07}
+{'loss': 0.6692, 'learning_rate': 0.0, 'epoch': 0.07}
+{'eval_loss': 0.6798794865608215, 'eval_bce': 0.6793396669820034, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.6056992663630228, 'eval_auprc': 0.17377767858963067, 'eval_mcc': 0.12576337708342422, 'eval_precision': 0.17943107221006566, 'eval_recall': 0.283596837944664, 'eval_f1': 0.21979705150296763, 'eval_runtime': 155.1413, 'eval_samples_per_second': 143.037, 'eval_steps_per_second': 2.237, 'epoch': 0.07}
+{'train_runtime': 873.9273, 'train_samples_per_second': 14.647, 'train_steps_per_second': 0.458, 'train_loss': 0.6667818021774292, 'epoch': 0.07}
+    dev AUROC = 0.6056992663630228
+[STEP 5c] BEST 2a: s=20 dev_AUROC=0.6056992663630228 ckpt=/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/runs/clf_2a_s20
+[STEP 5c] OK
+
+=== STEP 6c: SKIPPED (RUN_2B=0; 2b degraded the no-stem head). Scoring 2a only. ===
+[STEP 6c] OK
+
+=== STEP 7c: score (leak-free) ===
+--- scoring 2a (/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/runs/clf_2a_s20) ---
+[load] ADASTRA eval: 251791 rows (pos=9071, neg=242720)
+[windows] built 251791/251791  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 251791 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/runs/clf_2a_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[score] task=classification -> ranking AUROC on 'delta'
+[leakage] train.meta.csv: +16193 bins, 16193 seen total
+[leakage] dev.meta.csv: +2019 bins, 18212 seen total
+[leakage] 206210/251791 eval variants (81.90%) in a seen bin; 7480 ASB-positive. Dropped for leak_free.
+[AUROC:full] balanced 9071 pos + 9071 neg  AUROC=0.7009 95%CI[0.6932,0.7079]  AUPRC=0.7251
+[AUROC:leak_free] balanced 1591 pos + 1591 neg  AUROC=0.7124 95%CI[0.6953,0.7304]  AUPRC=0.7314
+
+=== entexBERT-2 vs benchmark models (CTCF_AUROC, 11 models) ===
+      Sei                  DNN       0.7668
+      DeepSEA              DNN       0.7664
+      Enformer             DNN       0.7338
+  >>> entexBERT-2 (this run)   0.7124  <<<
+      DeepBind_ChIP-seq    DNN       0.6596
+      DeepBind_HT-SELEX    DNN       0.6296
+      deltaSVM_ChIP-seq    kmer/gkm  0.6118
+      tRap                 PWM       0.6076
+      FABIAN-variant       PWM       0.5514
+      Beluga               DNN       0.5423
+      atSNP                PWM       0.5312
+      motifbreakR          PWM       0.5283
+
+[done] wrote /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/score_clf_2a_adastra_metrics.json + /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/score_clf_2a_adastra_perVariant.csv.gz
+[filter] total_reads>=20: 790085/2391015 rows kept
+[load] 790085 hetSNV rows over donors=['ENC-001', 'ENC-002', 'ENC-003', 'ENC-004']
+[leakage] train.meta.csv: +16193 bins, 16193 seen total
+[leakage] dev.meta.csv: +2019 bins, 18212 seen total
+
+===== donor ENC-001: 176390 rows (pos=11296, neg=165094) =====
+[windows] built 176390/176390  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 176390 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/runs/clf_2a_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 158545/176390 ENC-001 (cross-donor) variants in a seen bin (10090 positive).
+  [ENC-001:full] AUROC=0.5671 CI[0.5595,0.5751] AUPRC=0.6353 n_pos=11296 | mag_Spearman=nan signed_Spearman=nan
+  [ENC-001:leak_free] AUROC=0.5862 CI[0.5619,0.6090] AUPRC=0.6086 n_pos=1206 | mag_Spearman=nan signed_Spearman=nan
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+    Peyers_patch                     AUROC=0.5843 n_pos=68 mag_Sp=nan
+    adrenal_gland                    AUROC=0.6231 n_pos=78 mag_Sp=nan
+    body_of_pancreas                 AUROC=0.6748 n_pos=189 mag_Sp=nan
+    esophagus_muscularis_mucosa      AUROC=0.6644 n_pos=50 mag_Sp=nan
+    esophagus_squamous_epithelium    AUROC=0.5729 n_pos=70 mag_Sp=nan
+    gastroesophageal_sphincter       AUROC=0.5942 n_pos=38 mag_Sp=nan
+    prostate_gland                   AUROC=0.5060 n_pos=98 mag_Sp=nan
+    spleen                           AUROC=0.5056 n_pos=25 mag_Sp=nan
+    testis                           AUROC=0.6250 n_pos=34 mag_Sp=nan
+    thoracic_aorta                   AUROC=0.6238 n_pos=106 mag_Sp=nan
+    tibial_artery                    AUROC=0.5944 n_pos=91 mag_Sp=nan
+    tibial_nerve                     AUROC=0.5795 n_pos=52 mag_Sp=nan
+    transverse_colon                 AUROC=0.6400 n_pos=143 mag_Sp=nan
+    upper_lobe_of_left_lung          AUROC=0.6550 n_pos=110 mag_Sp=nan
+
+===== donor ENC-002: 202506 rows (pos=10877, neg=191629) =====
+[windows] built 202506/202506  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 202506 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/runs/clf_2a_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 180810/202506 ENC-002 (matched) variants in a seen bin (9668 positive).
+  [ENC-002:full] AUROC=0.6185 CI[0.6106,0.6260] AUPRC=0.6868 n_pos=10877 | mag_Spearman=nan signed_Spearman=nan
+  [ENC-002:leak_free] AUROC=0.5988 CI[0.5773,0.6210] AUPRC=0.6830 n_pos=1209 | mag_Spearman=nan signed_Spearman=nan
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+    Peyers_patch                     AUROC=0.6510 n_pos=101 mag_Sp=nan
+    adrenal_gland                    AUROC=0.6565 n_pos=81 mag_Sp=nan
+    body_of_pancreas                 AUROC=0.5374 n_pos=138 mag_Sp=nan
+    breast_epithelium                AUROC=0.6699 n_pos=32 mag_Sp=nan
+    esophagus_muscularis_mucosa      AUROC=0.5795 n_pos=84 mag_Sp=nan
+    esophagus_squamous_epithelium    AUROC=0.7284 n_pos=107 mag_Sp=nan
+    gastroesophageal_sphincter       AUROC=0.4190 n_pos=49 mag_Sp=nan
+    prostate_gland                   AUROC=0.5411 n_pos=56 mag_Sp=nan
+    sigmoid_colon                    AUROC=0.4615 n_pos=42 mag_Sp=nan
+    spleen                           AUROC=0.6111 n_pos=183 mag_Sp=nan
+    testis                           AUROC=0.5680 n_pos=25 mag_Sp=nan
+    thyroid_gland                    AUROC=0.7153 n_pos=101 mag_Sp=nan
+    transverse_colon                 AUROC=0.5847 n_pos=73 mag_Sp=nan
+    upper_lobe_of_left_lung          AUROC=0.5079 n_pos=98 mag_Sp=nan
+
+===== donor ENC-003: 196350 rows (pos=10462, neg=185888) =====
+[windows] built 196350/196350  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 196350 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/runs/clf_2a_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 175316/196350 ENC-003 (cross-donor) variants in a seen bin (9351 positive).
+  [ENC-003:full] AUROC=0.5800 CI[0.5724,0.5879] AUPRC=0.6432 n_pos=10462 | mag_Spearman=nan signed_Spearman=nan
+  [ENC-003:leak_free] AUROC=0.6247 CI[0.6005,0.6464] AUPRC=0.6718 n_pos=1111 | mag_Spearman=nan signed_Spearman=nan
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+    Peyers_patch                     AUROC=0.6415 n_pos=85 mag_Sp=nan
+    adrenal_gland                    AUROC=0.5647 n_pos=66 mag_Sp=nan
+    body_of_pancreas                 AUROC=0.6671 n_pos=70 mag_Sp=nan
+    coronary_artery                  AUROC=0.5345 n_pos=46 mag_Sp=nan
+    esophagus_squamous_epithelium    AUROC=0.7160 n_pos=79 mag_Sp=nan
+    gastrocnemius_medialis           AUROC=0.6683 n_pos=58 mag_Sp=nan
+    gastroesophageal_sphincter       AUROC=0.5860 n_pos=57 mag_Sp=nan
+    heart_left_ventricle             AUROC=0.6155 n_pos=85 mag_Sp=nan
+    ovary                            AUROC=0.5241 n_pos=41 mag_Sp=nan
+    right_lobe_of_liver              AUROC=0.6413 n_pos=76 mag_Sp=nan
+    spleen                           AUROC=0.6759 n_pos=91 mag_Sp=nan
+    thyroid_gland                    AUROC=0.6211 n_pos=32 mag_Sp=nan
+    tibial_nerve                     AUROC=0.6034 n_pos=69 mag_Sp=nan
+    transverse_colon                 AUROC=0.6349 n_pos=59 mag_Sp=nan
+    upper_lobe_of_left_lung          AUROC=0.5556 n_pos=49 mag_Sp=nan
+    uterus                           AUROC=0.5722 n_pos=79 mag_Sp=nan
+
+===== donor ENC-004: 214839 rows (pos=10629, neg=204210) =====
+[windows] built 214839/214839  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 214839 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/runs/clf_2a_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 191967/214839 ENC-004 (cross-donor) variants in a seen bin (9514 positive).
+  [ENC-004:full] AUROC=0.5799 CI[0.5724,0.5878] AUPRC=0.6446 n_pos=10629 | mag_Spearman=nan signed_Spearman=nan
+  [ENC-004:leak_free] AUROC=0.5596 CI[0.5366,0.5841] AUPRC=0.6356 n_pos=1115 | mag_Spearman=nan signed_Spearman=nan
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+    adrenal_gland                    AUROC=0.4957 n_pos=46 mag_Sp=nan
+    ascending_aorta                  AUROC=0.5673 n_pos=49 mag_Sp=nan
+    body_of_pancreas                 AUROC=0.5554 n_pos=107 mag_Sp=nan
+    breast_epithelium                AUROC=0.5862 n_pos=29 mag_Sp=nan
+    esophagus_muscularis_mucosa      AUROC=0.5083 n_pos=28 mag_Sp=nan
+    esophagus_squamous_epithelium    AUROC=0.5908 n_pos=50 mag_Sp=nan
+    gastrocnemius_medialis           AUROC=0.5510 n_pos=66 mag_Sp=nan
+    gastroesophageal_sphincter       AUROC=0.6319 n_pos=74 mag_Sp=nan
+    heart_left_ventricle             AUROC=0.6856 n_pos=69 mag_Sp=nan
+    ovary                            AUROC=0.5015 n_pos=26 mag_Sp=nan
+    right_atrium_auricular_region    AUROC=0.5968 n_pos=49 mag_Sp=nan
+    spleen                           AUROC=0.6394 n_pos=100 mag_Sp=nan
+    stomach                          AUROC=0.6024 n_pos=52 mag_Sp=nan
+    thyroid_gland                    AUROC=0.6219 n_pos=95 mag_Sp=nan
+    tibial_nerve                     AUROC=0.6276 n_pos=75 mag_Sp=nan
+    upper_lobe_of_left_lung          AUROC=0.5810 n_pos=71 mag_Sp=nan
+    uterus                           AUROC=0.5527 n_pos=59 mag_Sp=nan
+
+[write] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/score_clf_2a_hetsnv_perVariant.csv.gz  (790085 scored variants)
+[write] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/score_clf_2a_hetsnv_summary.csv
+
+=== donor-level (ALL-tissue) summary ===
+  donor  donor_kind    regime    auroc  n_pos  mag_spearman  signed_spearman
+ENC-001 cross-donor      full 0.567111  11296           NaN              NaN
+ENC-001 cross-donor leak_free 0.586238   1206           NaN              NaN
+ENC-002     matched      full 0.618543  10877           NaN              NaN
+ENC-002     matched leak_free 0.598848   1209           NaN              NaN
+ENC-003 cross-donor      full 0.579984  10462           NaN              NaN
+ENC-003 cross-donor leak_free 0.624744   1111           NaN              NaN
+ENC-004 cross-donor      full 0.579858  10629           NaN              NaN
+ENC-004 cross-donor leak_free 0.559561   1115           NaN              NaN
+[STEP 7c] OK
+
+============================================================
+ CTCF STAGE-2 CLASSIFICATION + CNN STEM COMPLETE.  (DIAG=1)
+   best 2a: s=20 (dev AUROC 0.6056992663630228) -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/runs/clf_2a_s20
+   2b:      dev AUROC -1  (scored: 0)
+   outputs: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem_diag/score_clf_2a_*  (and score_clf_2b_* if RUN_2B=1 and it won)
+ ABLATION TARGET: no-stem full run on this exact pipeline was leak-free AUROC 0.7208 [0.7031,0.7380].
+   Beating 0.7208 => base-resolution input fixes the tokenization/representation ceiling the
+   head alone couldn't move. (Regression-twin on the same trunk was 0.6652/0.6748, for reference.)
+   Benchmark context: best sequence-only DNNs on CTCF ~0.73-0.77 (Sei/DeepSEA/Enformer).
+ NOTE: DIAG mode -> AUROC is UNDER-TRAINED, not final. Rerun with DIAG=0 for the real number.
+============================================================

@@ -1,0 +1,113 @@
+{
+  "num_tracks": 18,
+  "tracks": [
+    {
+      "index": 0,
+      "tissue": "transverse_colon",
+      "y_col": "y_track_0",
+      "m_col": "m_track_0"
+    },
+    {
+      "index": 1,
+      "tissue": "sigmoid_colon",
+      "y_col": "y_track_1",
+      "m_col": "m_track_1"
+    },
+    {
+      "index": 2,
+      "tissue": "upper_lobe_of_left_lung",
+      "y_col": "y_track_2",
+      "m_col": "m_track_2"
+    },
+    {
+      "index": 3,
+      "tissue": "stomach",
+      "y_col": "y_track_3",
+      "m_col": "m_track_3"
+    },
+    {
+      "index": 4,
+      "tissue": "gastrocnemius_medialis",
+      "y_col": "y_track_4",
+      "m_col": "m_track_4"
+    },
+    {
+      "index": 5,
+      "tissue": "spleen",
+      "y_col": "y_track_5",
+      "m_col": "m_track_5"
+    },
+    {
+      "index": 6,
+      "tissue": "esophagus_muscularis_mucosa",
+      "y_col": "y_track_6",
+      "m_col": "m_track_6"
+    },
+    {
+      "index": 7,
+      "tissue": "adrenal_gland",
+      "y_col": "y_track_7",
+      "m_col": "m_track_7"
+    },
+    {
+      "index": 8,
+      "tissue": "thyroid_gland",
+      "y_col": "y_track_8",
+      "m_col": "m_track_8"
+    },
+    {
+      "index": 9,
+      "tissue": "body_of_pancreas",
+      "y_col": "y_track_9",
+      "m_col": "m_track_9"
+    },
+    {
+      "index": 10,
+      "tissue": "esophagus_squamous_epithelium",
+      "y_col": "y_track_10",
+      "m_col": "m_track_10"
+    },
+    {
+      "index": 11,
+      "tissue": "tibial_nerve",
+      "y_col": "y_track_11",
+      "m_col": "m_track_11"
+    },
+    {
+      "index": 12,
+      "tissue": "gastroesophageal_sphincter",
+      "y_col": "y_track_12",
+      "m_col": "m_track_12"
+    },
+    {
+      "index": 13,
+      "tissue": "peyers_patch",
+      "y_col": "y_track_13",
+      "m_col": "m_track_13"
+    },
+    {
+      "index": 14,
+      "tissue": "suprapubic_skin",
+      "y_col": "y_track_14",
+      "m_col": "m_track_14"
+    },
+    {
+      "index": 15,
+      "tissue": "prostate_gland",
+      "y_col": "y_track_15",
+      "m_col": "m_track_15"
+    },
+    {
+      "index": 16,
+      "tissue": "lower_leg_skin",
+      "y_col": "y_track_16",
+      "m_col": "m_track_16"
+    },
+    {
+      "index": 17,
+      "tissue": "testis",
+      "y_col": "y_track_17",
+      "m_col": "m_track_17"
+    }
+  ]
+}

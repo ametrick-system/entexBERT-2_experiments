@@ -1,0 +1,106 @@
+*** DIAGNOSTIC MODE: capped steps + 2-value s-sweep. NOT a final result. ***
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+torch 1.13.1+cu117 | cuda True
+  repo OK: as_class label present
+  found: /home/asm242/entexBERT-2/DNABERT-2-117M-attention
+  found: /home/asm242/reference_genome/hg38.fa
+  found: /home/asm242/palmer_scratch/entex_data/hetSNVs.tsv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_adastra_evalset.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_benchmark_reference_auroc.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/binding_reg_ENC-002_CTCF_ctcf_binding_regression_multitissue_enc002/runs/reg/pytorch_model.bin
+
+=== STEP 3c: counts + held-out chroms + s_hat ===
+[STEP 3c] counts absent -> building from hetSNVs
+[in]  22310439 rows (assay=CTCF)
+[agg] 712805 donor-loci -> 233906 kept (n>=20; dropped 478899)
+[pos] imbalance_significant loci: 23346 (10.0%)
+[k/n] median n=55, median k/n=0.500
+[wrote] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/ctcf_betabinom_counts.csv
+total positives = 23346  over 22 chromosomes
+largest-2 by variant count (spared from holdout): ['chr1', 'chr2']
+special-regime excluded: ['chr1', 'chrM', 'chrX', 'chrY']
+
+HELD-OUT SET: chr3+chr10  pos=2335  frac=0.1000 (target 10%, dev 0.0000)
+CI-viability OK (2335 >= 100 positives).
+
+wrote /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/ctcf_heldout_clf_per_chrom_counts.csv
+[STEP 3c] held-out chroms = chr3,chr10
+[STEP 3c] s_hat=31.6 | s-sweep = 31.6 20
+
+=== STEP 4c: build Stage-2 classification dataset ===
+Experiment: ctcf_stage2_asb_clf_enc002
+  source:     betabinom_counts (has_variants=True)
+  primary:    as_class [classification]
+  aux:        none
+  input_mode: hap_pair
+  window:     L128/R128 offset=fixed jitter=0
+  split:      train_dev_test group=locus exclude=0 loci
+  depth_col:  n (-> 'depth' privileged weight)
+  partition:  hybrid bin_size=100000 fold_id=0 test_chroms=['chr10', 'chr3'] (overrides group-shuffle)
+  output_dir: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/inputs_clf
+Loading reference FASTA...
+partition_spec enabled (bin_size=100000, fold_id=0): row-level split counts {'train': 186512, 'test': 24634, 'dev': 22197, '__exclude__': 563}
+  boundary exclusion: dropped 563 loci whose window straddled a 100000bp bin edge (boundary_bp=128)
+
+Duplicate AS/window summary
+Rows: 233343
+Unique groups: 173671
+Duplicate groups: 46065
+Rows in duplicate groups: 105737
+Conflicting-label groups: 6506
+Rows in conflicting-label groups: 16019
+
+Example conflicting groups:
+                  n_rows  n_unique_labels  mean_label  min_label  max_label
+_group_key                                                                 
+002a74a1e374eb43       2                2    0.500000        0.0        1.0
+00353f0a0aafac34       4                2    0.750000        0.0        1.0
+003d5a2fcefd016c       2                2    0.500000        0.0        1.0
+005717e0596c616c       3                2    0.333333        0.0        1.0
+005ce4269dda50dd       3                2    0.333333        0.0        1.0
+006f17328266552c       3                2    0.333333        0.0        1.0
+007553914f29e105       3                2    0.333333        0.0        1.0
+007882a61ac6f90d       2                2    0.500000        0.0        1.0
+008fedc5cf3b1ace       2                2    0.500000        0.0        1.0
+0090bf9432f7de50       3                2    0.333333        0.0        1.0
+Precomputed split via column '_assigned_split': {'train.csv': 186500, 'dev.csv': 22195, 'test.csv': 24632}
+cross-split dedup: dropped 4 rows from dev (sequence already present in an earlier split).
+cross-split dedup: removed 4 cross-split duplicate-sequence rows total.
+Saved 233323 total examples to /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/inputs_clf
+{'train.csv': 186500, 'dev.csv': 22191, 'test.csv': 24632}
+
+Main label summary:
+count    233323.000000
+mean          0.099892
+std           0.299856
+min           0.000000
+25%           0.000000
+50%           0.000000
+75%           0.000000
+max           1.000000
+Name: label, dtype: float64
+
+Main label counts:
+label
+0.0    210016
+1.0     23307
+Name: count, dtype: int64
+
+Done. Final rows: 233343
+
+Finetune settings (map to finetune_entexbert2.py):
+  --task classification
+  --head_num_layers 2  (1 = linear, >1 = MLP)
+  --head_hidden_size 128
+  --proj_dim 128   (shared projection dim d for the contrast distance)
+  --balanced_sampler True   (class-balanced batches: AS is rare, ~5-6% positive)
+  --neff_s <s>   (privileged precision weight from 'n' -> depth; LUPI)
+  trainer data path: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/inputs_clf
+  primary label column: as_class
+[STEP 4c] train.csv cols: ['sequence1', 'sequence2', 'label', 'depth'] | rows: 186500
+[STEP 4c] label counts: {0.0: 167552, 1.0: 18948} | positive fraction: 0.1016
+[STEP 4c] OK
+
+=== STEP 5c: Stage-2a frozen contrast head (s sweep) ===
+--- Stage-2a s=31.6 -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/runs/clf_2a_s31.6 ---

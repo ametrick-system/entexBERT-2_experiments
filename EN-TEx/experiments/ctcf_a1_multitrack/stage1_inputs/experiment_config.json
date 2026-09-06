@@ -1,0 +1,200 @@
+{
+  "experiment": "ctcf_binding_regression_multitrack_enc002",
+  "resolved": {
+    "experiment": "ctcf_binding_regression_multitrack_enc002",
+    "ref_fasta": "/home/asm242/reference_genome/hg38.fa",
+    "row_source": {
+      "type": "multi_tissue_peak",
+      "donor": "ENC-002",
+      "assay": "TF-ChIP-seq_CTCF",
+      "genome_sizes": "/home/asm242/reference_genome/hg38.chrom.sizes",
+      "tissue_tracks": [
+        {
+          "tissue": "transverse_colon",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_transverse_colon.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_transverse_colon.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_transverse_colon.pval.bigWig"
+        },
+        {
+          "tissue": "sigmoid_colon",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_sigmoid_colon.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_sigmoid_colon.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_sigmoid_colon.pval.bigWig"
+        },
+        {
+          "tissue": "upper_lobe_of_left_lung",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_upper_lobe_of_left_lung.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_upper_lobe_of_left_lung.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_upper_lobe_of_left_lung.pval.bigWig"
+        },
+        {
+          "tissue": "stomach",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_stomach.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_stomach.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_stomach.pval.bigWig"
+        },
+        {
+          "tissue": "gastrocnemius_medialis",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_gastrocnemius_medialis.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_gastrocnemius_medialis.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_gastrocnemius_medialis.pval.bigWig"
+        },
+        {
+          "tissue": "spleen",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_spleen.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_spleen.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_spleen.pval.bigWig"
+        },
+        {
+          "tissue": "esophagus_muscularis_mucosa",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_esophagus_muscularis_mucosa.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_esophagus_muscularis_mucosa.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_esophagus_muscularis_mucosa.pval.bigWig"
+        },
+        {
+          "tissue": "adrenal_gland",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_adrenal_gland.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_adrenal_gland.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_adrenal_gland.pval.bigWig"
+        },
+        {
+          "tissue": "thyroid_gland",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_thyroid_gland.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_thyroid_gland.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_thyroid_gland.pval.bigWig"
+        },
+        {
+          "tissue": "body_of_pancreas",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_body_of_pancreas.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_body_of_pancreas.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_body_of_pancreas.pval.bigWig"
+        },
+        {
+          "tissue": "esophagus_squamous_epithelium",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_esophagus_squamous_epithelium.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_esophagus_squamous_epithelium.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_esophagus_squamous_epithelium.pval.bigWig"
+        },
+        {
+          "tissue": "tibial_nerve",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_tibial_nerve.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_tibial_nerve.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_tibial_nerve.pval.bigWig"
+        },
+        {
+          "tissue": "gastroesophageal_sphincter",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_gastroesophageal_sphincter.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_gastroesophageal_sphincter.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_gastroesophageal_sphincter.pval.bigWig"
+        },
+        {
+          "tissue": "peyers_patch",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_peyers_patch.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_peyers_patch.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_peyers_patch.pval.bigWig"
+        },
+        {
+          "tissue": "suprapubic_skin",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_suprapubic_skin.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_suprapubic_skin.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_suprapubic_skin.pval.bigWig"
+        },
+        {
+          "tissue": "prostate_gland",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_prostate_gland.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_prostate_gland.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_prostate_gland.pval.bigWig"
+        },
+        {
+          "tissue": "lower_leg_skin",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_lower_leg_skin.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_lower_leg_skin.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_lower_leg_skin.pval.bigWig"
+        },
+        {
+          "tissue": "testis",
+          "peak_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_testis.narrowPeak",
+          "bigwig_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_testis.fc.bigWig",
+          "pval_path": "/home/asm242/palmer_scratch/entex_data/CTCF/ENC-002/ctcf_2_testis.pval.bigWig"
+        }
+      ],
+      "merge_window_bp": 100,
+      "label_radius_bp": 32,
+      "summit_mode": "summit",
+      "background_ratio": 1.0,
+      "background_gap_bp": 1000,
+      "exclude_chroms": [
+        "chrY",
+        "chrM"
+      ]
+    },
+    "primary_label": {
+      "type": "multitrack",
+      "num_tracks": 18,
+      "transform": "log1p"
+    },
+    "sequence": {
+      "input_mode": "ref_single"
+    },
+    "window": {
+      "left_bp": 128,
+      "right_bp": 128,
+      "snv_offset_mode": "fixed",
+      "jitter_max_bp": 0
+    },
+    "head": {
+      "task": "regression",
+      "num_labels": 18,
+      "head_num_layers": 1,
+      "head_hidden_size": -1
+    },
+    "split": {
+      "group": "locus",
+      "mode": "train_dev_test",
+      "ratio": [
+        0.8,
+        0.1,
+        0.1
+      ]
+    },
+    "partition": {
+      "enabled": true,
+      "bin_size": 100000,
+      "salt": "entexbert2_binding_multitissue_enc002_v1",
+      "fold_assignment": {},
+      "bin_test_frac": 0.1,
+      "bin_dev_frac": 0.1,
+      "exclude_boundary": true
+    },
+    "balance": {
+      "strategy": "none"
+    },
+    "datasets": [
+      {
+        "donor": "ENC-002",
+        "assay": "TF-ChIP-seq_CTCF"
+      }
+    ]
+  },
+  "head_resolved": {
+    "task": "regression",
+    "num_labels": 18,
+    "head_num_layers": 1,
+    "head_hidden_size": -1,
+    "multitrack": true
+  },
+  "partition_resolved": {
+    "enabled": true,
+    "bin_size": 100000,
+    "salt": "entexbert2_binding_multitissue_enc002_v1",
+    "fold_assignment": {},
+    "fold_id": 0,
+    "train_frac_within_nontest": 0.8888888888888888,
+    "bin_test_frac": 0.1,
+    "bin_dev_frac": 0.1,
+    "exclude_boundary": true,
+    "boundary_bp": 128
+  },
+  "ref_fasta": "/home/asm242/reference_genome/hg38.fa",
+  "output_dir": "/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_a1_multitrack/stage1_inputs"
+}

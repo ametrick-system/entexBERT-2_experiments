@@ -1,0 +1,25 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) StdEnv
+=== preflight ===
+cuda True NVIDIA GeForce RTX 3090
+found  /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/binding_reg_ENC-002_CTCF_ctcf_binding_regression_multitissue_enc002/runs/reg/pytorch_model.bin
+MISSING  /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/binding_reg_ENC-002_CTCF_ctcf_binding_regression_multitissue_enc002/inputs/test.csv
+=== ISM (top 30 CTCF peak windows, 3xL substitutions each) ===
+Traceback (most recent call last):
+  File "/home/asm242/entexBERT-2/src/entexbert2/ism_saliency.py", line 111, in <module>
+    main()
+  File "/home/asm242/entexBERT-2/src/entexbert2/ism_saliency.py", line 81, in main
+    df = pd.read_csv(a.windows_csv)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 912, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 577, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1407, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1661, in _make_engine
+    self.handles = get_handle(
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/pandas/io/common.py", line 859, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: '/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/binding_reg_ENC-002_CTCF_ctcf_binding_regression_multitissue_enc002/inputs/test.csv'

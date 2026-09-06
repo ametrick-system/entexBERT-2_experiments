@@ -1,0 +1,19 @@
+[build] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/binding_windows already populated — skipping (delete to force rebuild)
+[build] OK: single-window binding build with feature_type
+[build] building leak-free ADASTRA pairs -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/adastra_pairs.csv
+Traceback (most recent call last):
+  File "/home/asm242/entexBERT-2/build_adastra_pairs.py", line 133, in <module>
+    main()
+  File "/home/asm242/entexBERT-2/build_adastra_pairs.py", line 89, in main
+    ev = pd.read_csv(args.eval_csv)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 912, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 577, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1407, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1661, in _make_engine
+    self.handles = get_handle(
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/pandas/io/common.py", line 859, in get_handle
+    handle = open(
+FileNotFoundError: [Errno 2] No such file or directory: 'ctcf_adastra_evalset.csv'

@@ -1,0 +1,106 @@
+*** DIAGNOSTIC MODE: capped steps + 2-value s-sweep. NOT a final result. ***
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+torch 1.13.1+cu117 | cuda True
+  repo OK: model.py learned_metric
+  repo OK: model_io.py learned_metric
+  repo OK: finetune learned_metric
+  found: /home/asm242/entexBERT-2/DNABERT-2-117M-attention
+  found: /home/asm242/reference_genome/hg38.fa
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_adastra_evalset.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_benchmark_reference_auroc.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/binding_reg_ENC-002_CTCF_ctcf_binding_regression_multitissue_enc002/runs/reg/pytorch_model.bin
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/inputs_clf/train.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/inputs_clf/test.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/inputs_clf/train.meta.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/inputs_clf/dev.meta.csv
+
+=== STEP 1: s_hat ===
+[STEP 1] s_hat=31.6 | s-sweep = 31.6 20
+
+--- Stage-2a (learned-metric) s=31.6 -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_lm_head/runs/clf_2a_lm_s31.6 ---
+{'loss': 0.683, 'learning_rate': 0.0004, 'epoch': 0.0}
+{'loss': 0.6703, 'learning_rate': 0.0008, 'epoch': 0.01}
+{'loss': 0.6474, 'learning_rate': 0.0009714285714285714, 'epoch': 0.01}
+{'loss': 0.691, 'learning_rate': 0.0009142857142857143, 'epoch': 0.01}
+{'loss': 0.6735, 'learning_rate': 0.0008571428571428571, 'epoch': 0.02}
+{'eval_loss': 0.7159221768379211, 'eval_bce': 0.7163458192453064, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.5917039606636365, 'eval_auprc': 0.17462669564135694, 'eval_mcc': 0.049299968220519, 'eval_precision': 0.10091257770136225, 'eval_recall': 0.7539525691699605, 'eval_f1': 0.17800069987169018, 'eval_runtime': 20.2969, 'eval_samples_per_second': 1093.322, 'eval_steps_per_second': 17.096, 'epoch': 0.02}
+{'loss': 0.6474, 'learning_rate': 0.0008, 'epoch': 0.02}
+{'loss': 0.6575, 'learning_rate': 0.0007428571428571429, 'epoch': 0.02}
+{'loss': 0.6764, 'learning_rate': 0.0006857142857142857, 'epoch': 0.03}
+{'loss': 0.6759, 'learning_rate': 0.0006285714285714285, 'epoch': 0.03}
+{'loss': 0.6784, 'learning_rate': 0.0005714285714285714, 'epoch': 0.03}
+{'eval_loss': 0.6870377659797668, 'eval_bce': 0.6868202484437792, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.5920824945695538, 'eval_auprc': 0.17151231896454885, 'eval_mcc': 0.10661124506693165, 'eval_precision': 0.15261496844003608, 'eval_recall': 0.33448616600790515, 'eval_f1': 0.20959752321981423, 'eval_runtime': 20.4684, 'eval_samples_per_second': 1084.156, 'eval_steps_per_second': 16.953, 'epoch': 0.03}
+{'loss': 0.6554, 'learning_rate': 0.0005142857142857142, 'epoch': 0.04}
+{'loss': 0.6742, 'learning_rate': 0.00045714285714285713, 'epoch': 0.04}
+{'loss': 0.6496, 'learning_rate': 0.0004, 'epoch': 0.04}
+{'loss': 0.6405, 'learning_rate': 0.00034285714285714285, 'epoch': 0.05}
+{'loss': 0.6752, 'learning_rate': 0.0002857142857142857, 'epoch': 0.05}
+{'eval_loss': 0.6933767795562744, 'eval_bce': 0.6929387419364529, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.6077966739582196, 'eval_auprc': 0.17770057574247503, 'eval_mcc': 0.12007602291838307, 'eval_precision': 0.15877497827975673, 'eval_recall': 0.36116600790513836, 'eval_f1': 0.22057936028968012, 'eval_runtime': 20.5482, 'eval_samples_per_second': 1079.946, 'eval_steps_per_second': 16.887, 'epoch': 0.05}
+{'loss': 0.6508, 'learning_rate': 0.00022857142857142857, 'epoch': 0.05}
+{'loss': 0.6585, 'learning_rate': 0.00017142857142857143, 'epoch': 0.06}
+{'loss': 0.6388, 'learning_rate': 0.00011428571428571428, 'epoch': 0.06}
+{'loss': 0.6634, 'learning_rate': 5.714285714285714e-05, 'epoch': 0.07}
+{'loss': 0.6616, 'learning_rate': 0.0, 'epoch': 0.07}
+{'eval_loss': 0.6856672763824463, 'eval_bce': 0.6850682042184802, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.6092959141955189, 'eval_auprc': 0.17908497838173842, 'eval_mcc': 0.12612763207956076, 'eval_precision': 0.1709043250327654, 'eval_recall': 0.3221343873517787, 'eval_f1': 0.22332591197122795, 'eval_runtime': 20.5482, 'eval_samples_per_second': 1079.947, 'eval_steps_per_second': 16.887, 'epoch': 0.07}
+{'train_runtime': 103.6791, 'train_samples_per_second': 123.458, 'train_steps_per_second': 3.858, 'train_loss': 0.6634459924697876, 'epoch': 0.07}
+  [lm] s=31.6 dev AUROC = 0.6092959141955189
+
+--- Stage-2a (learned-metric) s=20 -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_lm_head/runs/clf_2a_lm_s20 ---
+{'loss': 0.6862, 'learning_rate': 0.0004, 'epoch': 0.0}
+{'loss': 0.6738, 'learning_rate': 0.0008, 'epoch': 0.01}
+{'loss': 0.6586, 'learning_rate': 0.0009714285714285714, 'epoch': 0.01}
+{'loss': 0.6881, 'learning_rate': 0.0009142857142857143, 'epoch': 0.01}
+{'loss': 0.6773, 'learning_rate': 0.0008571428571428571, 'epoch': 0.02}
+{'eval_loss': 0.7100884914398193, 'eval_bce': 0.7102472227744903, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.5930445944348877, 'eval_auprc': 0.17632537142337532, 'eval_mcc': 0.05568531052459682, 'eval_precision': 0.10485814224640498, 'eval_recall': 0.666501976284585, 'eval_f1': 0.18120760292833635, 'eval_runtime': 20.3707, 'eval_samples_per_second': 1089.359, 'eval_steps_per_second': 17.034, 'epoch': 0.02}
+{'loss': 0.6529, 'learning_rate': 0.0008, 'epoch': 0.02}
+{'loss': 0.6619, 'learning_rate': 0.0007428571428571429, 'epoch': 0.02}
+{'loss': 0.6728, 'learning_rate': 0.0006857142857142857, 'epoch': 0.03}
+{'loss': 0.6753, 'learning_rate': 0.0006285714285714285, 'epoch': 0.03}
+{'loss': 0.68, 'learning_rate': 0.0005714285714285714, 'epoch': 0.03}
+{'eval_loss': 0.6831566691398621, 'eval_bce': 0.6828270995300277, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.59470642222423, 'eval_auprc': 0.17499282060894294, 'eval_mcc': 0.11322400714231629, 'eval_precision': 0.1655944055944056, 'eval_recall': 0.2924901185770751, 'eval_f1': 0.21146633327379888, 'eval_runtime': 20.4267, 'eval_samples_per_second': 1086.373, 'eval_steps_per_second': 16.988, 'epoch': 0.03}
+{'loss': 0.6559, 'learning_rate': 0.0005142857142857142, 'epoch': 0.04}
+{'loss': 0.6747, 'learning_rate': 0.00045714285714285713, 'epoch': 0.04}
+{'loss': 0.6517, 'learning_rate': 0.0004, 'epoch': 0.04}
+{'loss': 0.6463, 'learning_rate': 0.00034285714285714285, 'epoch': 0.05}
+{'loss': 0.6762, 'learning_rate': 0.0002857142857142857, 'epoch': 0.05}
+{'eval_loss': 0.6869725584983826, 'eval_bce': 0.686349538504567, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.6074333416760562, 'eval_auprc': 0.18176364236272952, 'eval_mcc': 0.12641995831623956, 'eval_precision': 0.17064935064935066, 'eval_recall': 0.32460474308300397, 'eval_f1': 0.22369765066394282, 'eval_runtime': 20.4913, 'eval_samples_per_second': 1082.948, 'eval_steps_per_second': 16.934, 'epoch': 0.05}
+{'loss': 0.6568, 'learning_rate': 0.00022857142857142857, 'epoch': 0.05}
+{'loss': 0.656, 'learning_rate': 0.00017142857142857143, 'epoch': 0.06}
+{'loss': 0.6488, 'learning_rate': 0.00011428571428571428, 'epoch': 0.06}
+{'loss': 0.6651, 'learning_rate': 5.714285714285714e-05, 'epoch': 0.07}
+{'loss': 0.6638, 'learning_rate': 0.0, 'epoch': 0.07}
+{'eval_loss': 0.6819758415222168, 'eval_bce': 0.6814509935324196, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.6073144603234926, 'eval_auprc': 0.1776688463503202, 'eval_mcc': 0.12065373645248167, 'eval_precision': 0.1725043782837128, 'eval_recall': 0.29199604743083, 'eval_f1': 0.2168807339449541, 'eval_runtime': 20.5142, 'eval_samples_per_second': 1081.739, 'eval_steps_per_second': 16.915, 'epoch': 0.07}
+{'train_runtime': 103.5043, 'train_samples_per_second': 123.666, 'train_steps_per_second': 3.865, 'train_loss': 0.6661085343360901, 'epoch': 0.07}
+  [lm] s=20 dev AUROC = 0.6074333416760562
+
+[STEP 2] BEST 2a: s=31.6 dev_AUROC=0.6092959141955189 ckpt=/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_lm_head/runs/clf_2a_lm_s31.6
+
+=== STEP 3: score leak-free (best 2a) ===
+[load] ADASTRA eval: 251791 rows (pos=9071, neg=242720)
+[windows] built 251791/251791  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 251791 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_lm_head/runs/clf_2a_lm_s31.6/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[score] task=classification -> ranking AUROC on 'delta'
+[leakage] train.meta.csv: +16193 bins, 16193 seen total
+[leakage] dev.meta.csv: +2019 bins, 18212 seen total
+[leakage] 206210/251791 eval variants (81.90%) in a seen bin; 7480 ASB-positive. Dropped for leak_free.
+[AUROC:full] balanced 9071 pos + 9071 neg  AUROC=0.6996 95%CI[0.6920,0.7066]  AUPRC=0.7250
+[AUROC:leak_free] balanced 1591 pos + 1591 neg  AUROC=0.7087 95%CI[0.6917,0.7271]  AUPRC=0.7305
+
+=== entexBERT-2 vs benchmark models (CTCF_AUROC, 11 models) ===
+      Sei                  DNN       0.7668
+      DeepSEA              DNN       0.7664
+      Enformer             DNN       0.7338
+  >>> entexBERT-2 (this run)   0.7087  <<<
+      DeepBind_ChIP-seq    DNN       0.6596
+      DeepBind_HT-SELEX    DNN       0.6296
+      deltaSVM_ChIP-seq    kmer/gkm  0.6118
+      tRap                 PWM       0.6076
+      FABIAN-variant       PWM       0.5514
+      Beluga               DNN       0.5423
+      atSNP                PWM       0.5312
+      motifbreakR          PWM       0.5283
+
+[done] wrote /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_lm_head/score_lm_adastra_metrics.json + /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_lm_head/score_lm_adastra_perVariant.csv.gz

@@ -1,0 +1,41 @@
+*** FULL RUN: Stage-1 3-epoch multi-track + Stage-2a 3-epoch s-sweep {s_hat,20,50,100}. ***
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+torch 1.13.1+cu117 | cuda True
+  repo OK: multitrack label present
+  repo OK: num_labels head present
+  found: /home/asm242/entexBERT-2/DNABERT-2-117M-attention
+  found: /home/asm242/reference_genome/hg38.fa
+  found: /home/asm242/palmer_scratch/entex_data/hetSNVs.tsv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_adastra_evalset.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_benchmark_reference_auroc.csv
+
+=== STEP 1: build Stage-1 multi-track binding dataset ===
+[STEP 1] reusing existing multi-track build at /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_a1_multitrack/stage1_inputs
+[STEP 1] y_track cols: 18 | m_track cols: 18 | has 'sequence': True
+[STEP 1] tracks.json num_tracks: 18 | first tissue: transverse_colon
+[STEP 1] OK
+
+=== STEP 2: train Stage-1 multi-track trunk (num_labels=18) ===
+[STEP 2] reusing existing multi-track trunk: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_a1_multitrack/stage1_runs/reg/pytorch_model.bin
+[STEP 2] OK -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_a1_multitrack/stage1_runs/reg/pytorch_model.bin
+
+=== STEP 3: Stage-2 ASB dataset (reuse baseline) + s_hat ===
+[STEP 3] reusing baseline Stage-2 split at /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/inputs_clf (identical data for the A/B)
+[STEP 3] s_hat=31.6 | s-sweep = 31.6 20 50 100
+
+=== STEP 4[a1]: Stage-2a s-sweep (a1) ===
+--- [a1] Stage-2a s=31.6 -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_a1_multitrack/stage2_a1/runs/clf_2a_s31.6 ---
+{'loss': 0.6763, 'learning_rate': 0.0004, 'epoch': 0.0}
+{'loss': 0.6594, 'learning_rate': 0.0008, 'epoch': 0.01}
+{'loss': 0.6391, 'learning_rate': 0.000999426506853243, 'epoch': 0.01}
+{'loss': 0.6739, 'learning_rate': 0.0009982795205597294, 'epoch': 0.01}
+{'loss': 0.664, 'learning_rate': 0.0009971325342662154, 'epoch': 0.02}
+{'loss': 0.64, 'learning_rate': 0.0009959855479727017, 'epoch': 0.02}
+{'loss': 0.6483, 'learning_rate': 0.000994838561679188, 'epoch': 0.02}
+{'loss': 0.6726, 'learning_rate': 0.000993691575385674, 'epoch': 0.03}
+{'loss': 0.668, 'learning_rate': 0.0009925445890921604, 'epoch': 0.03}
+{'loss': 0.6744, 'learning_rate': 0.0009913976027986465, 'epoch': 0.03}
+{'loss': 0.6431, 'learning_rate': 0.0009902506165051328, 'epoch': 0.04}
+{'loss': 0.6715, 'learning_rate': 0.000989103630211619, 'epoch': 0.04}
+{'eval_runtime': 20.0166, 'eval_samples_per_second': 1108.628, 'eval_steps_per_second': 17.336, 'epoch': 0.04}

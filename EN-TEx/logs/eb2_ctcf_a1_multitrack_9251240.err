@@ -1,0 +1,71 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) StdEnv
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1385: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1393: RuntimeWarning: Mean of empty slice
+  assign["mean_pval"] = np.nanmean(pmat, axis=1)
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1385: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1393: RuntimeWarning: Mean of empty slice
+  assign["mean_pval"] = np.nanmean(pmat, axis=1)
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1385: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1393: RuntimeWarning: Mean of empty slice
+  assign["mean_pval"] = np.nanmean(pmat, axis=1)
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1385: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1393: RuntimeWarning: Mean of empty slice
+  assign["mean_pval"] = np.nanmean(pmat, axis=1)
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1385: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1393: RuntimeWarning: Mean of empty slice
+  assign["mean_pval"] = np.nanmean(pmat, axis=1)
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1385: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1393: RuntimeWarning: Mean of empty slice
+  assign["mean_pval"] = np.nanmean(pmat, axis=1)
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1385: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1393: RuntimeWarning: Mean of empty slice
+  assign["mean_pval"] = np.nanmean(pmat, axis=1)
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1385: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1393: RuntimeWarning: Mean of empty slice
+  assign["mean_pval"] = np.nanmean(pmat, axis=1)
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1385: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1393: RuntimeWarning: Mean of empty slice
+  assign["mean_pval"] = np.nanmean(pmat, axis=1)
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1385: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1393: RuntimeWarning: Mean of empty slice
+  assign["mean_pval"] = np.nanmean(pmat, axis=1)
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1385: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/home/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1393: RuntimeWarning: Mean of empty slice
+  assign["mean_pval"] = np.nanmean(pmat, axis=1)
+tee: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_a1_multitrack/stage1_runs/reg/train.log: No such file or directory

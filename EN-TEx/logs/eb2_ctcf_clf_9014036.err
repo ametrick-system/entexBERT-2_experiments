@@ -1,0 +1,17 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) StdEnv
+[s_hat] rho=0.0306 -> s_hat=31.6 (n loci=233906, mean n=254.7)
+Traceback (most recent call last):
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/runpy.py", line 185, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/home/asm242/.conda/envs/eb2/lib/python3.8/runpy.py", line 155, in _get_module_details
+    code = loader.get_code(mod_name)
+  File "<frozen importlib._bootstrap_external>", line 976, in get_code
+  File "<frozen importlib._bootstrap_external>", line 906, in source_to_code
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "/home/asm242/entexBERT-2/src/entexbert2/finetune_entexbert2.py", line 526
+    if training_args.save_model:
+                               ^
+SyntaxError: invalid syntax

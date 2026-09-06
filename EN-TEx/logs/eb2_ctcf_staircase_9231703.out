@@ -1,0 +1,80 @@
+[build] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/binding_windows already populated — skipping (delete to force rebuild)
+[build] OK: single-window binding build with feature_type
+[build] building leak-free ADASTRA pairs -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/adastra_pairs.csv
+[load] ADASTRA eval: 251791 rows (pos=9071, neg=242720)
+[windows] built 251791/251791  (dropped: 0 out-of-bounds, 0 bad-chrom; ref-base!=hg38 on 0 kept rows)
+[leakage] train.meta.csv: +16193 bins, 16193 total
+[leakage] dev.meta.csv: +2019 bins, 18212 total
+[leakage] 206210/251791 in a seen bin (81.90%); 7480 ASB-positive.
+[leakage] --drop_leaky -> 45581 leak-free rows kept (pos=1591)
+[write] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/adastra_pairs.csv: 45581 pairs (pos=1591, neg=43990)
+=== [staircase] 3 trunk states x {binding, asb} ===
+Explicitly passing a `revision` is encouraged when loading a model with custom code to ensure no malicious code has been contributed in a newer revision.
+[binding:train] 155142 rows, peaks=79191, bg=75951
+[binding:test] 20188 rows, peaks=10200, bg=9988
+[asb:train] 208691 pairs, pos=20972
+[asb:adastra] 45581 pairs, pos=1591 (chr/pos present=False)
+[leak] pairs assumed pre-filtered leak-free (no chr/pos or no --train_coords)
+
+===== TRUNK: random =====
+[trunk:random] fresh AutoModel.from_config (seed=0) — NO pretrained weights
+  [binding] embedding train+test (tokens for CNN)
+  [embed] 64/155142
+  [embed] 3264/155142
+  [embed] 6464/155142
+  [embed] 9664/155142
+  [embed] 12864/155142
+  [embed] 16064/155142
+  [embed] 19264/155142
+  [embed] 22464/155142
+  [embed] 25664/155142
+  [embed] 28864/155142
+  [embed] 32064/155142
+  [embed] 35264/155142
+  [embed] 38464/155142
+  [embed] 41664/155142
+  [embed] 44864/155142
+  [embed] 48064/155142
+  [embed] 51264/155142
+  [embed] 54464/155142
+  [embed] 57664/155142
+  [embed] 60864/155142
+  [embed] 64064/155142
+  [embed] 67264/155142
+  [embed] 70464/155142
+  [embed] 73664/155142
+  [embed] 76864/155142
+  [embed] 80064/155142
+  [embed] 83264/155142
+  [embed] 86464/155142
+  [embed] 89664/155142
+  [embed] 92864/155142
+  [embed] 96064/155142
+  [embed] 99264/155142
+  [embed] 102464/155142
+  [embed] 105664/155142
+  [embed] 108864/155142
+  [embed] 112064/155142
+  [embed] 115264/155142
+  [embed] 118464/155142
+  [embed] 121664/155142
+  [embed] 124864/155142
+  [embed] 128064/155142
+  [embed] 131264/155142
+  [embed] 134464/155142
+  [embed] 137664/155142
+  [embed] 140864/155142
+  [embed] 144064/155142
+  [embed] 147264/155142
+  [embed] 150464/155142
+  [embed] 153664/155142
+  [embed] 64/20188
+  [embed] 3264/20188
+  [embed] 6464/20188
+  [embed] 9664/20188
+  [embed] 12864/20188
+  [embed] 16064/20188
+  [embed] 19264/20188
+/var/spool/slurmd/job9231703/slurm_script: line 113: 4062388 Killed                  python staircase_probe.py --backbone_path "$MODEL" --finetuned_trunk "$FINETUNED_TRUNK" --binding_dir "$BINDING_DIR" --asb_train_dir "$ASB_TRAIN_DIR" --adastra_pairs "$PAIRS_CSV" --reference_csv "$REFERENCE_CSV" --bin_size 100000 --batch_size 64 --max_len 128 --proj_dim 128 --seed 0 --device cuda --out "$OUT" 2>&1
+     4062389 Done                    | tee "$OUT.log"
+slurmstepd: error: Detected 1 oom_kill event in StepId=9231703.batch. Some of the step tasks have been OOM Killed.

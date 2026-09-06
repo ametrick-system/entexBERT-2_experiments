@@ -1,0 +1,103 @@
+{
+  "binding": {
+    "random": {
+      "linear": {
+        "rung": "binding/random/linear",
+        "auroc": 0.7592483828010512,
+        "auroc_lo": 0.7523813144593603,
+        "auroc_hi": 0.7653059561395967,
+        "auprc": 0.7723587303574875,
+        "n_pos": 9988
+      },
+      "cnn": {
+        "rung": "binding/random/cnn",
+        "auroc": 0.8150395312179982,
+        "auroc_lo": 0.8088594213036545,
+        "auroc_hi": 0.8208239715381396,
+        "auprc": 0.8320691542627964,
+        "n_pos": 9988
+      },
+      "strength_spearman": 0.2390219234559972
+    },
+    "pretrained": {
+      "linear": {
+        "rung": "binding/pretrained/linear",
+        "auroc": 0.8520039024803332,
+        "auroc_lo": 0.8466862728471435,
+        "auroc_hi": 0.8571397100622238,
+        "auprc": 0.8656076961571554,
+        "n_pos": 9988
+      },
+      "cnn": {
+        "rung": "binding/pretrained/cnn",
+        "auroc": 0.8597469797156667,
+        "auroc_lo": 0.8542892621752216,
+        "auroc_hi": 0.8646166675305237,
+        "auprc": 0.877280285838916,
+        "n_pos": 9988
+      },
+      "strength_spearman": 0.4177208832460419
+    },
+    "finetuned": {
+      "linear": {
+        "rung": "binding/finetuned/linear",
+        "auroc": 0.9144503640652323,
+        "auroc_lo": 0.910582286768616,
+        "auroc_hi": 0.9182420321821174,
+        "auprc": 0.9296315912435477,
+        "n_pos": 9988
+      },
+      "cnn": {
+        "rung": "binding/finetuned/cnn",
+        "auroc": 0.9154544273713157,
+        "auroc_lo": 0.9115097909153045,
+        "auroc_hi": 0.9193060577535275,
+        "auprc": 0.9298786689824926,
+        "n_pos": 9988
+      },
+      "strength_spearman": 0.6518300748340045
+    }
+  },
+  "asb": {
+    "twin_random": {
+      "rung": "asb/random/twin_probe",
+      "auroc": 0.5133906508206714,
+      "auroc_lo": 0.49450196382513806,
+      "auroc_hi": 0.533339318483051,
+      "auprc": 0.5298795670760228,
+      "n_pos": 1591
+    },
+    "zeroshot_distance": {
+      "rung": "asb/pretrained/zeroshot_dist",
+      "auroc": 0.49883517475934125,
+      "auroc_lo": 0.48032362757307256,
+      "auroc_hi": 0.519140175489419,
+      "auprc": 0.4985722035909892,
+      "n_pos": 1591
+    },
+    "twin_pretrained": {
+      "rung": "asb/pretrained/twin_probe",
+      "auroc": 0.5191128523463021,
+      "auroc_lo": 0.49938495635086655,
+      "auroc_hi": 0.537785648043646,
+      "auprc": 0.524018376267866,
+      "n_pos": 1591
+    }
+  },
+  "config": {
+    "backbone_path": "/home/asm242/entexBERT-2/DNABERT-2-117M-attention",
+    "finetuned_trunk": "experiments/binding_reg_ENC-002_CTCF_ctcf_binding_regression_multitissue_enc002/runs/reg",
+    "binding_dir": "/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/binding_windows",
+    "asb_train_dir": "experiments/stage2_ctcf_clf/inputs_clf",
+    "adastra_pairs": "/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/adastra_pairs.csv",
+    "train_coords": null,
+    "reference_csv": "ctcf_benchmark_reference_auroc.csv",
+    "bin_size": 100000,
+    "batch_size": 64,
+    "max_len": 128,
+    "proj_dim": 128,
+    "seed": 0,
+    "device": "cuda",
+    "out": "/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/staircase_ctcf"
+  }
+}

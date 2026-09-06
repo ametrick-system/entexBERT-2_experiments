@@ -1,0 +1,83 @@
+{
+  "experiment": "ep300_stage2_asb_clf_enc001",
+  "resolved": {
+    "experiment": "ep300_stage2_asb_clf_enc001",
+    "ref_fasta": "/home/asm242/reference_genome/hg38.fa",
+    "output_dir": "/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/inputs_clf",
+    "row_source": {
+      "type": "betabinom_counts",
+      "path": "/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/ep300_betabinom_counts.csv",
+      "assay": "EP300",
+      "min_total_reads": 20
+    },
+    "primary_label": {
+      "type": "as_class",
+      "column": "imbalance_significance",
+      "name": "as_class"
+    },
+    "sequence": {
+      "input_mode": "hap_pair"
+    },
+    "window": {
+      "left_bp": 128,
+      "right_bp": 128,
+      "snv_offset_mode": "fixed",
+      "jitter_max_bp": 0
+    },
+    "head": {
+      "task": "classification",
+      "head_num_layers": 2,
+      "head_hidden_size": 128,
+      "proj_dim": 128
+    },
+    "depth_col": "n",
+    "split": {
+      "mode": "train_dev_test",
+      "ratio": [
+        0.8,
+        0.1,
+        0.1
+      ],
+      "seed": 42,
+      "group": "locus"
+    },
+    "partition": {
+      "enabled": true,
+      "bin_size": 100000,
+      "fold_id": 0,
+      "fold_assignment": {
+        "chr3": 0,
+        "chr4": 0
+      },
+      "exclude_boundary": true,
+      "boundary_bp": 128
+    },
+    "balance": {
+      "strategy": "none"
+    }
+  },
+  "head_resolved": {
+    "task": "classification",
+    "head_num_layers": 2,
+    "head_hidden_size": 128,
+    "proj_dim": 128,
+    "num_labels": 1
+  },
+  "partition_resolved": {
+    "enabled": true,
+    "bin_size": 100000,
+    "salt": "entexbert2_v1",
+    "fold_assignment": {
+      "chr3": 0,
+      "chr4": 0
+    },
+    "fold_id": 0,
+    "train_frac_within_nontest": 0.8888888888888888,
+    "bin_test_frac": 0.0,
+    "bin_dev_frac": 0.0,
+    "exclude_boundary": true,
+    "boundary_bp": 128
+  },
+  "ref_fasta": "/home/asm242/reference_genome/hg38.fa",
+  "output_dir": "/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/inputs_clf"
+}

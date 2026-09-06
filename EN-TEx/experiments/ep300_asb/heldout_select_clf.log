@@ -1,0 +1,8 @@
+total positives = 2514  over 22 chromosomes
+largest-2 by variant count (spared from holdout): ['chr1', 'chr2']
+special-regime excluded: ['chr1', 'chrM', 'chrX', 'chrY']
+
+HELD-OUT SET: chr3+chr4  pos=252  frac=0.1002 (target 10%, dev 0.0002)
+CI-viability OK (252 >= 100 positives).
+
+wrote /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/ep300_heldout_clf_per_chrom_counts.csv

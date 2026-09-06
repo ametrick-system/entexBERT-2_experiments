@@ -1,0 +1,22 @@
+{
+  "model_name_or_path": "/home/asm242/entexBERT-2/DNABERT-2-117M-attention",
+  "cache_dir": null,
+  "model_max_length": 512,
+  "pooling_mode": "center_mean",
+  "center_pool_width": 5,
+  "head_num_layers": 2,
+  "head_hidden_size": 128,
+  "head_activation": "gelu",
+  "head_dropout": 0.1,
+  "neff_s": 20.0,
+  "task": "classification",
+  "num_labels": 1,
+  "proj_dim": 128,
+  "learned_metric": true,
+  "pair_head": false,
+  "use_cnn_stem": false,
+  "cnn_channels": 64,
+  "cnn_out_dim": 64,
+  "input_mode": "hap_pair",
+  "use_lora": false
+}

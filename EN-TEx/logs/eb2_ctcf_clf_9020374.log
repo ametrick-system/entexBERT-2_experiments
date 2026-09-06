@@ -1,0 +1,8 @@
+*** FULL RUN: 3-epoch 2a over s-sweep {s_hat,20,50,100} + 2-epoch 2b. This is the real number. ***
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+torch 1.13.1+cu117 | cuda True
+  repo OK: as_class label present
+  found: /home/asm242/entexBERT-2/DNABERT-2-117M-attention
+  found: /home/asm242/reference_genome/hg38.fa
+FATAL: missing /home/asm242/entex_data/hetSNVs.tsv

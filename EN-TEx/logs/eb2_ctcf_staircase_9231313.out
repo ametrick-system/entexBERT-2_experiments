@@ -1,0 +1,92 @@
+[build] regenerating CTCF binding peak/background windows -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/binding_windows
+/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/vast/palmer/home.mccleary/asm242/entexBERT-2/src/entexbert2/build_inputs.py:1375: RuntimeWarning: Mean of empty slice
+  binding_label_raw=np.nanmean(mat, axis=1),
+/home/asm242/.conda/envs/eb2/lib/python3.8/site-packages/numpy/lib/nanfunctions.py:1872: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+Experiment: ctcf_binding_regression_multitissue_enc002
+  source:     multi_tissue_peak (has_variants=False)
+  primary:    ctcf_binding [regression]
+  aux:        none
+  input_mode: ref_single
+  window:     L128/R128 offset=fixed jitter=0
+  split:      train_dev_test group=locus exclude=0 loci
+  partition:  hybrid bin_size=100000 fold_id=0 test_chroms=[] (overrides group-shuffle)
+  output_dir: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/binding_windows
+Loading reference FASTA...
+partition_spec enabled (bin_size=100000, fold_id=0): row-level split counts {'train': 158351, 'test': 20633, 'dev': 20281, '__exclude__': 503}
+  boundary exclusion: dropped 503 loci whose window straddled a 100000bp bin edge (boundary_bp=128)
+
+Duplicate AS/window summary
+Rows: 199265
+Unique groups: 199265
+Duplicate groups: 0
+Rows in duplicate groups: 0
+Conflicting-label groups: 0
+Rows in conflicting-label groups: 0
+Precomputed split via column '_assigned_split': {'train.csv': 155142, 'dev.csv': 19830, 'test.csv': 20188}
+cross-split dedup: dropped 2 rows from dev (sequence already present in an earlier split).
+cross-split dedup: removed 2 cross-split duplicate-sequence rows total.
+Saved 195158 total examples to /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/binding_windows
+{'train.csv': 155142, 'dev.csv': 19828, 'test.csv': 20188}
+
+Main label summary:
+count    195158.000000
+mean          1.142627
+std           0.853177
+min           0.000000
+25%           0.547064
+50%           0.706128
+75%           1.567879
+max           4.366805
+Name: label, dtype: float64
+
+Done. Final rows: 199265
+
+Finetune settings (map to finetune_entexbert2.py):
+  --task regression
+  --head_num_layers 1  (1 = linear, >1 = MLP)
+  trainer data path: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/binding_windows
+  primary label column: ctcf_binding
+[build] OK: single-window binding build with feature_type
+[build] building leak-free ADASTRA pairs -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/adastra_pairs.csv
+python: can't open file 'build_adastra_pairs.py': [Errno 2] No such file or directory

@@ -1,0 +1,34 @@
+*** FULL RUN: 3-epoch 2a over s-sweep {s_hat,20,50,100} + 2-epoch 2b. This is the real number. ***
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+torch 1.13.1+cu117 | cuda True
+  repo OK: as_class label present
+  repo OK: CNN stem present in model.py
+  found: /home/asm242/entexBERT-2/DNABERT-2-117M-attention
+  found: /home/asm242/reference_genome/hg38.fa
+  found: /home/asm242/palmer_scratch/entex_data/hetSNVs.tsv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_adastra_evalset.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_benchmark_reference_auroc.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/binding_reg_ENC-002_CTCF_ctcf_binding_regression_multitissue_enc002/runs/reg/pytorch_model.bin
+
+=== STEP 3c: counts + held-out chroms + s_hat ===
+[STEP 3c] reusing existing counts: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/ctcf_betabinom_counts.csv
+total positives = 23346  over 22 chromosomes
+largest-2 by variant count (spared from holdout): ['chr1', 'chr2']
+special-regime excluded: ['chr1', 'chrM', 'chrX', 'chrY']
+
+HELD-OUT SET: chr3+chr10  pos=2335  frac=0.1000 (target 10%, dev 0.0000)
+CI-viability OK (2335 >= 100 positives).
+
+wrote /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem/ctcf_heldout_clf_per_chrom_counts.csv
+[STEP 3c] held-out chroms = chr3,chr10
+[STEP 3c] s_hat=31.6 | s-sweep = 31.6 20 50 100
+
+=== STEP 4c: build Stage-2 classification dataset ===
+[STEP 4c] reusing existing baseline split at /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/inputs_clf (clean ablation -> identical data)
+[STEP 4c] train.csv cols: ['sequence1', 'sequence2', 'label', 'depth'] | rows: 186500
+[STEP 4c] label counts: {0.0: 167552, 1.0: 18948} | positive fraction: 0.1016
+[STEP 4c] OK
+
+=== STEP 5c: Stage-2a frozen contrast head (s sweep) ===
+--- Stage-2a s=31.6 -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf_stem/runs/clf_2a_s31.6 ---

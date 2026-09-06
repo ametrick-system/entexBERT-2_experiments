@@ -1,0 +1,84 @@
+*** DIAGNOSTIC MODE: capped steps + 2-value s-sweep. NOT a final result. ***
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+torch 1.13.1+cu117 | cuda True
+  repo OK: model.py pair_head
+  repo OK: model_io.py pair_head
+  repo OK: finetune pair_head
+  found: /home/asm242/entexBERT-2/DNABERT-2-117M-attention
+  found: /home/asm242/reference_genome/hg38.fa
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_adastra_evalset.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ctcf_benchmark_reference_auroc.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/binding_reg_ENC-002_CTCF_ctcf_binding_regression_multitissue_enc002/runs/reg/pytorch_model.bin
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/inputs_clf/train.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/inputs_clf/test.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/inputs_clf/train.meta.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_clf/inputs_clf/dev.meta.csv
+
+=== STEP 1: s_hat ===
+[STEP 1] s_hat=31.6 | s-sweep = 31.6 20
+
+--- Stage-2a (learned-metric) s=31.6 -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_pair_head/runs/clf_2a_ph_s31.6 ---
+{'loss': 0.6879, 'learning_rate': 0.0004, 'epoch': 0.0}
+{'loss': 0.669, 'learning_rate': 0.0008, 'epoch': 0.01}
+{'loss': 0.6415, 'learning_rate': 0.0009714285714285714, 'epoch': 0.01}
+{'loss': 0.6579, 'learning_rate': 0.0009142857142857143, 'epoch': 0.01}
+{'loss': 0.6525, 'learning_rate': 0.0008571428571428571, 'epoch': 0.02}
+{'eval_loss': 0.6768136024475098, 'eval_bce': 0.6496633594002648, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.658484375327674, 'eval_auprc': 0.1991746401030849, 'eval_mcc': 0.1436842268000132, 'eval_precision': 0.1557757819758439, 'eval_recall': 0.49703557312252966, 'eval_f1': 0.23720820561188397, 'eval_runtime': 20.4555, 'eval_samples_per_second': 1084.841, 'eval_steps_per_second': 16.964, 'epoch': 0.02}
+{'loss': 0.6403, 'learning_rate': 0.0008, 'epoch': 0.02}
+{'loss': 0.646, 'learning_rate': 0.0007428571428571429, 'epoch': 0.02}
+{'loss': 0.6559, 'learning_rate': 0.0006857142857142857, 'epoch': 0.03}
+{'loss': 0.6478, 'learning_rate': 0.0006285714285714285, 'epoch': 0.03}
+{'loss': 0.6726, 'learning_rate': 0.0005714285714285714, 'epoch': 0.03}
+{'eval_loss': 0.7096961736679077, 'eval_bce': 0.7005593813946848, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.6688836334198376, 'eval_auprc': 0.20282445374370603, 'eval_mcc': 0.1331697294249215, 'eval_precision': 0.13831712282289074, 'eval_recall': 0.6042490118577075, 'eval_f1': 0.2251058347137861, 'eval_runtime': 20.5226, 'eval_samples_per_second': 1081.294, 'eval_steps_per_second': 16.908, 'epoch': 0.03}
+{'loss': 0.644, 'learning_rate': 0.0005142857142857142, 'epoch': 0.04}
+{'loss': 0.6615, 'learning_rate': 0.00045714285714285713, 'epoch': 0.04}
+{'loss': 0.6347, 'learning_rate': 0.0004, 'epoch': 0.04}
+{'loss': 0.6234, 'learning_rate': 0.00034285714285714285, 'epoch': 0.05}
+{'loss': 0.6639, 'learning_rate': 0.0002857142857142857, 'epoch': 0.05}
+{'eval_loss': 0.6363317966461182, 'eval_bce': 0.6187938726809633, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.6755514012344748, 'eval_auprc': 0.20749208905143013, 'eval_mcc': 0.17867750011380634, 'eval_precision': 0.18951781970649895, 'eval_recall': 0.44664031620553357, 'eval_f1': 0.26611716220194287, 'eval_runtime': 20.577, 'eval_samples_per_second': 1078.435, 'eval_steps_per_second': 16.863, 'epoch': 0.05}
+{'loss': 0.6293, 'learning_rate': 0.00022857142857142857, 'epoch': 0.05}
+{'loss': 0.6475, 'learning_rate': 0.00017142857142857143, 'epoch': 0.06}
+{'loss': 0.6129, 'learning_rate': 0.00011428571428571428, 'epoch': 0.06}
+{'loss': 0.653, 'learning_rate': 5.714285714285714e-05, 'epoch': 0.07}
+{'loss': 0.6541, 'learning_rate': 0.0, 'epoch': 0.07}
+{'eval_loss': 0.7238770127296448, 'eval_bce': 0.70671713910974, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.6752066881852735, 'eval_auprc': 0.20794549185052935, 'eval_mcc': 0.14545827367957265, 'eval_precision': 0.14346623646001383, 'eval_recall': 0.6151185770750988, 'eval_f1': 0.23266679125397124, 'eval_runtime': 20.5953, 'eval_samples_per_second': 1077.478, 'eval_steps_per_second': 16.848, 'epoch': 0.07}
+{'train_runtime': 104.123, 'train_samples_per_second': 122.932, 'train_steps_per_second': 3.842, 'train_loss': 0.6497883486747742, 'epoch': 0.07}
+  [lm] s=31.6 dev AUROC = 0.6755514012344748
+
+--- Stage-2a (learned-metric) s=20 -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_pair_head/runs/clf_2a_ph_s20 ---
+{'loss': 0.6888, 'learning_rate': 0.0004, 'epoch': 0.0}
+{'loss': 0.6734, 'learning_rate': 0.0008, 'epoch': 0.01}
+{'loss': 0.6437, 'learning_rate': 0.0009714285714285714, 'epoch': 0.01}
+{'loss': 0.6605, 'learning_rate': 0.0009142857142857143, 'epoch': 0.01}
+{'loss': 0.6499, 'learning_rate': 0.0008571428571428571, 'epoch': 0.02}
+{'eval_loss': 0.6784806251525879, 'eval_bce': 0.6615873433689528, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.6589368594371385, 'eval_auprc': 0.20152202638345929, 'eval_mcc': 0.14123034355883363, 'eval_precision': 0.15115115115115116, 'eval_recall': 0.5222332015810277, 'eval_f1': 0.23444604635688146, 'eval_runtime': 20.4202, 'eval_samples_per_second': 1086.718, 'eval_steps_per_second': 16.993, 'epoch': 0.02}
+{'loss': 0.6426, 'learning_rate': 0.0008, 'epoch': 0.02}
+{'loss': 0.6517, 'learning_rate': 0.0007428571428571429, 'epoch': 0.02}
+{'loss': 0.659, 'learning_rate': 0.0006857142857142857, 'epoch': 0.03}
+{'loss': 0.6484, 'learning_rate': 0.0006285714285714285, 'epoch': 0.03}
+{'loss': 0.6712, 'learning_rate': 0.0005714285714285714, 'epoch': 0.03}
+{'eval_loss': 0.7111525535583496, 'eval_bce': 0.7040825579078358, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.6699964020782199, 'eval_auprc': 0.2026735203323516, 'eval_mcc': 0.13627600676084264, 'eval_precision': 0.13931190073322053, 'eval_recall': 0.6101778656126482, 'eval_f1': 0.22683442005693819, 'eval_runtime': 20.4856, 'eval_samples_per_second': 1083.251, 'eval_steps_per_second': 16.939, 'epoch': 0.03}
+{'loss': 0.6482, 'learning_rate': 0.0005142857142857142, 'epoch': 0.04}
+{'loss': 0.6627, 'learning_rate': 0.00045714285714285713, 'epoch': 0.04}
+{'loss': 0.6325, 'learning_rate': 0.0004, 'epoch': 0.04}
+{'loss': 0.6244, 'learning_rate': 0.00034285714285714285, 'epoch': 0.05}
+{'loss': 0.6649, 'learning_rate': 0.0002857142857142857, 'epoch': 0.05}
+{'eval_loss': 0.627658486366272, 'eval_bce': 0.6142799855254275, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.6779371007031996, 'eval_auprc': 0.20815826666369888, 'eval_mcc': 0.17276184389128574, 'eval_precision': 0.18743321222483436, 'eval_recall': 0.433300395256917, 'eval_f1': 0.2616738773683425, 'eval_runtime': 20.5335, 'eval_samples_per_second': 1080.722, 'eval_steps_per_second': 16.899, 'epoch': 0.05}
+{'loss': 0.6307, 'learning_rate': 0.00022857142857142857, 'epoch': 0.05}
+{'loss': 0.6475, 'learning_rate': 0.00017142857142857143, 'epoch': 0.06}
+{'loss': 0.6166, 'learning_rate': 0.00011428571428571428, 'epoch': 0.06}
+{'loss': 0.6546, 'learning_rate': 5.714285714285714e-05, 'epoch': 0.07}
+{'loss': 0.6557, 'learning_rate': 0.0, 'epoch': 0.07}
+{'eval_loss': 0.7028353214263916, 'eval_bce': 0.689547526711965, 'eval_n_pos': 2024.0, 'eval_pos_rate': 0.09120814744716327, 'eval_auroc': 0.676646114136682, 'eval_auprc': 0.20927048470609788, 'eval_mcc': 0.1527733049557191, 'eval_precision': 0.1508637236084453, 'eval_recall': 0.5825098814229249, 'eval_f1': 0.2396585018802724, 'eval_runtime': 20.5672, 'eval_samples_per_second': 1078.953, 'eval_steps_per_second': 16.872, 'epoch': 0.07}
+{'train_runtime': 103.9179, 'train_samples_per_second': 123.174, 'train_steps_per_second': 3.849, 'train_loss': 0.6513586783409119, 'epoch': 0.07}
+  [lm] s=20 dev AUROC = 0.6779371007031996
+
+[STEP 2] BEST 2a: s=20 dev_AUROC=0.6779371007031996 ckpt=/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_pair_head/runs/clf_2a_ph_s20
+
+=== STEP 3: score leak-free (best 2a) ===
+[load] ADASTRA eval: 251791 rows (pos=9071, neg=242720)
+[windows] built 251791/251791  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 251791 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_pair_head/runs/clf_2a_ph_s20/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0

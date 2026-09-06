@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/var/spool/slurmd/job9232802/slurm_script", line 54, in <module>
+    import numpy as np
+ModuleNotFoundError: No module named 'numpy'

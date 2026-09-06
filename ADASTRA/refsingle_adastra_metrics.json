@@ -1,0 +1,24 @@
+{
+  "results": [
+    {
+      "regime": "full",
+      "auroc": 0.5916710893074553,
+      "auroc_lo": 0.5834331371859526,
+      "auroc_hi": 0.5998769703848975,
+      "auprc": 0.5970075251149001,
+      "n_pos": 9071
+    },
+    {
+      "regime": "leak_free",
+      "auroc": 0.5796331654415471,
+      "auroc_lo": 0.5671875036010992,
+      "auroc_hi": 0.5911334613762903,
+      "auprc": 0.5829412627144133,
+      "n_pos": 3964
+    }
+  ],
+  "checkpoint_dir": "/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/refsingle_ENC-002_CTCF_ctcf_ref_single_classification_binsplit2_cw/runs/clf",
+  "scoring": "ref_window_only_P(ASB)",
+  "n_scored": 251791,
+  "leaky_excluded": true
+}

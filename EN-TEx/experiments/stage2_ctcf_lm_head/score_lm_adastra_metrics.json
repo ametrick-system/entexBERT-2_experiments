@@ -1,0 +1,27 @@
+{
+  "eval": "adastra",
+  "results": [
+    {
+      "regime": "full",
+      "auroc": 0.7014357247686069,
+      "auroc_lo": 0.6939122294476354,
+      "auroc_hi": 0.7085353383461579,
+      "auprc": 0.7268930930114466,
+      "n_pos": 9071
+    },
+    {
+      "regime": "leak_free",
+      "auroc": 0.7107478387425181,
+      "auroc_lo": 0.6936810396615518,
+      "auroc_hi": 0.7284946583830318,
+      "auprc": 0.7326930715093407,
+      "n_pos": 1591
+    }
+  ],
+  "checkpoint_dir": "/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/stage2_ctcf_lm_head/runs/clf_2a_lm_s31.6",
+  "run_config_task": "classification",
+  "n_scored": 251791,
+  "left_bp": 128,
+  "right_bp": 128,
+  "leaky_excluded": true
+}

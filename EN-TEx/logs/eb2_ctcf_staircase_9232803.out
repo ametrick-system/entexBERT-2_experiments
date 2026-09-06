@@ -1,0 +1,148 @@
+[build] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/binding_windows already populated — skipping (delete to force rebuild)
+[build] OK: single-window binding build with feature_type
+[build] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_staircase/adastra_pairs.csv exists — skipping (delete to force rebuild)
+=== [staircase] 3 trunk states x {binding, asb} ===
+Explicitly passing a `revision` is encouraged when loading a model with custom code to ensure no malicious code has been contributed in a newer revision.
+[binding:train] 155142 rows, peaks=79191, bg=75951
+[binding:test] 20188 rows, peaks=10200, bg=9988
+[asb:train] 208691 pairs, pos=20972
+[asb:adastra] 45581 pairs, pos=1591 (chr/pos present=False)
+[leak] pairs assumed pre-filtered leak-free (no chr/pos or no --train_coords)
+
+===== TRUNK: random =====
+[trunk:random] fresh AutoModel.from_config (seed=0) — NO pretrained weights
+  [binding] token maxlen train=66 test=67 (cap 128); streaming to memmap
+  [embed-mm] 64/155142
+  [embed-mm] 3264/155142
+  [embed-mm] 6464/155142
+  [embed-mm] 9664/155142
+  [embed-mm] 12864/155142
+  [embed-mm] 16064/155142
+  [embed-mm] 19264/155142
+  [embed-mm] 22464/155142
+  [embed-mm] 25664/155142
+  [embed-mm] 28864/155142
+  [embed-mm] 32064/155142
+  [embed-mm] 35264/155142
+  [embed-mm] 38464/155142
+  [embed-mm] 41664/155142
+  [embed-mm] 44864/155142
+  [embed-mm] 48064/155142
+  [embed-mm] 51264/155142
+  [embed-mm] 54464/155142
+  [embed-mm] 57664/155142
+  [embed-mm] 60864/155142
+  [embed-mm] 64064/155142
+  [embed-mm] 67264/155142
+  [embed-mm] 70464/155142
+  [embed-mm] 73664/155142
+  [embed-mm] 76864/155142
+  [embed-mm] 80064/155142
+  [embed-mm] 83264/155142
+  [embed-mm] 86464/155142
+  [embed-mm] 89664/155142
+  [embed-mm] 92864/155142
+  [embed-mm] 96064/155142
+  [embed-mm] 99264/155142
+  [embed-mm] 102464/155142
+  [embed-mm] 105664/155142
+  [embed-mm] 108864/155142
+  [embed-mm] 112064/155142
+  [embed-mm] 115264/155142
+  [embed-mm] 118464/155142
+  [embed-mm] 121664/155142
+  [embed-mm] 124864/155142
+  [embed-mm] 128064/155142
+  [embed-mm] 131264/155142
+  [embed-mm] 134464/155142
+  [embed-mm] 137664/155142
+  [embed-mm] 140864/155142
+  [embed-mm] 144064/155142
+  [embed-mm] 147264/155142
+  [embed-mm] 150464/155142
+  [embed-mm] 153664/155142
+  [embed-mm] 64/20188
+  [embed-mm] 3264/20188
+  [embed-mm] 6464/20188
+  [embed-mm] 9664/20188
+  [embed-mm] 12864/20188
+  [embed-mm] 16064/20188
+  [embed-mm] 19264/20188
+    [binding/random/linear] AUROC=0.7592 95%CI[0.7524,0.7653] AUPRC=0.7724 (balanced 9988+9988)
+    [binding/random/cnn] AUROC=0.8151 95%CI[0.8093,0.8207] AUPRC=0.8328 (balanced 9988+9988)
+    [binding/random/strength] Spearman=0.2390 (test peaks n=10200)
+  [asb] frozen twin-probe (train EN-TEx pairs -> score ADASTRA)
+  [embed] 64/208691
+  [embed] 3264/208691
+  [embed] 6464/208691
+  [embed] 9664/208691
+  [embed] 12864/208691
+  [embed] 16064/208691
+  [embed] 19264/208691
+  [embed] 22464/208691
+  [embed] 25664/208691
+  [embed] 28864/208691
+  [embed] 32064/208691
+  [embed] 35264/208691
+  [embed] 38464/208691
+  [embed] 41664/208691
+  [embed] 44864/208691
+  [embed] 48064/208691
+  [embed] 51264/208691
+  [embed] 54464/208691
+  [embed] 57664/208691
+  [embed] 60864/208691
+  [embed] 64064/208691
+  [embed] 67264/208691
+  [embed] 70464/208691
+  [embed] 73664/208691
+  [embed] 76864/208691
+  [embed] 80064/208691
+  [embed] 83264/208691
+  [embed] 86464/208691
+  [embed] 89664/208691
+  [embed] 92864/208691
+  [embed] 96064/208691
+  [embed] 99264/208691
+  [embed] 102464/208691
+  [embed] 105664/208691
+  [embed] 108864/208691
+  [embed] 112064/208691
+  [embed] 115264/208691
+  [embed] 118464/208691
+  [embed] 121664/208691
+  [embed] 124864/208691
+  [embed] 128064/208691
+  [embed] 131264/208691
+  [embed] 134464/208691
+  [embed] 137664/208691
+  [embed] 140864/208691
+  [embed] 144064/208691
+  [embed] 147264/208691
+  [embed] 150464/208691
+  [embed] 153664/208691
+  [embed] 156864/208691
+  [embed] 160064/208691
+  [embed] 163264/208691
+  [embed] 166464/208691
+  [embed] 169664/208691
+  [embed] 172864/208691
+  [embed] 176064/208691
+  [embed] 179264/208691
+  [embed] 182464/208691
+  [embed] 185664/208691
+  [embed] 188864/208691
+  [embed] 192064/208691
+  [embed] 195264/208691
+  [embed] 198464/208691
+  [embed] 201664/208691
+  [embed] 204864/208691
+  [embed] 208064/208691
+/home/asm242/.cache/huggingface/modules/transformers_modules/DNABERT-2-117M-attention/bert_layers.py:127: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+Traceback (most recent call last):
+  File "staircase_probe.py", line 492, in <module>
+    main()
+  File "staircase_probe.py", line 472, in main
+    z1tr, _, _ = embed(model, tok, asb_tr.sequence1.tolist(), args.batch_size, dev, args.max_len)
+ValueError: too many values to unpack (expected 3)

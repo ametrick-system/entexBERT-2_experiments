@@ -1,0 +1,29 @@
+The following modules were not unloaded:
+  (Use "module --force purge" to unload all):
+
+  1) StdEnv
+/apps/custom/lmod/8.7.48/init/bash: line 250: conda: command not found
+=== preflight ===
+cuda True NVIDIA GeForce RTX 3090
+found  /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/binding_reg_ENC-002_CTCF_ctcf_binding_regression_multitissue_enc002/runs/reg/pytorch_model.bin
+found  /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/binding_reg_ENC-002_CTCF_ctcf_binding_regression_multitissue_enc002/inputs/ENC-002__TF-ChIP-seq_CTCF/fold0/test.csv
+=== ISM (top 30 CTCF peak windows, 3xL substitutions each) ===
+/home/asm242/.cache/huggingface/modules/transformers_modules/DNABERT-2-117M-attention/bert_layers.py:127: UserWarning: Unable to import Triton; defaulting MosaicBERT attention implementation to pytorch (this will reduce throughput when using this model).
+  warnings.warn(
+Some weights of the model checkpoint at /home/asm242/entexBERT-2/DNABERT-2-117M-attention were not used when initializing BertModel: ['cls.predictions.transform.dense.bias', 'cls.predictions.decoder.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.decoder.weight', 'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.transform.dense.weight']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+Some weights of BertModel were not initialized from the model checkpoint at /home/asm242/entexBERT-2/DNABERT-2-117M-attention and are newly initialized: ['bert.pooler.dense.bias', 'bert.pooler.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+[ISM] 300 windows x L=257  -> 231600 forward inputs (231300 mutants + 300 baselines)
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/binding_reg_ENC-002_CTCF_ctcf_binding_regression_multitissue_enc002/runs/reg/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 3
+  first unexpected: ['logvar_bias', 'sigma_head.weight', 'sigma_head.bias']
+[ISM] saved -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_ism/trunk_ism_300.npz | importance range [-0.895,1.766] mean per-window peak 0.296
+
+============================================================
+ ISM COMPLETE -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ctcf_ism/trunk_ism_300.npz
+ Download it, then locally:
+   python plot_ism_logo.py --ism trunk_ism.npz --pwm_json handoff/ctcf_pwm.json \
+     --matrix_id MA0139.1 --out ctcf_trunk_ism_logo.png
+============================================================

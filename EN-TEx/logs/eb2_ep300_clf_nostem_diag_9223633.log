@@ -1,0 +1,191 @@
+*** DIAGNOSTIC MODE: capped steps + 2-value s-sweep. NOT a final result. ***
+=== preflight ===
+NVIDIA GeForce RTX 3090, 24576 MiB
+torch 1.13.1+cu117 | cuda True
+  repo OK: as_class label present
+  found: /home/asm242/entexBERT-2/DNABERT-2-117M-attention
+  found: /home/asm242/reference_genome/hg38.fa
+  found: /home/asm242/palmer_scratch/entex_data/hetSNVs.tsv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ep300_adastra_evalset.csv.gz
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/ADASTRA/ep300_benchmark_reference_auroc.csv
+  found: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/stage1/runs/reg/pytorch_model.bin
+
+=== STEP 3c: counts + held-out chroms + s_hat ===
+[STEP 3c] reusing existing counts: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/ep300_betabinom_counts.csv
+total positives = 2514  over 22 chromosomes
+largest-2 by variant count (spared from holdout): ['chr1', 'chr2']
+special-regime excluded: ['chr1', 'chrM', 'chrX', 'chrY']
+
+HELD-OUT SET: chr3+chr4  pos=252  frac=0.1002 (target 10%, dev 0.0002)
+CI-viability OK (252 >= 100 positives).
+
+wrote /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/ep300_heldout_clf_per_chrom_counts.csv
+[STEP 3c] held-out chroms = chr3,chr4
+[STEP 3c] s_hat=21.3 | s-sweep = 21.3 20
+
+=== STEP 4c: build Stage-2 classification dataset ===
+[STEP 4c] reusing existing baseline split at /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/inputs_clf (clean ablation -> identical data as no-stem EP300)
+[STEP 4c] train.csv cols: ['sequence1', 'sequence2', 'label', 'depth'] | rows: 36807
+[STEP 4c] label counts: {0.0: 34749, 1.0: 2058} | positive fraction: 0.0559
+[STEP 4c] OK
+
+=== STEP 5c: Stage-2a frozen contrast head (s sweep) ===
+--- Stage-2a s=21.3 -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/clf_2a_s21.3 ---
+{'loss': 0.6994, 'learning_rate': 0.0004, 'epoch': 0.02}
+{'loss': 0.7017, 'learning_rate': 0.0008, 'epoch': 0.03}
+{'loss': 0.7004, 'learning_rate': 0.0009714285714285714, 'epoch': 0.05}
+{'loss': 0.6992, 'learning_rate': 0.0009142857142857143, 'epoch': 0.07}
+{'loss': 0.6885, 'learning_rate': 0.0008571428571428571, 'epoch': 0.09}
+{'eval_loss': 0.7049868106842041, 'eval_bce': 0.7054542347446576, 'eval_n_pos': 199.0, 'eval_pos_rate': 0.04349726775956284, 'eval_auroc': 0.5189676674046649, 'eval_auprc': 0.046013342793290814, 'eval_mcc': 0.025491531822860257, 'eval_precision': 0.04571280991735537, 'eval_recall': 0.8894472361809045, 'eval_f1': 0.08695652173913045, 'eval_runtime': 4.4416, 'eval_samples_per_second': 1030.039, 'eval_steps_per_second': 16.21, 'epoch': 0.09}
+{'loss': 0.6875, 'learning_rate': 0.0008, 'epoch': 0.1}
+{'loss': 0.6871, 'learning_rate': 0.0007428571428571429, 'epoch': 0.12}
+{'loss': 0.6925, 'learning_rate': 0.0006857142857142857, 'epoch': 0.14}
+{'loss': 0.6834, 'learning_rate': 0.0006285714285714285, 'epoch': 0.16}
+{'loss': 0.6917, 'learning_rate': 0.0005714285714285714, 'epoch': 0.17}
+{'eval_loss': 0.6916724443435669, 'eval_bce': 0.6921144842014074, 'eval_n_pos': 199.0, 'eval_pos_rate': 0.04349726775956284, 'eval_auroc': 0.516834630189338, 'eval_auprc': 0.04497643999410256, 'eval_mcc': -0.003877089079573066, 'eval_precision': 0.042420461634435434, 'eval_recall': 0.3417085427135678, 'eval_f1': 0.07547169811320756, 'eval_runtime': 4.4339, 'eval_samples_per_second': 1031.831, 'eval_steps_per_second': 16.239, 'epoch': 0.17}
+{'loss': 0.6881, 'learning_rate': 0.0005142857142857142, 'epoch': 0.19}
+{'loss': 0.6895, 'learning_rate': 0.00045714285714285713, 'epoch': 0.21}
+{'loss': 0.6914, 'learning_rate': 0.0004, 'epoch': 0.23}
+{'loss': 0.6877, 'learning_rate': 0.00034285714285714285, 'epoch': 0.24}
+{'loss': 0.6781, 'learning_rate': 0.0002857142857142857, 'epoch': 0.26}
+{'eval_loss': 0.6825801730155945, 'eval_bce': 0.6829445921071616, 'eval_n_pos': 199.0, 'eval_pos_rate': 0.04349726775956284, 'eval_auroc': 0.5198616482779528, 'eval_auprc': 0.04601531373345518, 'eval_mcc': 0.0014914712508208106, 'eval_precision': 0.04419889502762431, 'eval_recall': 0.16080402010050251, 'eval_f1': 0.06933911159263272, 'eval_runtime': 4.4568, 'eval_samples_per_second': 1026.531, 'eval_steps_per_second': 16.155, 'epoch': 0.26}
+{'loss': 0.6724, 'learning_rate': 0.00022857142857142857, 'epoch': 0.28}
+{'loss': 0.6811, 'learning_rate': 0.00017142857142857143, 'epoch': 0.3}
+{'loss': 0.6882, 'learning_rate': 0.00011428571428571428, 'epoch': 0.31}
+{'loss': 0.6776, 'learning_rate': 5.714285714285714e-05, 'epoch': 0.33}
+{'loss': 0.6843, 'learning_rate': 0.0, 'epoch': 0.35}
+{'eval_loss': 0.6823376417160034, 'eval_bce': 0.6827186100850909, 'eval_n_pos': 199.0, 'eval_pos_rate': 0.04349726775956284, 'eval_auroc': 0.5209738133078555, 'eval_auprc': 0.04621973162531571, 'eval_mcc': -0.0011905348728154055, 'eval_precision': 0.04293628808864266, 'eval_recall': 0.15577889447236182, 'eval_f1': 0.06731813246471227, 'eval_runtime': 4.477, 'eval_samples_per_second': 1021.892, 'eval_steps_per_second': 16.082, 'epoch': 0.35}
+{'train_runtime': 39.0221, 'train_samples_per_second': 328.019, 'train_steps_per_second': 10.251, 'train_loss': 0.6884860253334045, 'epoch': 0.35}
+    dev AUROC = 0.5209738133078555
+--- Stage-2a s=20 -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/clf_2a_s20 ---
+{'loss': 0.7003, 'learning_rate': 0.0004, 'epoch': 0.02}
+{'loss': 0.7014, 'learning_rate': 0.0008, 'epoch': 0.03}
+{'loss': 0.7001, 'learning_rate': 0.0009714285714285714, 'epoch': 0.05}
+{'loss': 0.7005, 'learning_rate': 0.0009142857142857143, 'epoch': 0.07}
+{'loss': 0.6874, 'learning_rate': 0.0008571428571428571, 'epoch': 0.09}
+{'eval_loss': 0.7051984071731567, 'eval_bce': 0.705644708772948, 'eval_n_pos': 199.0, 'eval_pos_rate': 0.04349726775956284, 'eval_auroc': 0.5069147152581922, 'eval_auprc': 0.04656841886808208, 'eval_mcc': 0.015530204230644891, 'eval_precision': 0.04486514522821577, 'eval_recall': 0.8693467336683417, 'eval_f1': 0.08532675709001233, 'eval_runtime': 4.491, 'eval_samples_per_second': 1018.694, 'eval_steps_per_second': 16.032, 'epoch': 0.09}
+{'loss': 0.6882, 'learning_rate': 0.0008, 'epoch': 0.1}
+{'loss': 0.6897, 'learning_rate': 0.0007428571428571429, 'epoch': 0.12}
+{'loss': 0.6932, 'learning_rate': 0.0006857142857142857, 'epoch': 0.14}
+{'loss': 0.6846, 'learning_rate': 0.0006285714285714285, 'epoch': 0.16}
+{'loss': 0.6915, 'learning_rate': 0.0005714285714285714, 'epoch': 0.17}
+{'eval_loss': 0.6926259994506836, 'eval_bce': 0.6930139090068248, 'eval_n_pos': 199.0, 'eval_pos_rate': 0.04349726775956284, 'eval_auroc': 0.5068216999072143, 'eval_auprc': 0.04584849470572198, 'eval_mcc': -0.005129415831425705, 'eval_precision': 0.0421987784564131, 'eval_recall': 0.38190954773869346, 'eval_f1': 0.076, 'eval_runtime': 4.5062, 'eval_samples_per_second': 1015.258, 'eval_steps_per_second': 15.978, 'epoch': 0.17}
+{'loss': 0.689, 'learning_rate': 0.0005142857142857142, 'epoch': 0.19}
+{'loss': 0.6912, 'learning_rate': 0.00045714285714285713, 'epoch': 0.21}
+{'loss': 0.6898, 'learning_rate': 0.0004, 'epoch': 0.23}
+{'loss': 0.6858, 'learning_rate': 0.00034285714285714285, 'epoch': 0.24}
+{'loss': 0.6788, 'learning_rate': 0.0002857142857142857, 'epoch': 0.26}
+{'eval_loss': 0.6833286881446838, 'eval_bce': 0.6836615270868456, 'eval_n_pos': 199.0, 'eval_pos_rate': 0.04349726775956284, 'eval_auroc': 0.509344023591449, 'eval_auprc': 0.045985890265219265, 'eval_mcc': -0.0008968793141994885, 'eval_precision': 0.04310344827586207, 'eval_recall': 0.17587939698492464, 'eval_f1': 0.0692383778437191, 'eval_runtime': 4.5075, 'eval_samples_per_second': 1014.974, 'eval_steps_per_second': 15.973, 'epoch': 0.26}
+{'loss': 0.6724, 'learning_rate': 0.00022857142857142857, 'epoch': 0.28}
+{'loss': 0.681, 'learning_rate': 0.00017142857142857143, 'epoch': 0.3}
+{'loss': 0.6871, 'learning_rate': 0.00011428571428571428, 'epoch': 0.31}
+{'loss': 0.6779, 'learning_rate': 5.714285714285714e-05, 'epoch': 0.33}
+{'loss': 0.6844, 'learning_rate': 0.0, 'epoch': 0.35}
+{'eval_loss': 0.683085024356842, 'eval_bce': 0.6834440944461996, 'eval_n_pos': 199.0, 'eval_pos_rate': 0.04349726775956284, 'eval_auroc': 0.5136870366457517, 'eval_auprc': 0.046439360612170785, 'eval_mcc': 0.0034758084413564865, 'eval_precision': 0.045012165450121655, 'eval_recall': 0.18592964824120603, 'eval_f1': 0.07247796278158668, 'eval_runtime': 4.5127, 'eval_samples_per_second': 1013.816, 'eval_steps_per_second': 15.955, 'epoch': 0.35}
+{'train_runtime': 39.3453, 'train_samples_per_second': 325.324, 'train_steps_per_second': 10.166, 'train_loss': 0.6887015223503112, 'epoch': 0.35}
+    dev AUROC = 0.5136870366457517
+[STEP 5c] BEST 2a: s=21.3 dev_AUROC=0.5209738133078555 ckpt=/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/clf_2a_s21.3
+[STEP 5c] OK
+
+=== STEP 6c: SKIPPED (RUN_2B=0; 2b degraded the distance head). Scoring 2a only. ===
+[STEP 6c] OK
+
+=== STEP 7c: score (leak-free) ===
+--- scoring 2a (/home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/clf_2a_s21.3) ---
+[load] ADASTRA eval: 32619 rows (pos=1416, neg=31203)
+[windows] built 32619/32619  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 32619 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/clf_2a_s21.3/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[score] task=classification -> ranking AUROC on 'delta'
+[leakage] train.meta.csv: +8745 bins, 8745 seen total
+[leakage] dev.meta.csv: +1097 bins, 9842 seen total
+[leakage] 22617/32619 eval variants (69.34%) in a seen bin; 784 ASB-positive. Dropped for leak_free.
+[AUROC:full] balanced 1416 pos + 1416 neg  AUROC=0.5639 95%CI[0.5430,0.5865]  AUPRC=0.5447
+[AUROC:leak_free] balanced 632 pos + 632 neg  AUROC=0.5439 95%CI[0.5129,0.5782]  AUPRC=0.5143
+
+=== entexBERT-2 vs benchmark models (EP300_AUROC, 7 models) ===
+      Enformer             DNN       0.5961
+      DeepFun              DNN       0.5891
+      DeepSEA              DNN       0.5601
+  >>> entexBERT-2 (this run)   0.5439  <<<
+      deltaSVM_ChIP-seq    kmer/gkm  0.5334
+      DeepBind_ChIP-seq    DNN       0.5174
+      Beluga               DNN       0.5087
+      Sei                  DNN       0.4970
+
+[done] wrote /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score/score_clf_2a_adastra_metrics.json + /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score/score_clf_2a_adastra_perVariant.csv.gz
+[filter] total_reads>=20: 40808/220043 rows kept
+[load] 40808 hetSNV rows over donors=['ENC-001', 'ENC-002', 'ENC-003', 'ENC-004']
+[leakage] train.meta.csv: +8745 bins, 8745 seen total
+[leakage] dev.meta.csv: +1097 bins, 9842 seen total
+
+===== donor ENC-001: 24345 rows (pos=1120, neg=23225) =====
+[windows] built 24345/24345  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 24345 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/clf_2a_s21.3/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 22036/24345 ENC-001 (cross-donor) variants in a seen bin (979 positive).
+  [ENC-001:full] AUROC=0.5419 CI[0.5186,0.5641] AUPRC=0.5762 n_pos=1120 | mag_Spearman=nan signed_Spearman=nan
+  [ENC-001:leak_free] AUROC=0.5455 CI[0.4848,0.6142] AUPRC=0.5393 n_pos=141 | mag_Spearman=nan signed_Spearman=nan
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+    sigmoid_colon                    AUROC=0.5350 n_pos=20 mag_Sp=nan
+    tibial_nerve                     AUROC=0.5191 n_pos=87 mag_Sp=nan
+
+===== donor ENC-002: 3910 rows (pos=225, neg=3685) =====
+[windows] built 3910/3910  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 3910 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/clf_2a_s21.3/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 3610/3910 ENC-002 (matched) variants in a seen bin (212 positive).
+  [ENC-002:full] AUROC=0.6726 CI[0.6193,0.7244] AUPRC=0.6560 n_pos=225 | mag_Spearman=nan signed_Spearman=nan
+  [ENC-002:leak_free] AUROC=0.3728 CI[0.1625,0.6341] AUPRC=0.4860 n_pos=13 | mag_Spearman=nan signed_Spearman=nan
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+
+===== donor ENC-003: 2973 rows (pos=190, neg=2783) =====
+[windows] built 2973/2973  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 2973 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/clf_2a_s21.3/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 2725/2973 ENC-003 (cross-donor) variants in a seen bin (177 positive).
+  [ENC-003:full] AUROC=0.6881 CI[0.6347,0.7392] AUPRC=0.6908 n_pos=190 | mag_Spearman=nan signed_Spearman=nan
+  [ENC-003:leak_free] AUROC=0.6509 CI[0.4182,0.8632] AUPRC=0.7080 n_pos=13 | mag_Spearman=nan signed_Spearman=nan
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+
+===== donor ENC-004: 9580 rows (pos=535, neg=9045) =====
+[windows] built 9580/9580  (dropped: 0 out-of-bounds, 0 bad-chrom; hg38-base!=ref on 0 kept rows)
+[score] running twin inference on 9580 variants (dump_embeddings=False)...
+Loaded weights from /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/clf_2a_s21.3/pytorch_model.bin
+  missing keys: 0 | unexpected keys: 0
+[leakage] 8692/9580 ENC-004 (cross-donor) variants in a seen bin (489 positive).
+  [ENC-004:full] AUROC=0.5556 CI[0.5220,0.5949] AUPRC=0.5822 n_pos=535 | mag_Spearman=nan signed_Spearman=nan
+  [ENC-004:leak_free] AUROC=0.5964 CI[0.4758,0.7207] AUPRC=0.6068 n_pos=46 | mag_Spearman=nan signed_Spearman=nan
+  --- per-tissue [leak_free] (>= 20 pos & neg) ---
+    upper_lobe_of_left_lung          AUROC=0.4376 n_pos=35 mag_Sp=nan
+
+[write] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score/score_clf_2a_hetsnv_perVariant.csv.gz  (40808 scored variants)
+[write] /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score/score_clf_2a_hetsnv_summary.csv
+
+=== donor-level (ALL-tissue) summary ===
+  donor  donor_kind    regime    auroc  n_pos  mag_spearman  signed_spearman
+ENC-001 cross-donor      full 0.541893   1120           NaN              NaN
+ENC-001 cross-donor leak_free 0.545496    141           NaN              NaN
+ENC-002     matched      full 0.672612    225           NaN              NaN
+ENC-002     matched leak_free 0.372781     13           NaN              NaN
+ENC-003 cross-donor      full 0.688061    190           NaN              NaN
+ENC-003 cross-donor leak_free 0.650888     13           NaN              NaN
+ENC-004 cross-donor      full 0.555640    535           NaN              NaN
+ENC-004 cross-donor leak_free 0.596408     46           NaN              NaN
+[STEP 7c] OK
+
+============================================================
+ EP300 STAGE-2 CLASSIFICATION (NO STEM) COMPLETE.  (DIAG=1)
+   best 2a: s=21.3 (dev AUROC 0.5209738133078555) -> /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/runs/clf_2a_s21.3
+   2b:      dev AUROC -1  (scored: 0)
+   outputs: /home/asm242/palmer_scratch/entexBERT-2_experiments/EN-TEx/experiments/ep300_asb/score/score_clf_2a_*  (and score_clf_2b_* if RUN_2B=1 and it won)
+ WIN CONDITION: leak-free classification AUROC > ~0.596 (Enformer, best DNN on EP300).
+ ABLATION CONTROL: this is the NO-STEM classification baseline. Compare score_clf_2a_* here
+   (runs/ + score/) vs the stem diag (runs_stem/ + score_stem/) to isolate the stem's EP300 effect.
+   Head, trunk, counts, build, DIAG cap, and s-sweep are all identical -- only the stem differs.
+ NOTE: DIAG mode -> AUROC is UNDER-TRAINED, not final. Rerun full (DIAG=0) for the real number.
+============================================================
